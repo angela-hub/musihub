@@ -25,10 +25,33 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `email`, `password`, `admin
 ('1', 'admin', 'admin' ,'admin@admin.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'si', '658988745', '08/01/2020', ''),
 ('2', 'pepe', 'pepe' ,'pepe@pepe.com', '7c9e7c1494b2684ab7c19d6aff737e460fa9e98d5a234da1310c97ddf5691834', 'no', '632567895', '08/01/2020', '');
 
+-- tabla `instrumentos`
+DROP TABLE IF EXISTS `instrumentos`;
+CREATE TABLE `instrumentos` (
+  `id` int(11) NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `referencia` text COLLATE utf8_spanish_ci NOT NULL,
+  `compañia_distribuidor` text COLLATE utf8_spanish_ci NOT NULL,
+  `tipo` text COLLATE utf8_spanish_ci NOT NULL,
+  `precio` text COLLATE utf8_spanish_ci NOT NULL,
+  `descuento` text COLLATE utf8_spanish_ci NOT NULL,
+  `stock_inicial` text COLLATE utf8_spanish_ci NOT NULL,
+  `imagen` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+INSERT INTO `instrumentos` (`id`, `nombre`, `referencia`, `compañia_distribuidor`, `tipo`, `precio`, `descuento`, `stock_inicial`, `imagen`) VALUES 
+('1', 'Tambor', '04880', 'Gonalca' ,'Percusion', '279,00', 'no', '100', '');
+
 
 -- Indices 
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `instrumentos`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `instrumentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;

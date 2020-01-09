@@ -22,5 +22,4 @@ if ( !defined('IMAGE_PATH') )
 
     if ( !defined('VENDOR_PATH') )
     define('VENDOR_PATH', ROOT_PATH."vendor/");
-
 ?>

@@ -83,11 +83,11 @@ class ControladorUsuario{
         }
     }
     
-    public function buscarUsuarioNombre($nombre){
+    public function buscarUsuarioEmail($email){
         $bd= ControladorBD::getControlador();
         $bd->abrirBD();
-        $consulta="SELECT * FROM usuarios WHERE nombre = :nombre";
-        $parametros=array(':nombre'=>$nombre);
+        $consulta="SELECT * FROM usuarios WHERE email = :email";
+        $parametros=array(':email'=>$email);
         $filas= $bd->consultarBD($consulta,$parametros);
         $res=$bd->consultarBD($consulta,$parametros);
         $filas=$res->fetchAll(PDO::FETCH_OBJ);
@@ -96,7 +96,7 @@ class ControladorUsuario{
                 $usuario=new usuario($c->id,$c->nombre,$c->apellidos,$c->email,$c->password,$c->administrador,$c->telefono,$c->fecha_alta,$c->foto);
             }
             $bd->cerrarBD();
-            return $Alumno;
+            return $usuario;
         }else{
             return null;
         }

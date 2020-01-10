@@ -21,7 +21,7 @@ require_once UTILITY_PATH."funciones.php";
 // Variables temporales
 $nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto ="";
 $nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr ="";
- 
+
 // Procesamos el formulario al pulsar el botón aceptar de esta ficha
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
         // salvamos la foto
         $foto = md5($_FILES['foto']['tmp_name'] . $_FILES['foto']['name'].time()) . "." . $extension;
         $controlador = ControladorImagen::getControlador();
-        if(!$controlador->salvarfoto($foto)){
+        if(!$controlador->salvarImagen($foto)){
             $fotoErr= "Error al procesar la foto y subirla al servidor";
         }
     }

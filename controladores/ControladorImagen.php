@@ -20,8 +20,8 @@ class ControladorImagen {
         return self::$instancia;
     }
 //--------------------------------------------------------------------------------------------
-    function salvarImagen($imagen) {
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], IMAGE_PATH ."fotos/" . $imagen)) {
+    function salvarImagen($foto) {
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], IMAGE_PATH ."fotos/" . $foto)) {
             return true;
         }
         return false;

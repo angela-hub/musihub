@@ -93,16 +93,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     }else{
         $telefono=$telefonoVal;
     }
-    
-    // Procesamos fecha
-    $fecha_alta = date("d-m-Y", strtotime(filtrado($_POST["fecha_alta"])));
-    $hoy =date("d-m-Y");
-    if($fecha_alta>$hoy){
-        $fecha_altaErr = "La fecha no puede ser superior a la fecha actual";
-    }else{
-        $fecha_alta = date("d/m/Y", strtotime(filtrado($_POST["fecha_alta"])));
-    }
 
+    // Cogemos la fecha
+    $fecha_alta=date("d/m/o");
 
     // Procesamos la foto
     $propiedades = explode("/", $_FILES['foto']['type']);
@@ -186,9 +179,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
                         <!-- Tipo de Usuario -->
                         <div class="form-group <?php echo (!empty($administradorErr)) ? 'error: ' : ''; ?>">
-                            <label>Matrícula</label>
+                            <label>Administrador</label>
                             <input type="radio" name="administrador" value="si" <?php echo (strstr($administrador, 'si')) ? 'checked' : ''; ?>>Si</input>
-                            <input type="radio" name="administrador" value="no" <?php echo (strstr($administrador, 'no')) ? 'checked' : ''; ?>>No</input><br>
+                            <input type="radio" name="administrador" value="no" checked <?php echo (strstr($administrador, 'no')) ? 'checked' : ''; ?>>No</input><br>
                             <span class="help-block"><?php echo $administradorErr;?></span>
                         </div>
                         <!-- Telefono-->
@@ -197,12 +190,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                             <input type="tel" required name="telefono" value="<?php echo $telefono; ?>"
                             pattern="[0-9]{9}" title="Debes poner 9 números">
                             <span class="help-block"><?php echo $telefonoErr;?></span>
-                        </div>
-                        <!-- Fecha de Alta-->
-                        <div class="form-group <?php echo (!empty($fecha_altaErr)) ? 'error: ' : ''; ?>">
-                        <label>Fecha de Alta</label>
-                            <input type="date" required name="fecha" value="<?php echo date('Y-m-d', strtotime(str_replace('/', '-', $fecha_alta)));?>"></input><div>
-                            <span class="help-block"><?php echo $fecha_altaErr;?></span>
                         </div>
                          <!-- Foto-->
                          <div class="form-group <?php echo (!empty($fotoErr)) ? 'error: ' : ''; ?>">

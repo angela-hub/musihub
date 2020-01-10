@@ -16,14 +16,14 @@
                     <a href="funciones/descargar.php?opcion=PDF" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  PDF</a>
                     <a href="funciones/descargar.php?opcion=XML" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  XML</a>
                     <a href="funciones/descargar.php?opcion=JSON" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  JSON</a>
-                    <a href="accion/create.php" class="btn btn-success pull-right"><span class="glyphicon glyphicon-user"></span>  Añadir Usuario</a>
+                    <a href="create_usu.php" class="btn btn-success pull-right"><span class="glyphicon glyphicon-user"></span>  Añadir Usuario</a>
                     
                 </form>
             </div>
 
 <?php
-
-require_once CONTROLLER_PATH. "ControladorUsuario.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH. "Paginador.php";
 require_once UTILITY_PATH. "funciones.php";
 
@@ -44,7 +44,7 @@ $paginador= new Paginador($consulta,$parametros,$limite);
 $resultados=$paginador->getDatos($pagina);
 
 if(count($resultados->datos)>0){
-    echo "<table class='table table-bordered table-striped'>";
+    echo "<table border='1' class='table table-bordered table-striped'>";
         echo "<thead>";
         echo "<tr>";
         echo "<th>Nombre</th>";
@@ -55,7 +55,7 @@ if(count($resultados->datos)>0){
         echo "<th>Telefono</th>";
         echo "<th>Fecha de Alta</th>";
         echo "<th>Foto</th>";
-        echo "<th>Acción</th>";
+        //echo "<th>Acción</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -64,18 +64,18 @@ if(count($resultados->datos)>0){
 
         echo "<tr>";
                     echo "<td>" . $usuario->getnombre() . "</td>";
-                    echo "<td>" . $usuario->apellidos() . "</td>";
-                    echo "<td>" . $usuario->email() . "</td>";
-                    echo "<td>" . $usuario->password() . "</td>";
-                    echo "<td>" . $usuario->administrador() . "</td>";
-                    echo "<td>" . $usuario->telefono() . "</td>";
-                    echo "<td>" . $usuario->fecha_alta() . "</td>";
-                    echo "<td><img src='imagenes/fotos/".$usuario->getimagen()."' width='48px' height='48px'></td>";
-                    echo "<td>";
+                    echo "<td>" . $usuario->getapellidos() . "</td>";
+                    echo "<td>" . $usuario->getemail() . "</td>";
+                    echo "<td>" . str_repeat("*",strlen($usuario->getpassword()))  . "</td>";
+                    echo "<td>" . $usuario->getadministrador() . "</td>";
+                    echo "<td>" . $usuario->gettelefono() . "</td>";
+                    echo "<td>" . $usuario->getfecha_alta() . "</td>";
+                    echo "<td><img src='../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
+                    /*echo "<td>";
                     echo "<a href='accion/read.php?id=" . codificar($usuario->getid()) . "' title='Ver aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                     echo "<a href='accion/update.php?id=" . codificar($usuario->getid()) . "' title='Actualizar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
                     echo "<a href='accion/borrar.php?id=" . codificar($usuario->getid()) . "' title='Borrar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-                    echo "</td>";
+                    echo "</td>";*/
                     echo "</tr>";
     }
             echo "</tbody>";

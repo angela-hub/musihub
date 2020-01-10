@@ -49,7 +49,7 @@ class ControladorUsuario{
         $parametros2=array(':nombre' => $nombre);
         $result= $bd->consultarBD($consulta2, $parametros2);
     
-        $row= $result->fetch(PDO::FETCH_NUM);
+        /*$row= $result->fetch(PDO::FETCH_NUM);
     
         if($row[0] == 0){
             $estado=$bd->actualizarBD($consulta,$parametros);
@@ -62,6 +62,7 @@ class ControladorUsuario{
             return null;
             exit();
         }
+        */
     }
     
     public function buscarUsuario($id){

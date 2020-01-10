@@ -26,6 +26,13 @@ class ControladorImagen {
         }
         return false;
     }
+
+    function salvarImagenPro($imagen) {
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], IMAGE_PATH ."fotos/" . $imagen)) {
+            return true;
+        }
+        return false;
+    }
 //--------------------------------------------------------------------------------------------
     function eliminarImagen($imagen) {
         $fichero = IMAGE_PATH ."fotos/" . $imagen;

@@ -3,7 +3,7 @@ class instrumento {
     private $id;
     private $nombre;
     private $referencia;
-    private $compañiadistribuidor;
+    private $distribuidor;
     private $tipo;
     private $precio;
     private $descuento;
@@ -12,11 +12,11 @@ class instrumento {
 
     
     // Constructor
-    public function __construct($id, $nombre, $referencia, $compañiadistribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen) {
+    public function __construct($id, $nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->referencia = $referencia;
-        $this->compañiadistribuidor = $compañiadistribuidor;
+        $this->distribuidor = $distribuidor;
         $this->tipo = $tipo;
         $this->precio = $precio;
         $this->descuento = $descuento;
@@ -38,8 +38,8 @@ class instrumento {
         return $this->referencia;
     }
 
-    function getcompañiadistribuidor() {
-        return $this->compañiadistribuidor;
+    function getdistribuidor() {
+        return $this->distribuidor;
     }
 
     function gettipo() {

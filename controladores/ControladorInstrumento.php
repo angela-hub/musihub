@@ -40,7 +40,7 @@ class ControladorInstrumento {
 
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->compañiadistribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
+                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
                 $lista[] = $instrumento;
             }
             $bd->cerrarBD();
@@ -50,13 +50,13 @@ class ControladorInstrumento {
         }    
     }
 //----------------------------------------------------------------------------------------------------
-    public function almacenarInstrumento($nombre, $referencia, $compañiadistribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen){
+    public function almacenarInstrumento($nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
-        $consulta = "INSERT INTO instrumentos (nombre, referencia, compañiadistribuidor, tipo, precio, descuento, stockinicial, imagen) 
-        VALUES ( :nombre, :referencia, :compañiadistribuidor, :tipo, :precio, :descuento, :stockinicial, :imagen)";
+        $consulta = "INSERT INTO instrumentos (nombre, referencia, distribuidor, tipo, precio, descuento, stockinicial, imagen) 
+        VALUES ( :nombre, :referencia, :distribuidor, :tipo, :precio, :descuento, :stockinicial, :imagen)";
         
-        $parametros= array( ':nombre'=>$nombre, ':referencia'=>$referencia, ':compañiadistribuidor'=>$compañiadistribuidor,':tipo'=>$tipo,
+        $parametros= array( ':nombre'=>$nombre, ':referencia'=>$referencia, ':distribuidor'=>$distribuidor,':tipo'=>$tipo,
                             ':precio'=>$precio, ':descuento'=>$descuento, ':stockinicial'=>$stockinicial, ':imagen'=>$imagen);
         $estado = $bd->actualizarBD($consulta,$parametros);
         $bd->cerrarBD();
@@ -73,7 +73,7 @@ class ControladorInstrumento {
         $filas=$res->fetchAll(PDO::FETCH_OBJ);
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->compañiadistribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
+                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
             }
             $bd->cerrarBD();
             return $instrumento;
@@ -92,7 +92,7 @@ class ControladorInstrumento {
         $filas=$res->fetchAll(PDO::FETCH_OBJ);
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->compañiadistribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
+                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
             }
             $bd->cerrarBD();
             return $instrumento;
@@ -112,13 +112,13 @@ class ControladorInstrumento {
         return $estado;
     }
 //-------------------------------------------------------------------------------------------------  
-    public function actualizarInstrumento($id ,$nombre, $referencia, $compañiadistribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen){
+    public function actualizarInstrumento($id ,$nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
-        $consulta = "UPDATE instrumentos SET  nombre=:nombre, referencia=:referencia, compañiadistribuidor=:compañiadistribuidor, tipo=:tipo, precio=:precio, 
+        $consulta = "UPDATE instrumentos SET  nombre=:nombre, referencia=:referencia, distribuidor=:distribuidor, tipo=:tipo, precio=:precio, 
             descuento=:descuento, stockinicial=:stockinicial, imagen=:imagen 
             WHERE id=:id";
-        $parametros= array(':id' => $id, ':nombre'=>$nombre, ':referencia'=>$referencia, ':compañiadistribuidor'=>$compañiadistribuidor,':tipo'=>$tipo,
+        $parametros= array(':id' => $id, ':nombre'=>$nombre, ':referencia'=>$referencia, ':distribuidor'=>$distribuidor,':tipo'=>$tipo,
                             ':precio'=>$precio, ':descuento'=>$descuento, ':stockinicial'=>$stockinicial, ':imagen'=>$imagen);
         $estado = $bd->actualizarBD($consulta,$parametros);
         $bd->cerrarBD();

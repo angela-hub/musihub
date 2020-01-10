@@ -14,9 +14,9 @@ require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
 
 // Variables
-$nombre = $referencia = $compañiadistribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
-$nombreVal = $referenciaVal = $compañiadistribuidorVal = $tipoVal =  $precioVal = $descuentoVal =  $stockinicialVal =  $imagenVal = "";
-$nombreErr = $referenciaErr = $compañiadistribuidorErr = $tipoErr =  $precioErr = $descuentoErr =  $stockinicialErr =  $imagenErr = "";
+$nombre = $referencia = $distribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
+$nombreVal = $referenciaVal = $distribuidorVal = $tipoVal =  $precioVal = $descuentoVal =  $stockinicialVal =  $imagenVal = "";
+$nombreErr = $referenciaErr = $distribuidorErr = $tipoErr =  $precioErr = $descuentoErr =  $stockinicialErr =  $imagenErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     // Procesamos el nombre
@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
         $referencia = $referenciaVal;
     }
 
-    // Procesamos compañiadistribuidor
-    if (isset($_POST["compañiadistribuidor"])) {
-        $compañiadistribuidor = filtrado($_POST["compañiadistribuidor"]);
+    // Procesamos distribuidor
+    if (isset($_POST["distribuidor"])) {
+        $distribuidor = filtrado($_POST["distribuidor"]);
     } else {
-        $compañiadistribuidorErr = "Debe elegir al menos una compañiadistribuidor";
+        $distribuidorErr = "Debe elegir al menos una distribuidor";
     }
 
     // Procesamos tipo
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     // Procesamos la foto
     $propiedades = explode("/", $_FILES['imagen']['type']);
     $extension = $propiedades[1];
-    $tam_max = 50000; // 50 KBytes
+    $tam_max = 5000000000; 
     $tam = $_FILES['imagen']['size'];
     $mod = true; // para modificar
 
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
         //guardar imagen
         $imagen = md5($_FILES['imagen']['tmp_name'] . $_FILES['imagen']['name'] . time()) . "." . $extension;
         $controlador = ControladorImagen::getControlador();
-        if (!$controlador->salvarImagen($imagen)) {
+        if (!$controlador->salvarImagenPro($imagen)) {
             $imagenErr = "Error al procesar la imagen y subirla al servidor";
         }
     }
@@ -123,12 +123,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     echo $imagen = filtrado(($_POST["imagen"]));
 */
     if (
-        empty($nombreErr) && empty($referenciaErr) && empty($compañiadistribuidorErr) && empty($tipoErr) &&
+        empty($nombreErr) && empty($referenciaErr) && empty($distribuidorErr) && empty($tipoErr) &&
         empty($precioErr) && empty($descuentoErr) && empty($stockinicialErr) && empty($imagenErr)
     ) {
-        // creamos el controlador de dragones
+        // creamos el controlador de instrumentos
         $controlador = ControladorInstrumento::getControlador();
-        $estado = $controlador->almacenarInstrumento($nombre, $referencia, $compañiadistribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen);
+        $estado = $controlador->almacenarInstrumento($nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen);
         if ($estado) {
             header("location: ../index.php");
             exit();
@@ -143,11 +143,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
 
 ?>
 
-<?php require_once VIEW_PATH . "cabecera.php"; ?>
+<?//php require_once VIEW_PATH . "cabecera.php"; ?>
 
-<h2>Crear Dragon</h2>
+<h2>Insertar Instrumento</h2>
 
-<p>Por favor rellene este formulario para añadir un nuevo dragon a la base de datos de la clase.</p>
+<p>Por favor rellene este formulario para añadir un nuevo instrumento a la base de datos de la tienda MusiHub.</p>
 <!-- Formulario-->
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
     <!-- Nombre-->
@@ -159,39 +159,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     <!-- referencia -->
     <div <?php echo (!empty($referenciaErr)) ? 'error: ' : ''; ?>>
         <label>Referencia</label>
-        <input type="number" required name="referencia" pattern="([1-9])" title="Referencia valida solo con numeros" value="<?php echo $referencia; ?>">
+        <input type="text" required name="referencia" pattern="([1-9])" min="0" title="Referencia valida solo con numeros" value="<?php echo $referencia; ?>">
        <?php echo $referenciaErr; ?>
     </div>
-    <!-- compañiadistribuidor -->
-    <div <?php echo (!empty($compañiadistribuidorErr)) ? 'error: ' : ''; ?>>
+    <!-- distribuidor -->
+    <div <?php echo (!empty($distribuidorErr)) ? 'error: ' : ''; ?>>
         <label>Compañia / Distribuidor</label>
-        <input type="text" required name="compañiadistribuidor" pattern="([^\s][A-zÀ-ž\s]+)" title="Inserte el nombre de la compañia o distribuidor" value="<?php echo $compañiadistribuidor; ?>">
-        <?php echo $compañiadistribuidorErr; ?>
+        <input type="text" required name="distribuidor" pattern="([^\s][A-zÀ-ž\s]+)" title="Inserte el nombre de la compañia o distribuidor" value="<?php echo $distribuidor; ?>">
+        <?php echo $distribuidorErr; ?>
     </div>
     <!-- tipo-->
         <label>Tipo de instrumento</label>
         <select name="tipo">
-            <option value="percusion" <?php echo (strstr($tipo, 'percusion')) ? : ''; ?>>Percusion</option>
-            <option value="viento" <?php echo (strstr($tipo, 'viento')) ? : ''; ?>>Viento</option>
-            <option value="cuerda" <?php echo (strstr($tipo, 'cuerda')) ? : ''; ?>>Cuerda</option>
-            <option value="vientometal" <?php echo (strstr($tipo, 'vientometal')) ? 'selected' : ''; ?>>Viento Metal</option>
+            <option name="tipo" value="percusion" <?php echo (strstr($tipo, 'percusion')) ? : ''; ?>>Percusion</option>
+            <option name="tipo" value="viento" <?php echo (strstr($tipo, 'viento')) ? : ''; ?>>Viento</option>
+            <option name="tipo" value="cuerda" <?php echo (strstr($tipo, 'cuerda')) ? : ''; ?>>Cuerda</option>
+            <option name="tipo" value="vientometal" <?php echo (strstr($tipo, 'vientometal')) ? 'selected' : ''; ?>>Viento Metal</option>
         </select>
     <!-- Precio -->
     <div <?php echo (!empty($precioErr)) ? 'error: ' : ''; ?>>
         <label>Precio</label>
-        <input type="number" required name="precio" value="<?php echo $precio; ?>">
+        <input type="text" required name="precio" value="<?php echo $precio; ?>">
        <?php echo $precioErr; ?>
     </div>
     <!-- descuento-->
     <div <?php echo (!empty($descuentoErr)) ? 'error: ' : ''; ?>>
         <label>Descuento</label>
-        <input type="number" name="descuento" minlength="1">
+        <input type="text" name="descuento" minlength="1">
         <?php echo $descuentoErr; ?>
     </div>
     <!-- stockinicial -->
     <div <?php echo (!empty($stockinicialErr)) ? 'error: ' : ''; ?>>
         <label>Stock Inicial</label>
-        <input type="number" required name="stockinicial" pattern="([1-9])" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>">
+        <input type="text" required name="stockinicial" min="1" pattern="([1-9])" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>">
        <?php echo $stockinicialErr; ?>
     </div>
     <!-- Foto-->

@@ -41,16 +41,16 @@ class ControladorUsuario{
         $consulta= "INSERT INTO usuarios (nombre, apellidos, email, password, administrador, telefono, fecha_alta, foto) VALUES (:nombre, :apellidos, :email, :password, :administrador, :telefono, :fecha_alta, :foto)";
         $parametros= array(':nombre'=>$nombre, ':apellidos'=>$apellidos, ':email'=>$email, ':password'=>$password, 
         ':administrador'=>$administrador, ':telefono'=>$telefono, ':fecha_alta'=>$fecha_alta, ':foto'=>$foto);
-        /*$estado = $bd->actualizarBD($consulta,$parametros);
+        $estado = $bd->actualizarBD($consulta,$parametros);
         $bd->cerrarBD();
         return $estado;
-        */
+        /*
         $consulta2="SELECT count(nombre) FROM usuarios where nombre=:nombre";
         $parametros2=array(':nombre' => $nombre);
         $result= $bd->consultarBD($consulta2, $parametros2);
     
-        /*$row= $result->fetch(PDO::FETCH_NUM);
-    
+        $row= $result->fetch(PDO::FETCH_NUM);
+        
         if($row[0] == 0){
             $estado=$bd->actualizarBD($consulta,$parametros);
             $bd->cerrarBD();

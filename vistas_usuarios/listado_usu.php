@@ -55,7 +55,7 @@ if(count($resultados->datos)>0){
         echo "<th>Telefono</th>";
         echo "<th>Fecha de Alta</th>";
         echo "<th>Foto</th>";
-        //echo "<th>Acción</th>";
+        echo "<th>Acción</th>";
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
@@ -71,11 +71,11 @@ if(count($resultados->datos)>0){
                     echo "<td>" . $usuario->gettelefono() . "</td>";
                     echo "<td>" . $usuario->getfecha_alta() . "</td>";
                     echo "<td><img src='../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
-                    /*echo "<td>";
-                    echo "<a href='accion/read.php?id=" . codificar($usuario->getid()) . "' title='Ver aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                    echo "<a href='accion/update.php?id=" . codificar($usuario->getid()) . "' title='Actualizar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                    echo "<a href='accion/borrar.php?id=" . codificar($usuario->getid()) . "' title='Borrar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-                    echo "</td>";*/
+                    echo "<td>";
+                    //echo "<a href='accion/read.php?id=" . codificar($usuario->getid()) . "' title='Ver aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                    //echo "<a href='accion/update.php?id=" . codificar($usuario->getid()) . "' title='Actualizar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                    echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar aspirante' data-toggle='tooltip'>Borrar Aspirante<span class='glyphicon glyphicon-trash'></span></a>";
+                    echo "</td>";
                     echo "</tr>";
     }
             echo "</tbody>";

@@ -42,6 +42,14 @@ class ControladorImagen {
         }
         return false;;
     }
+    function eliminarFoto($imagen) {
+        $fichero = IMAGE_PATH ."fotos/" . $foto;
+        if (file_exists($fichero)) {
+            unlink($fichero);
+            return true;
+        }
+        return false;;
+    }
 //--------------------------------------------------------------------------------------------
     function actualizarFoto(){
         $fotoAnterior = trim($_POST["fotoAnterior"]);

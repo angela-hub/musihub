@@ -7,11 +7,11 @@
     <button type="submit"> Buscar</button>
 
     <a href="javascript:window.print()"> IMPRIMIR</a>
-    <a href="utilidades/descargar.php?opcion=TXT" target="_blank"> TXT</a>
-    <a href="utilidades/descargar.php?opcion=PDF" target="_blank"> PDF</a>
-    <a href="utilidades/descargar.php?opcion=XML" target="_blank"> XML</a>
-    <a href="utilidades/descargar.php?opcion=JSON" target="_blank"> JSON</a>
-    <a href="create.php"> Añadir Instrumento</a>
+    <a href="../utilidades/descargarInstrumento.php?opcion=TXT" target="_blank"> TXT</a>
+    <a href="../utilidades/descargarInstrumento.php?opcion=PDF" target="_blank"> PDF</a>
+    <a href="../utilidades/descargarInstrumento.php?opcion=XML" target="_blank"> XML</a>
+    <a href="../utilidades/descargarInstrumento.php?opcion=JSON" target="_blank"> JSON</a>
+    <a href="../vistas_instrumentos/create.php"> Añadir Instrumento</a>
 
 </form>
 </div>

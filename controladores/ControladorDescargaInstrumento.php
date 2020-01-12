@@ -30,7 +30,7 @@ class ControladorDescargaInstrumento
 //----------------------------------------------------------------------------------------------------------
 public function descargarTXT()
 {
-    $this->fichero = "dragones.txt";
+    $this->fichero = "Instrumentos.txt";
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=" . $this->fichero . "");
 
@@ -44,7 +44,7 @@ public function descargarTXT()
             " --stockinicial: " . $instrumento->getstockinicial();
         }
     } else {
-        echo "No se ha encontrado datos de dragones";
+        echo "No se ha encontrado datos de Instrumentos";
     }
 }
 //---------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ public function descargarTXT()
         $lista = $controlador = ControladorInstrumento::getControlador();
         $lista = $controlador->listarInstrumento("", "");
         $doc = new DOMDocument('1.0', 'UTF-8');
-        $instrumento = $doc->createElement('instrumento');
+        $instrumentos = $doc->createElement('instrumento');
 
         foreach ($lista as $a) {
             $instrumento = $doc->createElement('instrumento');
@@ -95,7 +95,7 @@ public function descargarTXT()
             $instrumento->appendChild($doc->createElement('stockinicial', $a->getstockinicial()));
             $instrumento->appendChild($doc->createElement('imagen', $a->getimagen()));
 
-            $instrumento->appendChild($instrumento);
+            $instrumentos->appendChild($instrumento);
         }
 
         $doc->appendChild($instrumento);

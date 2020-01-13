@@ -1,8 +1,8 @@
 <h2>Ficha de Instrumentos</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="no_imprimir">
     <div>
-        <label for="instrumento">Referencia o Nombre</label>
-        <input type="text" id="buscar" name="instrumento" placeholder="Ref o nombre">
+        <label for="instrumento">Buscar instrumento </label>
+        <input type="text" id="buscar" name="instrumento" placeholder="Inserte Nombre o Referencia">
     </div>
     <button type="submit"> Buscar</button>
 
@@ -71,7 +71,7 @@ if (count($resultados->datos) > 0) {
         echo "<td>" . $instrumento->getstockinicial() . "</td>";
         echo "<td><img src='imagenes/fotos/" . $instrumento->getimagen() . "' width='48px' height='48px'></td>";
         echo "<td>";
-        echo "<a href='vistas_instrumentos/read.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+        echo "<a href='../vistas_instrumentos/read.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Info <span class='glyphicon glyphicon-eye-open'></span></a>";
         echo "</td>";
         echo "</tr>";
     }

@@ -63,11 +63,11 @@ class ControladorInstrumento {
         return $estado;
     }
 //----------------------------------------------------------------------------------------------------
-    public function buscarInstrumentoRef($referencia){ 
+    public function buscarInstrumentoid($id){ 
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
-        $consulta = "SELECT* FROM instrumentos WHERE referencia = :referencia";
-        $parametros = array(':referencia' => $referencia);
+        $consulta = "SELECT* FROM instrumentos WHERE id = :id";
+        $parametros = array(':id' => $id);
         $filas = $bd->consultarBD($consulta, $parametros);
         $res = $bd->consultarBD($consulta,$parametros);
         $filas=$res->fetchAll(PDO::FETCH_OBJ);

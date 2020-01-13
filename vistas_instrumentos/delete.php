@@ -4,10 +4,10 @@ require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
 
-if (isset($_GET["referencia"]) && !empty(trim($_GET["referencia"]))) {
-    $referencia = decode($_GET["referencia"]);
+if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
+    $id = decode($_GET["id"]);
     $controlador = ControladorInstrumento::getControlador();
-    $instrumento = $controlador->buscarInstrumentoRef($referencia);
+    $instrumento = $controlador->buscarInstrumentoid($id);
     if (is_null($instrumento)) {
         header("location: error.php");
         exit();
@@ -17,7 +17,7 @@ if (isset($_GET["referencia"]) && !empty(trim($_GET["referencia"]))) {
 
 if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $controlador = ControladorInstrumento::getControlador();
-    $instrumento = $controlador->buscarInstrumentoRef($_POST["referencia"]);
+    $instrumento = $controlador->buscarInstrumentoid($_POST["id"]);
     if ($controlador->borrarInstrumento($_POST["id"])) {
 
         $controlador = ControladorImagen::getControlador();

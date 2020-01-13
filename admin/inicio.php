@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Administración de la Tienda MusiHub</h1>
-    <a href="vistas_usuarios/listado_usu.php">Gestión de Usuarios</a><br>
+    <a href="admin/vistas_usuarios/listado_usu.php">Gestión de Usuarios</a><br>
     <a href="vistas_instrumentos/listado.php">Gestión de Instrumentos</a>
 </body>
 </html>

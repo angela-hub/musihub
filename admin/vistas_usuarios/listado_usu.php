@@ -70,7 +70,7 @@ if(count($resultados->datos)>0){
                     echo "<td>" . $usuario->getadministrador() . "</td>";
                     echo "<td>" . $usuario->gettelefono() . "</td>";
                     echo "<td>" . $usuario->getfecha_alta() . "</td>";
-                    echo "<td><img src='../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
+                    echo "<td><img src='../../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
                     echo "<td>";
                     //echo "<a href='accion/read.php?id=" . codificar($usuario->getid()) . "' title='Ver aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                     //echo "<a href='accion/update.php?id=" . codificar($usuario->getid()) . "' title='Actualizar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";

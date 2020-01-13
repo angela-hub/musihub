@@ -63,12 +63,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Apellidos</label>
-                                    <p class="form-control-static"><?php echo $usuario->getnombre(); ?></p>
+                                    <p class="form-control-static"><?php echo $usuario->getapellidos(); ?></p>
                                 </div>
                         </td>
                         <td class="align-left">
                             <label>Imagen</label><br>
-                            <img src='<?php echo "../imagenes/fotos/" . $usuario->getfoto() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
+                            <img src='<?php echo "../../imagenes/fotos/" . $usuario->getfoto() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
                         </td>
                     </tr>
                 </table>
@@ -101,7 +101,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                         <p>¿Está seguro que desea borrar este usuario?</p><br>
                         <p>
                             <button type="submit" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span>  Borrar</button>
-                            <a href="../index.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+                            <a href="../../index.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
                         </p>
                     </div>
                 </form>

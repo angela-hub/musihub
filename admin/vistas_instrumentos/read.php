@@ -25,7 +25,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         </td>
         <td>
             <label>Fotografía</label><br>
-            <img src='<?php echo "../imagenes/fotos/" . $instrumento->getimagen() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
+            <img src='<?php echo "../../imagenes/fotos/" . $instrumento->getimagen() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
         </td>
     </tr>
 </table>
@@ -49,5 +49,5 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 <label>stockinicial</label>
 <p><?php echo $instrumento->getstockinicial(); ?></p>
 
-<p><a href="../index.php"> Aceptar</a></p>
+<p><a href="../../index.php"> Aceptar</a></p>
 <br><br><br>

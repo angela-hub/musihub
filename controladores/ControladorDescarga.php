@@ -5,7 +5,7 @@ require_once MODEL_PATH . "instrumento.php";
 require_once VENDOR_PATH . "autoload.php";
 use Spipu\Html2Pdf\HTML2PDF;
 
-class ControladorDescargaInstrumento
+class ControladorDescarga
 {
     private $fichero;
     static private $instancia = null;
@@ -23,7 +23,7 @@ class ControladorDescargaInstrumento
     public static function getControlador()
     {
         if (self::$instancia == null) {
-            self::$instancia = new ControladorDescargaInstrumento();
+            self::$instancia = new ControladorDescarga();
         }
         return self::$instancia;
     }

@@ -1,8 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
-require_once CONTROLLER_PATH . "ControladorDescargaInstrumento.php";
+require_once CONTROLLER_PATH . "ControladorDescarga.php";
 $opcion = $_GET["opcion"];
-$fichero = ControladorDescargaInstrumento::getControlador();
+$fichero = ControladorDescarga::getControlador();
 switch ($opcion) {
     case 'TXT':
         $fichero->descargarTXT();

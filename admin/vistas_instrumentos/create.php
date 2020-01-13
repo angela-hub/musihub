@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
         $controlador = ControladorInstrumento::getControlador();
         $estado = $controlador->almacenarInstrumento($nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen);
         if ($estado) {
-            header("location: ../index.php");
+            header("location: ../../index.php");
             exit();
         } else {
             header("location: error.php");
@@ -203,6 +203,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     <!-- Botones -->
     <button type="submit" name="aceptar" value="aceptar" > Aceptar</button>
     <button type="reset" value="reset" > Limpiar</button>
-    <a href="../index.php" > Volver</a>
+    <a href="../../index.php" > Volver</a>
 </form>
 <br><br><br>

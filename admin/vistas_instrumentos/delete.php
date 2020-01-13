@@ -50,7 +50,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         </td>
         <td>
             <label>Fotografía</label><br>
-            <img src='<?php echo "../imagenes/fotos/" . $instrumento->getimagen() ?>' width='48' height='auto'>
+            <img src='<?php echo "../../imagenes/fotos/" . $instrumento->getimagen() ?>' width='48' height='auto'>
         </td>
     </tr>
 </table>
@@ -85,7 +85,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         <p>¿Está seguro que desea borrar este instrumento?</p><br>
         <p>
             <button type="submit"> Borrar</button>
-            <a href="../index.php"> Volver</a>
+            <a href="../../index.php"> Volver</a>
         </p>
     </div>
 </form>

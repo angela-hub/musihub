@@ -6,10 +6,7 @@ if ( !defined('MODEL_PATH') )
     define('MODEL_PATH', ROOT_PATH."modelos/");
 
 if ( !defined('VIEW_PATH') )
-    define('VIEW_PATH', ROOT_PATH."vistas_instrumentos/");
-
-if ( !defined('VIEW_PATH') )
-    define('VIEW_PATH', ROOT_PATH."vistas_usuarios/");
+    define('VIEW_PATH', ROOT_PATH."admin/");
 
 if ( !defined('CONTROLLER_PATH') )
     define('CONTROLLER_PATH', ROOT_PATH."controladores/");

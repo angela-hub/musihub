@@ -74,7 +74,7 @@ if(count($resultados->datos)>0){
                     echo "<td><img src='../../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
                     echo "<td>";
                     echo "<a href='leer_usu.php?id=" . encode($usuario->getid()) . "' title='Ver usuario' data-toggle='tooltip'>Ver Usuario</span></a>" . "<br>";
-                    //echo "<a href='accion/update.php?id=" . codificar($usuario->getid()) . "' title='Actualizar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                    echo "<a href='update_usu.php?id=" . encode($usuario->getid()) . "' title='Actualizar Usuario' data-toggle='tooltip'>Actualizar Usuario</span></a>" . "<br>";
                     echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar usuario' data-toggle='tooltip'>Borrar Usuario<span class='glyphicon glyphicon-trash'></span></a>";
                     echo "</td>";
                     echo "</tr>";

@@ -42,7 +42,7 @@ class ControladorImagen {
         }
         return false;;
     }
-    function eliminarFoto($imagen) {
+    function eliminarFoto($foto) {
         $fichero = IMAGE_PATH ."fotos/" . $foto;
         if (file_exists($fichero)) {
             unlink($fichero);

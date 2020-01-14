@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     }
 
     // Cogemos la fecha
-    $fecha_alta=date("d/m/o");
+    $fecha_alta=date("d-m-Y");
 
     // Procesamos la foto
     $propiedades = explode("/", $_FILES['foto']['type']);
@@ -123,7 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
         $controlador = ControladorUsuario::getControlador();
         $estado = $controlador->almacenarUsuario($nombre, $apellidos, $email, $password, $administrador, $telefono, $fecha_alta, $foto);
         if($estado){
-            header("location: ../../index.php");
+            header("location: listado_usu.php");
             exit();
         }else{
             header("location: error.php");
@@ -133,8 +133,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
         alerta("Hay errores al procesar el formulario revise los errores");
     }
 
-}else{
-    $fecha = date("Y-m-d");
 }
 ?>
  
@@ -201,7 +199,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                         <!-- Botones --> 
                          <button type="submit" name= "aceptar" value="aceptar" class="btn btn-success"> <span class="glyphicon glyphicon-floppy-save"></span>  Aceptar</button>
                          <button type="reset" value="reset" class="btn btn-info"> <span class="glyphicon glyphicon-repeat"></span>  Limpiar</button>
-                        <a href="../../index.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+                        <a href="listado.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
                     </form>
                 </div>
             </div>        

@@ -63,7 +63,6 @@ if (count($resultados->datos) > 0) {
         echo "<tr>";
         echo "<td>" . $instrumento->getnombre() . "</td>";
         echo "<td>" . $instrumento->getreferencia() . "</td>";
-        // echo "<td>" . str_repeat("*",strlen($dragon->getPassword())) . "</td>";
         echo "<td>" . $instrumento->getdistribuidor() . "</td>";
         echo "<td>" . $instrumento->gettipo() . "</td>";
         echo "<td>" . $instrumento->getprecio() . "</td>";
@@ -86,9 +85,10 @@ if (count($resultados->datos) > 0) {
     echo "<p class='lead'><em>No se ha encontrado datos de Instrumentos.</em></p>";
 }
 ?>
+
 <div id="no_imprimir">
 
-    <?php
+    <?/*php
 
     if (isset($_COOKIE['CONTADOR'])) {
         echo $contador;
@@ -96,6 +96,6 @@ if (count($resultados->datos) > 0) {
     } else {
         echo "Es tu primera visita hoy";
     }
-    ?>
+    */?>
 </div>
 <br><br><br>

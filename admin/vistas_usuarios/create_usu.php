@@ -199,7 +199,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                         <!-- Botones --> 
                          <button type="submit" name= "aceptar" value="aceptar" class="btn btn-success"> <span class="glyphicon glyphicon-floppy-save"></span>  Aceptar</button>
                          <button type="reset" value="reset" class="btn btn-info"> <span class="glyphicon glyphicon-repeat"></span>  Limpiar</button>
-                        <a href="listado.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+                        <a href="listado_usu.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
                     </form>
                 </div>
             </div>        

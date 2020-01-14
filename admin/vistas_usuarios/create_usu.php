@@ -142,6 +142,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 <?php //require_once VIEW_PATH."cabecera.php"; ?>
 <!-- Cuerpo de la página web -->
     <div class="wrapper">
+    <title>Crear Usuario</title>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">

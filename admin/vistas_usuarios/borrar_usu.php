@@ -43,7 +43,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 <!-- Cuerpo de la página web -->
 <div class="wrapper">
     <div class="container-fluid">
-
+    <title>Borrar Usuario</title>
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">

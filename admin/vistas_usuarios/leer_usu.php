@@ -24,7 +24,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 <!-- Cuerpo de la página web -->
 <div class="wrapper">
     <div class="container-fluid">
-
+    <title>Información de Usuario</title>
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">

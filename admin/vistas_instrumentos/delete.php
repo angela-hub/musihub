@@ -22,7 +22,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
         $controlador = ControladorImagen::getControlador();
         if ($controlador->eliminarImagen($instrumento->getimagen())) {
-            header("location: ../index.php");
+            header("location: ../../index.php");
             exit();
         } else {
             header("location: error.php");

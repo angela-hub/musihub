@@ -1,0 +1,261 @@
+<?php
+// Incluimos el controlador a los objetos a usar
+require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
+require_once CONTROLLER_PATH . "ControladorInstrumento.php";
+require_once CONTROLLER_PATH . "ControladorImagen.php";
+require_once UTILITY_PATH . "funciones.php";
+
+// Variables temporales
+$nombre = $referencia = $distribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
+$nombreErr = $referenciaErr = $distribuidorErr = $tipoErr =  $precioErr = $descuentoErr =  $stockinicialErr =  $imagenErr = "";
+$imagenAnterior = "";
+$errores = [];
+
+// Procesamos la información obtenida por el get
+if (isset($_POST["id"]) && !empty($_POST["id"])) {
+    // Get hidden input value
+    $id = $_POST["id"];
+
+    // Procesamos el nombre
+    $nombreVal = filtrado(($_POST["nombre"]));
+    if (empty($nombreVal)) {
+        $nombreErr = "Por favor introduzca un nombre válido con solo carácteres alfabéticos.";
+    } elseif (!preg_match("/([^\s][A-zÀ-ž\s]+$)/", $nombreVal)) {
+        $nombreErr = "Por favor introduzca un nombre válido con solo carácteres alfabéticos.";
+    } else {
+        $nombre = $nombreVal;
+    }
+
+    // NO repetir nombre al actualizar
+    $controlador = ControladorInstrumento::getControlador();
+    $instrumento = $controlador->buscarInstrumentoNom($nombre);
+    if (isset($instrumento)) {
+        $nombreErr = "Ya existe un instrumento con este nombre:" . $nombreVal . " en la Base de Datos";
+    } else {
+        $nombre = $nombreVal;
+    }
+
+    // Procesamos referencia
+    if (isset($_POST["referencia"])) {
+        $referencia = filtrado($_POST["referencia"]);
+    } elseif (!preg_match("/([1-9])/", $referenciaVal)) {
+        $referenciaErr = "Introduzca una referencia valida en numeros";
+    } else {
+        $referencia = $referenciaVal;
+    }
+
+    // Procesamos distribuidor
+    if (isset($_POST["distribuidor"])) {
+        $distribuidor = filtrado($_POST["distribuidor"]);
+    } else {
+        $distribuidorErr = "Debe elegir al menos una distribuidor";
+    }
+
+    // Procesamos tipo
+    if (isset($_POST["tipo"])) {
+        $tipo = filtrado($_POST["tipo"]);
+    } else {
+        $tipoErr = "Tipo incorrecto";
+    }
+
+    // Procesamos precio
+    if (isset($_POST["precio"])) {
+        $precio = filtrado($_POST["precio"]);
+    } else {
+        $precioErr = "Precio incorrecto";
+    }
+
+    // Procesamos descuento
+    if (isset($_POST["descuento"])) {
+        $descuento = filtrado($_POST["descuento"]);
+    } else {
+        $descuentoErr = "descuento incorrecto";
+    }
+
+    // Procesamos stockinicial
+    if (isset($_POST["stockinicial"])) {
+        $stockinicial = filtrado($_POST["stockinicial"]);
+    } elseif (!preg_match("/([0-9])/", $stockinicialVal)) {
+        $stockinicialErr = "Introduzca un stockinicial valido desde el 0";
+    } else {
+        $stockinicial = $stockinicialVal;
+    }
+
+
+    // Procesamos la imagen
+    // Si nos ha llegado algo mayor que cero
+    if ($_FILES['imagen']['size'] > 0 && count($errores) == 0) {
+        $propiedades = explode("/", $_FILES['imagen']['type']);
+        $extension = $propiedades[1];
+        $tam_max = 5000000000;
+        $tam = $_FILES['imagen']['size'];
+        $mod = true;
+        // Si no coicide la extensión
+        if ($extension != "jpg" && $extension != "jpeg") {
+            $mod = false;
+            $imagenErr = "Formato debe ser jpg/jpeg";
+        }
+        // si no tiene el tamaño
+        if ($tam > $tam_max) {
+            $mod = false;
+            $imagenErr = "Tamaño superior al limite de: " . ($tam_max / 1000) . " KBytes";
+        }
+
+        // Si todo es correcto, mod = true
+        if ($mod) {
+            // salvamos la imagen
+            $imagen = md5($_FILES['imagen']['tmp_name'] . $_FILES['imagen']['name'] . time()) . "." . $extension;
+            $controlador = ControladorImagen::getControlador();
+            if (!$controlador->salvarImagenPro($imagen)) {
+                $imagenErr = "Error al procesar la imagen y subirla al servidor";
+            }
+
+            // Borramos la antigua
+            $imagenAnterior = trim($_POST["imagenAnterior"]);
+            if ($imagenAnterior != $imagen) {
+                if (!$controlador->eliminarImagen($imagenAnterior)) {
+                    $imagenErr = "Error al borrar la antigua imagen en el servidor";
+                }
+            }
+        } else {
+            // Si no la hemos modificado
+            $imagen = trim($_POST["imagenAnterior"]);
+        }
+    } else {
+        $imagen = trim($_POST["imagenAnterior"]);
+    }
+
+    // Chequeamos los errores antes de insertar en la base de datos
+    if (
+        empty($nombreErr) && empty($referenciaErr) && empty($distribuidorErr) && empty($tipoErr) &&
+        empty($precioErr) && empty($descuentoErr) && empty($stockinicialErr) && empty($imagenErr)
+    ) {
+        // creamos el controlador de alumnado
+        $controlador = ControladorInstrumento::getControlador();
+        $estado = $controlador->actualizarInstrumento($id, $nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen);
+        if ($estado) {
+            $errores = [];
+            // El registro se ha lamacenado corectamente
+            header("location: ../../index.php");
+            exit();
+        } else {
+            header("location: error.php");
+            exit();
+        }
+    } else {
+        alerta("Hay errores al procesar el formulario revise los errores");
+    }
+}
+
+
+
+// Comprobamos que existe el id antes de ir más lejos
+if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
+    $id =  decode($_GET["id"]);
+    $controlador = ControladorInstrumento::getControlador();
+    $instrumento = $controlador->buscarInstrumentoid($id);
+    if (!is_null($instrumento)) {
+        $nombre = $instrumento->getnombre();
+        $referencia = $instrumento->getreferencia();
+        $distribuidor = $instrumento->getdistribuidor();
+        $tipo = $instrumento->gettipo();
+        $precio = $instrumento->getprecio();
+        $descuento = $instrumento->getdescuento();
+        $stockinicial = $instrumento->getstockinicial();
+        $imagen = $instrumento->getimagen();
+        $imagenAnterior = $imagen;
+    } else {
+        // hay un error
+        header("location: error.php");
+        exit();
+    }
+} else {
+    // hay un error
+    header("location: error.php");
+    exit();
+}
+
+?>
+
+<!-- Cabecera de la página web -->
+<?php //require_once VIEW_PATH."cabecera.php"; 
+?>
+<!-- Cuerpo de la página web -->
+<h2>Modificar Instrumento</h2>
+
+<p>Por favor edite la nueva información para actualizar la ficha.</p>
+<form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <!-- Nombre-->
+                <div <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?>>
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" value="<?php echo $nombre; ?>">
+                    <?php echo $nombreErr; ?>
+                </div>
+            </td>
+            <!-- Fotografía -->
+            <td>
+                <label>Fotografía</label><br>
+                <img src='<?php echo "../../imagenes/fotos/" . $instrumento->getimagen() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
+            </td>
+        </tr>
+    </table>
+
+    <!-- referencia -->
+    <div <?php echo (!empty($referenciaErr)) ? 'error: ' : ''; ?>>
+        <label>Referencia</label>
+        <input type="text" required name="referencia" value="<?php echo $referencia; ?>" pattern="([1-9])" title="Referencia valida solo con numeros">
+        <?php echo $referenciaErr; ?>
+    </div>
+
+    <!-- distribuidor -->
+    <div <?php echo (!empty($distribuidorErr)) ? 'error: ' : ''; ?>>
+        <label>Compañia / Distribuidor</label>
+        <input type="text" required name="distribuidor" pattern="([^\s][A-zÀ-ž\s]+)" title="Inserte el nombre de la compañia o distribuidor" value="<?php echo $distribuidor; ?>">
+        <?php echo $distribuidorErr; ?>
+    </div>
+
+    <!-- tipo-->
+    <label>Tipo de instrumento</label>
+    <select name="tipo">
+        <option name="tipo" value="percusion" <?php echo (strstr($tipo, 'percusion')) ?: ''; ?>>Percusion</option>
+        <option name="tipo" value="viento" <?php echo (strstr($tipo, 'viento')) ?: ''; ?>>Viento</option>
+        <option name="tipo" value="cuerda" <?php echo (strstr($tipo, 'cuerda')) ?: ''; ?>>Cuerda</option>
+        <option name="tipo" value="vientometal" <?php echo (strstr($tipo, 'vientometal')) ? 'selected' : ''; ?>>Viento Metal</option>
+    </select>
+    <!-- Precio -->
+    <div <?php echo (!empty($precioErr)) ? 'error: ' : ''; ?>>
+        <label>Precio</label>
+        <input type="text" required name="precio" value="<?php echo $precio; ?>">
+        <?php echo $precioErr; ?>
+    </div>
+    <!-- descuento-->
+    <div <?php echo (!empty($descuentoErr)) ? 'error: ' : ''; ?>>
+        <label>Descuento</label>
+        <input type="text" name="descuento" minlength="1" value="<?php echo $descuento; ?>">
+        <?php echo $descuentoErr; ?>
+    </div>
+    <!-- stockinicial -->
+    <div <?php echo (!empty($stockinicialErr)) ? 'error: ' : ''; ?>>
+        <label>Stock Inicial</label>
+        <input type="text" required name="stockinicial" min="1" pattern="([1-9])" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>">
+        <?php echo $stockinicialErr; ?>
+    </div>
+    <!-- Foto-->
+    <div class="form-group <?php echo (!empty($imagenErr)) ? 'error: ' : ''; ?>">
+        <label>Fotografía</label>
+        <!-- Solo acepto imagenes jpg -->
+        <input type="file" name="imagen" class="form-control-file" id="imagen" accept="image/jpeg">
+        <span class="help-block"><?php echo $imagenErr; ?></span>
+    </div>
+
+    <input type="hidden" name="id" value="<?php echo $id; ?>" />
+        <input type="hidden" name="imagenAnterior" value="<?php echo $imagenAnterior; ?>" />
+        <button type="submit" value="aceptar"> Modificar</button>
+        <a href="../../index.php"> Volver</a>
+</form>
+<br><br><br>
+<!-- Pie de la página web -->
+<?php //require_once VIEW_PATH . "pie.php"; ?>

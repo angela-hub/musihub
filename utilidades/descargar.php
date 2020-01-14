@@ -16,4 +16,16 @@ switch ($opcion) {
     case 'PDF':
         $fichero->descargarPDF();
         break;
+    case 'TXTUsu':
+        $fichero->descargarTXTUsu();
+        break;
+    case 'JSONUsu':
+        $fichero->descargarJSONUsu();
+        break;
+    case 'XMLUsu':
+        $fichero->descargarXMLUsu();
+        break;
+    case 'PDFUsu':
+        $fichero->descargarPDFUsu();
+        break;
 }

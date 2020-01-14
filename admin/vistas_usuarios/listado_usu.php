@@ -89,6 +89,7 @@ if(count($resultados->datos)>0){
             echo "<p class='lead'><em>No se ha encontrado ningun Usuario.</em></p>";
         }
 ?>
+<a href="../inicio.php">Inicio</a>
 <?php
 /*
         // Leemos la cookie

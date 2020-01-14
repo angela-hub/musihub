@@ -216,15 +216,15 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         <input type="text" required name="distribuidor" pattern="([^\s][A-zÀ-ž\s]+)" title="Inserte el nombre de la compañia o distribuidor" value="<?php echo $distribuidor; ?>">
         <?php echo $distribuidorErr; ?>
     </div>
-
-    <!-- tipo-->
-    <label>Tipo de instrumento</label>
-    <select name="tipo">
-        <option name="tipo" value="percusion" <?php echo (strstr($tipo, 'percusion')) ?: ''; ?>>Percusion</option>
-        <option name="tipo" value="viento" <?php echo (strstr($tipo, 'viento')) ?: ''; ?>>Viento</option>
-        <option name="tipo" value="cuerda" <?php echo (strstr($tipo, 'cuerda')) ?: ''; ?>>Cuerda</option>
-        <option name="tipo" value="vientometal" <?php echo (strstr($tipo, 'vientometal')) ? 'selected' : ''; ?>>Viento Metal</option>
-    </select>
+    <!-- tipo -->
+    <div <?php echo (!empty($tipoErr)) ? 'error: ' : ''; ?>>
+        <label>Tipo de instrumento</label>
+        <input type="radio" name="tipo" value="percusion" <?php echo (strstr($tipo, 'percusion')) ? 'checked' : ''; ?>>percusion</input>
+        <input type="radio" name="tipo" value="viento" <?php echo (strstr($tipo, 'viento')) ? 'checked' : ''; ?>>viento</input>
+        <input type="radio" name="tipo" value="cuerda" <?php echo (strstr($tipo, 'cuerda')) ? 'checked' : ''; ?>>cuerda</input>
+        <input type="radio" name="tipo" value="vientometal" <?php echo (strstr($tipo, 'vientometal')) ? 'checked' : ''; ?>>vientometal</input>
+        <?php echo $tipoErr; ?>
+    </div>
     <!-- Precio -->
     <div <?php echo (!empty($precioErr)) ? 'error: ' : ''; ?>>
         <label>Precio</label>

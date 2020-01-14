@@ -12,7 +12,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary mb-2"> <span class="glyphicon glyphicon-search"></span>  Buscar</button>
                     <!-- Aquí va el nuevo botón para dar de alta, podría ir al final -->
-                    <a href="javascript:window.print()" class="btn pull-right"> <span class="glyphicon glyphicon-print"></span> IMPRIMIR</a>
+                    <!--<a href="javascript:window.print()" class="btn pull-right"> <span class="glyphicon glyphicon-print"></span> IMPRIMIR</a> -->
                     <a href="../../utilidades/descargar.php?opcion=TXTUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  TXT</a>
                     <a href="../../utilidades/descargar.php?opcion=PDFUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  PDF</a>
                     <a href="../../utilidades/descargar.php?opcion=XMLUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  XML</a>
@@ -90,6 +90,7 @@ if(count($resultados->datos)>0){
         }
 ?>
 <?php
+/*
         // Leemos la cookie
         if(isset($_COOKIE['CONTADOR'])){
             echo $contador;
@@ -98,5 +99,5 @@ if(count($resultados->datos)>0){
         else{
             echo "Es tu primera visita hoy";
         }
-        
+        */
     ?>

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<title>Lista de Usuarios</title>
+<title>Listado de Usuarios</title>
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header clearfix">
@@ -73,9 +73,9 @@ if(count($resultados->datos)>0){
                     echo "<td>" . $usuario->getfecha_alta() . "</td>";
                     echo "<td><img src='../../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
                     echo "<td>";
-                    //echo "<a href='accion/read.php?id=" . codificar($usuario->getid()) . "' title='Ver aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                    echo "<a href='leer_usu.php?id=" . encode($usuario->getid()) . "' title='Ver usuario' data-toggle='tooltip'>Ver Usuario</span></a>" . "<br>";
                     //echo "<a href='accion/update.php?id=" . codificar($usuario->getid()) . "' title='Actualizar aspirante' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                    echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar aspirante' data-toggle='tooltip'>Borrar Aspirante<span class='glyphicon glyphicon-trash'></span></a>";
+                    echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar usuario' data-toggle='tooltip'>Borrar Usuario<span class='glyphicon glyphicon-trash'></span></a>";
                     echo "</td>";
                     echo "</tr>";
     }

@@ -66,7 +66,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
                             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
                             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
                         ?>
-                        <li style='float:right'><a href="#"><span class="glyphicon glyphicon-user"></span>  Login</a></li>
+                        <li class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span>  Login</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

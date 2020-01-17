@@ -47,7 +47,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
             $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
             ?>
             <div class="col-md-3">
-                <form method='post' action='index.php?action=add&id=<?php echo $instrumento->getid(); ?>'>
+                   <form method='post' action='index.php?action=add&id=<?php echo $instrumento->getid(); ?>'>
                     <div style=' border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;' align="center">
                         <img style='height:200px;' src='imagenes/fotos/<?php echo $instrumento->getimagen() ?>' class='img-responsive' /><br />
 
@@ -57,8 +57,8 @@ require_once CONTROLLER_PATH . "Paginador.php";
 
                         <br><br>
                         <?php
-                        echo "<a style='margin-right:5px;' class='btn btn-lg btn-success' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
-                        echo "<a style='margin-left:5px;' class='btn btn-lg btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
+                        echo "<a style='margin-right:5px;' class='btn btn-principal btn-success' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
+                        echo "<a style='margin-left:5px;' class='btn btn-principal btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
                         ?>
                     </div>
                 </form>

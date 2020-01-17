@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
+require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once CONTROLLER_PATH . "Paginador.php";
 ?>
@@ -39,7 +40,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
 
             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
-            $limite = 20; // Limite
+            $limite = 12; // Limite
             $paginador  = new Paginador($consulta, $parametros, $limite);
             $resultados = $paginador->getDatos($pagina);
             foreach ($resultados->datos as $a) {
@@ -63,9 +64,12 @@ require_once CONTROLLER_PATH . "Paginador.php";
                 </form>
             </div>
             <?php
-            }
+                }
             ?>
         </div>
+        <?php
+            echo $paginador->crearLinks($enlaces);
+        ?>
         <br>
         <br>
         <br>

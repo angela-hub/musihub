@@ -20,14 +20,6 @@
                         +65 11.188.888
                     </div>
                 </div>
-                <div class="ht-right">
-                    <div class="top-social">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter-alt"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="nav-item">
@@ -37,7 +29,25 @@
                         <li class="active"><a href="./index.php">Inicio</a></li>
                         <li><a href="./contacto.php">Contacto</a></li>
                         <li><a href="admin/inicio.php">Administración</a></li>
-                        <li style='position:fixed; right:0px;'><a href="#">Login</a></li>
+                        <li style='position:relative; right:250px;'>
+                            <form class="form-inline mt-2 mt-md-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                                <input class="form-control mr-sm-2" name="instrumento" type="text" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                        </li>
+        <?php
+        if (!isset($_POST["instrumento"])) {
+            $referencia = "";
+            $nombre = "";
+        } else {
+            $referencia = filtrado($_POST["instrumento"]);
+            $nombre = filtrado($_POST["instrumento"]);
+        }
+            $controlador = ControladorInstrumento::getControlador();
+            $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
+            $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
+        ?>
+                        <li style='position:fixed; right:0px;'><a href="#"><span class="glyphicon glyphicon-user"></span>  Login</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

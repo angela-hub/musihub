@@ -89,7 +89,8 @@ class Paginador {
         
         //$clase = ($this->pagina == 1) ? "disabled" : ""; --> Si queremos que el primero no se edite
         $clase = ($this->pagina == 1) ? "" : "";
-        $html = '<li class="' . $clase . '"><a href="?limit=' . $this->limite . '&page=' . ($comienzo) . '">&laquo;</a></li>';
+        $html = "<ul style='position:relative; left:47%;'class='pagination'>";
+        $html .= '<li class="page-item"><a class="page-link" style="padding:10px;" href="?limit=' . $this->limite . '&page=' . ($comienzo) . '">&laquo;</a></li>';
 
         if ($comienzo > 1) {
             $html .= '<li><a href="?limit=' . $this->limite . '&page=1">1</a></li>';
@@ -98,17 +99,18 @@ class Paginador {
 
         for ($i = $comienzo; $i <= $fin; $i++) {
             $clase = ( $this->pagina == $i ) ? "active" : "";
-            $html .= '<li class="' . $clase . '"><a href="?limit=' . $this->limite . '&page=' . $i . '">' . $i . '</a></li>';
+            $html .= '<li class="page-item"><a style="padding:10px;" href="?limit=' . $this->limite . '&page=' . $i . '">' . $i . '</a></li>';
         }
 
         if ($fin < $ultimo) {
             $html .= '<li class="disabled"><span>...</span></li>';
-            $html .= '<li><a href="?limit=' . $this->limite . '&page=' . $ultimo . '">' . $ultimo . '</a></li>';
+            $html .= '<li><a style="padding:10px;" href="?limit=' . $this->limite . '&page=' . $ultimo . '">' . $ultimo . '</a></li>';
         }
         
         
         $clase = ( $this->pagina == $fin ) ? "disabled" : "enabled";                     // ($fin) --> si queremos ir a la ultima
-        $html .= '<li class="' . $clase . '"><a href="?limit=' . $this->limite . '&page=' . ($fin) . '">&raquo;</a></li>';
+        $html .= '<li class="page-item"><a style="padding:10px;" href="?limit=' . $this->limite . '&page=' . ($fin) . '">&raquo;</a></li>';
+        $html .= "</ul>";
         return $html;
     }
 

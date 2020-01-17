@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/musihub/css/style.css" type="text/css">
 <header class="header-section">
         <div class="header-top">
             <div class="container">
@@ -25,7 +25,7 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.php">Inicio</a></li>
+                        <li ><a href="/musihub/index.php">Inicio</a></li>
                         <li><a href="./contacto.php">Contacto</a></li>
                         <li><a href="admin/inicio.php">Administración</a></li>
                         <li>

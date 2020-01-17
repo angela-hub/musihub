@@ -17,7 +17,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
     <link rel="stylesheet" href="css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/musihub/css/style.css" type="text/css">
 <header class="header-section">
         <div class="header-top">
             <div class="container">

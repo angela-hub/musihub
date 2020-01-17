@@ -1,4 +1,16 @@
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<?php
+require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+require_once CONTROLLER_PATH."ControladorUsuario.php";
+require_once CONTROLLER_PATH . "ControladorInstrumento.php";
+require_once CONTROLLER_PATH."ControladorImagen.php";
+require_once CONTROLLER_PATH . "Paginador.php";
+?>
+<link rel="icon" type="image/png" href="logo.png">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/themify-icons.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
@@ -25,8 +37,16 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.php">Inicio</a></li>
-                        <li><a href="./contacto.php">Contacto</a></li>
+                    <?php
+                        $inicio=$_SERVER["REQUEST_URI"];
+                        if ($inicio=="/musihub/contacto.php"){
+                            echo "<li><a href='./index.php'>Inicio</a></li>";
+                            echo "<li class='active'><a href='./contacto.php'>Contacto</a></li>";
+                        }else{
+                            echo "<li class='active'><a href='./index.php'>Inicio</a></li>";
+                            echo "<li><a href='./contacto.php'>Contacto</a></li>";
+                        }
+                    ?>
                         <li><a href="admin/inicio.php">Administración</a></li>
                         <li>
                             <form class="form-inline mt-2 mt-md-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

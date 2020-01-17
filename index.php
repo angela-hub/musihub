@@ -1,19 +1,7 @@
-<?php
-require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
-require_once CONTROLLER_PATH."ControladorUsuario.php";
-require_once CONTROLLER_PATH . "ControladorInstrumento.php";
-require_once CONTROLLER_PATH."ControladorImagen.php";
-require_once CONTROLLER_PATH . "Paginador.php";
-?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Musihub</title>
-        <link rel="icon" type="image/png" href="logo.png">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
 	<body>
         <?php

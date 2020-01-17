@@ -8,6 +8,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
 <html>
 	<head>
 		<title>Musihub</title>
+        <link rel="icon" type="image/png" href="logo.png">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -65,5 +66,6 @@ require_once CONTROLLER_PATH . "Paginador.php";
             }
             ?>
 		</div>
+        <?php require_once "footer.html";?>
 	</body>
 </html>

@@ -34,18 +34,9 @@
         <div class="nav-item">
             <div class="container">
                 <nav class="nav-menu mobile-menu">
-                    <ul>
+                    <ul style='margin-right:55px;'>
                         <li class="active"><a href="./index.php">Home</a></li>
-                        <li><a href="./shop.php">Shop</a></li>
-                        <li><a href="#">Collection</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Men's</a></li>
-                                <li><a href="#">Women's</a></li>
-                                <li><a href="#">Kid's</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="./blog.php">Blog</a></li>
-                        <li><a href="./contact.php">Contact</a></li>
+                        <li><a href="./contacto.php">Contacto</a></li>
                         <li><a href="admin/inicio.php">Administración</a></li>
                     </ul>
                 </nav>

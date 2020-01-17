@@ -3,7 +3,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once CONTROLLER_PATH . "Paginador.php";
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,10 +14,9 @@ require_once CONTROLLER_PATH . "Paginador.php";
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-    <?php
-        require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+        <?php
         require_once "cabecera.php";
-    ?>
+        ?>
 		<br />
 		<div class="container">
 			<br />

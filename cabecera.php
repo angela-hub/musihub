@@ -50,7 +50,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
                         <li><a href="admin/inicio.php">Administración</a></li>
                         <li>
                             <form class="form-inline mt-2 mt-md-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                                <input class="form-control mr-sm-2" name="instrumento" type="text" placeholder="Büscar Instrumento">
+                                <input class="form-control mr-sm-2" name="instrumento" type="text" placeholder="Buscar Instrumento">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                             </form>
                         </li>

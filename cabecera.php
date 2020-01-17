@@ -21,7 +21,6 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
                     <div class="top-social">
                         <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -35,9 +34,10 @@
             <div class="container">
                 <nav class="nav-menu mobile-menu">
                     <ul style='margin-right:55px;'>
-                        <li class="active"><a href="./index.php">Home</a></li>
+                        <li class="active"><a href="./index.php">Inicio</a></li>
                         <li><a href="./contacto.php">Contacto</a></li>
                         <li><a href="admin/inicio.php">Administración</a></li>
+                        <li style='position:fixed; right:0px;'><a href="#">Login</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

@@ -65,7 +65,10 @@ require_once CONTROLLER_PATH . "Paginador.php";
             <?php
             }
             ?>
-		</div>
+        </div>
+        <br>
+        <br>
+        <br>
         <?php require_once "footer.html";?>
 	</body>
 </html>

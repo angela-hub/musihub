@@ -11,9 +11,14 @@ require_once CONTROLLER_PATH . "Paginador.php";
 		<title>Musihub</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
 	<body>
+    <?php
+        require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+        require_once "cabecera.php";
+    ?>
 		<br />
 		<div class="container">
 			<br />
@@ -50,11 +55,10 @@ require_once CONTROLLER_PATH . "Paginador.php";
 
                         <h4 class='text-danger'><?php echo $instrumento->getprecio(); ?> €</h4>
 
-                        <input id='number' type='number' value='1' min='1'>
                         <br><br>
                         <?php
-                        echo "<a class='btn btn-info btn-lg' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
-                        echo "<a class='btn btn-info btn-lg' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
+                        echo "<a style='margin-right:5px;' class='btn btn-lg btn-success' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
+                        echo "<a style='margin-left:5px;' class='btn btn-lg btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
                         ?>
                     </div>
                 </form>

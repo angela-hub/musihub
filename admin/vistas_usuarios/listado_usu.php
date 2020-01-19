@@ -19,7 +19,7 @@
                 <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="no_imprimir">
                     <div class="form-group mx-sm-5 mb-2">
                         <label for="usuario" class="sr-only">Usuario</label>
-                        <input type="text" class="form-control" id="buscar" name="usuario" placeholder="email">
+                        <input type="text" class="form-control" id="buscar" name="usuario" placeholder="Email">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2"> <span class="glyphicon glyphicon-search"></span>  Buscar</button>
                     <!-- Aquí va el nuevo botón para dar de alta, podría ir al final -->
@@ -29,7 +29,8 @@
                     <a href="../../utilidades/descargar.php?opcion=XMLUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  XML</a>
                     <a href="../../utilidades/descargar.php?opcion=JSONUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  JSON</a>
                     <a href="create_usu.php" class="btn btn-success pull-right"><span class="glyphicon glyphicon-user"></span>  Añadir Usuario</a>
-                    
+                    <br><br>
+
                 </form>
             </div>
 
@@ -56,7 +57,7 @@ $paginador= new Paginador($consulta,$parametros,$limite);
 $resultados=$paginador->getDatos($pagina);
 
 if(count($resultados->datos)>0){
-    echo "<table border='1' class='table table-bordered table-striped'>";
+    echo "<table border='1'>";
         echo "<thead>";
         echo "<tr>";
         echo "<th>Nombre</th>";
@@ -78,29 +79,26 @@ if(count($resultados->datos)>0){
                     echo "<td>" . $usuario->getnombre() . "</td>";
                     echo "<td>" . $usuario->getapellidos() . "</td>";
                     echo "<td>" . $usuario->getemail() . "</td>";
-                    echo "<td>" . str_repeat("*",strlen($usuario->getpassword()))  . "</td>";
-                    echo "<td>" . $usuario->getadministrador() . "</td>";
-                    echo "<td>" . $usuario->gettelefono() . "</td>";
-                    echo "<td>" . $usuario->getfecha_alta() . "</td>";
-                    echo "<td><img src='../../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
+                    echo "<td class='centrado'>" . str_repeat("*",strlen($usuario->getpassword()))  . "</td>";
+                    echo "<td class='centrado'>" . $usuario->getadministrador() . "</td>";
+                    echo "<td class='centrado'>" . $usuario->gettelefono() . "</td>";
+                    echo "<td class='centrado'>" . $usuario->getfecha_alta() . "</td>";
+                    echo "<td class='centrado'><img src='../../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
                     echo "<td>";
-                    echo "<a href='leer_usu.php?id=" . encode($usuario->getid()) . "' title='Ver usuario' data-toggle='tooltip'>Ver Usuario</span></a>" . "<br>";
-                    echo "<a href='update_usu.php?id=" . encode($usuario->getid()) . "' title='Actualizar Usuario' data-toggle='tooltip'>Actualizar Usuario</span></a>" . "<br>";
-                    echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar usuario' data-toggle='tooltip'>Borrar Usuario<span class='glyphicon glyphicon-trash'></span></a>";
+                    echo "<a href='leer_usu.php?id=" . encode($usuario->getid()) . "' title='Ver usuario'>Ver   <span class='glyphicon glyphicon-eye-open'></span></a>" . "<br>";
+                    echo "<a href='update_usu.php?id=" . encode($usuario->getid()) . "' title='Actualizar Usuario' >Editar   <span class='glyphicon glyphicon-edit'></span></a>" . "<br>";
+                    echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar usuario' data-toggle='tooltip'>Borrar   <span class='glyphicon glyphicon-trash'></span></a>";
                     echo "</td>";
                     echo "</tr>";
     }
             echo "</tbody>";
             echo "</table>";
-            echo "<ul class='pager' id='no_imprimir'>"; //  <ul class="pagination">
             echo $paginador->crearLinks($enlaces);
-            echo "</ul>";
         } else {
             // Si no hay nada seleccionado
             echo "<p class='lead'><em>No se ha encontrado ningun Usuario.</em></p>";
         }
 ?>
-<a href="../inicio.php">Inicio</a>
 <?php
 /*
         // Leemos la cookie
@@ -115,3 +113,43 @@ if(count($resultados->datos)>0){
     ?>
 </body>
 </html>
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;}
+
+table {     
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;    
+    margin:1.5%;     
+    width: 97%; 
+    border-collapse: collapse; 
+    border-bottom: 4px solid #aabcfe;
+}
+    
+
+th {     
+    font-size: 13px;     
+    font-weight: normal;     
+    padding: 8px;     
+    background: #b9c9fe;
+    border-top: 4px solid #aabcfe;    
+    border-bottom: 1px solid #fff; 
+    color: #039; }
+.centrado{
+    text-align: center;
+}
+td {    
+    padding: 8px;     
+    background: #e8edff;     
+    border-bottom: 1px solid #d0dafd;
+    color: #669;    
+    border-top: 1px solid transparent; }
+
+tr:hover td { 
+    background: #d0dafd; 
+    color: #339; }
+
+a:hover{ 
+    background: #d0dafd; 
+    color: black; }
+</style>

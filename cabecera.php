@@ -18,9 +18,19 @@ require_once CONTROLLER_PATH . "Paginador.php";
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/musihub/css/style.css" type="text/css">
-<header class="header-section">
+<header class="header-section"></header>
         <div class="header-top">
-            <div class="container">
+        <?php    
+        $tipo=$_SERVER["REQUEST_URI"];
+            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1"){
+                $tipo="";
+                $estilo="width:99.24%";
+            }else{
+                $tipo="container";
+                $estilo="";
+            }
+            echo "<div class='$tipo'>";
+        ?>
                 <div class="ht-left">
                     <div class="mail-service">
                         <i class=" fa fa-envelope"></i>
@@ -34,21 +44,28 @@ require_once CONTROLLER_PATH . "Paginador.php";
             </div>
         </div>
         <div class="nav-item">
-            <div class="container">
+            <?php
+            echo "<div class='$tipo' style='$estilo'>"
+            ?>
                 <nav class="nav-menu mobile-menu">
                     <ul>
                     <?php
                         $inicio=$_SERVER["REQUEST_URI"];
                         if ($inicio=="/musihub/contacto.php"){
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
-                            echo "<li class='active'><a href='./contacto.php'>Contacto</a></li>";
-                        }else{
+                            echo "<li class='active'><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                        }elseif($inicio=="/musihub/index.php"){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
-                            echo "<li><a href='./contacto.php'>Contacto</a></li>";
+                            echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                        }else{
+                            echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
+                            echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            echo "<li class='active'><a href='/musihub/admin/inicio.php'>Administración</a></li>";
                         }
                     ?>
-                        <li><a href="admin/inicio.php">Administración</a></li>
-                        <li>
+                        <li style="margin-left:50px;">
                             <form class="form-inline mt-2 mt-md-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <input class="form-control mr-sm-2" name="instrumento" type="text" placeholder="Buscar Instrumento">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>

@@ -40,10 +40,10 @@ require_once CONTROLLER_PATH . "Paginador.php";
                     <?php
                         $inicio=$_SERVER["REQUEST_URI"];
                         if ($inicio=="/musihub/contacto.php"){
-                            echo "<li><a href='./index.php'>Inicio</a></li>";
+                            echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li class='active'><a href='./contacto.php'>Contacto</a></li>";
                         }else{
-                            echo "<li class='active'><a href='./index.php'>Inicio</a></li>";
+                            echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='./contacto.php'>Contacto</a></li>";
                         }
                     ?>

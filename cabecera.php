@@ -39,7 +39,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
                     </div>
                     <div class="phone-service">
                         <i class=" fa fa-phone"></i>
-                        +65 11.188.888
+                        +34 666 55 55 55
                     </div>
                 </div>
             </div>

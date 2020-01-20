@@ -55,7 +55,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li class='active'><a href='/musihub/contacto.php'>Contacto</a></li>";
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
-                        }elseif($inicio=="/musihub/index.php"){
+                        }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1"){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";

@@ -47,7 +47,7 @@ $enlaces = (isset($_GET['enlaces'])) ? $_GET['enlaces'] : 10;
 
 $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
 $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
-$limite = 2; // Limite
+$limite = 5; // Limite
 $paginador  = new Paginador($consulta, $parametros, $limite);
 $resultados = $paginador->getDatos($pagina);
 
@@ -113,3 +113,43 @@ require_once VIEW_PATH . "../footer.html";
 <br><br><br>
 </body>
 </html>
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;}
+
+    table {     
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;    
+    margin:1.5%;     
+    width: 97%; 
+    border-collapse: collapse; 
+    border-bottom: 4px solid #aabcfe;
+}
+    
+
+th {     
+    font-size: 13px;     
+    font-weight: normal;     
+    padding: 8px;     
+    background: #b9c9fe;
+    border-top: 4px solid #aabcfe;    
+    border-bottom: 1px solid #fff; 
+    color: #039; }
+.centrado{
+    text-align: center;
+}
+td {    
+    padding: 8px;     
+    background: #e8edff;     
+    border-bottom: 1px solid #d0dafd;
+    color: #669;    
+    border-top: 1px solid transparent; }
+
+tr:hover td { 
+    background: #d0dafd; 
+    color: #339; }
+
+a:hover{ 
+    background: #d0dafd; 
+    color: black; }
+</style>

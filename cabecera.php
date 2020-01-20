@@ -32,7 +32,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
             $inicio=$_SERVER["REQUEST_URI"];
             echo "<div class='$tipo'>";
         ?>
-                <div class="ht-left">
+                <div style="margin-left:5px;" class="ht-left">
                     <div class="mail-service">
                     <i class="glyphicon glyphicon-envelope"></i>
                         contacto@musihub.com

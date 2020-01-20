@@ -84,6 +84,7 @@ if (count($resultados->datos) > 0) {
 } else {
     echo "<p class='lead'><em>No se ha encontrado datos de Instrumentos.</em></p>";
 }
+require_once VIEW_PATH . "../footer.html";
 ?>
 
 <div id="no_imprimir">

@@ -139,6 +139,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 <!-- Cabecera de la página web -->
 <?php //require_once VIEW_PATH."cabecera.php"; ?>
 <!-- Cuerpo de la página web -->
+<link rel="icon" type="image/png" href="logo.png">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <div class="wrapper">
     <title>Crear Usuario</title>
         <div class="container-fluid">
@@ -165,7 +170,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                         <!-- Email -->
                         <div class="form-group <?php echo (!empty($emailErr)) ? 'error: ' : ''; ?>">
                             <label>E-Mail</label>
-                            <input type="email" required name="email" class="form-control" value="<?php echo $email; ?>">
+                            <input type="email" required name="email" class="form-control input-md" value="<?php echo $email; ?>">
                             <span class="help-block"><?php echo $emailErr;?></span>
                         </div>
 
@@ -186,7 +191,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                         <!-- Telefono-->
                         <div class="form-group <?php echo (!empty($telefonoErr)) ? 'error: ' : ''; ?>">
                             <label>Telefono</label>
-                            <input type="tel" required name="telefono" value="<?php echo $telefono; ?>"
+                            <input type="tel" class="form-control input-md" required name="telefono" value="<?php echo $telefono; ?>"
                             pattern="[0-9]{9}" title="Debes poner 9 números">
                             <span class="help-block"><?php echo $telefonoErr;?></span>
                         </div>
@@ -197,9 +202,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                             <span class="help-block"><?php echo $fotoErr;?></span>    
                         </div>
                         <!-- Botones --> 
-                         <button type="submit" name= "aceptar" value="aceptar" class="btn btn-success"> <span class="glyphicon glyphicon-floppy-save"></span>  Aceptar</button>
-                         <button type="reset" value="reset" class="btn btn-info"> <span class="glyphicon glyphicon-repeat"></span>  Limpiar</button>
-                        <a href="listado_usu.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+                        <div class="form-group">
+                            <button type="submit" id="button1id" name="aceptar" class="btn btn-success">Aceptar</button>
+                            <button type="reset" id="button2id" class="btn btn-warning">Limpiar</button>
+                            <a href="./listado_usu.php" class="btn btn-primary">Volver</a>
+                        </div>
                     </form>
                 </div>
             </div>        

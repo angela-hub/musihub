@@ -34,11 +34,11 @@ require_once CONTROLLER_PATH . "Paginador.php";
         ?>
                 <div class="ht-left">
                     <div class="mail-service">
-                        <i class=" fa fa-envelope"></i>
+                    <i class="glyphicon glyphicon-envelope"></i>
                         contacto@musihub.com
                     </div>
                     <div class="phone-service">
-                        <i class=" fa fa-phone"></i>
+                        <i class="glyphicon glyphicon-earphone"></i>
                         +34 666 55 55 55
                     </div>
                 </div>
@@ -56,7 +56,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li class='active'><a href='/musihub/contacto.php'>Contacto</a></li>";
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
-                        }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1"){
+                        }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1" || $inicio=="/musihub/"){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";

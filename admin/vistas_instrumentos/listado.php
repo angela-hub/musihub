@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Listado de Instrumentos</title>
 </head>
 <body>
 <?php
@@ -52,7 +52,7 @@ $paginador  = new Paginador($consulta, $parametros, $limite);
 $resultados = $paginador->getDatos($pagina);
 
 if (count($resultados->datos) > 0) {
-    echo "<table class='table table-bordered table-striped'>";
+    echo "<table>";
     echo "<thead>";
     echo "<tr>";
     echo "<th>Nombre</th>";
@@ -89,9 +89,7 @@ if (count($resultados->datos) > 0) {
     }
     echo "</tbody>";
     echo "</table>";
-    echo "<ul class='pager' id='no_imprimir'>";
     echo $paginador->crearLinks($enlaces);
-    echo "</ul>";
 } else {
     echo "<p class='lead'><em>No se ha encontrado datos de Instrumentos.</em></p>";
 }

@@ -254,7 +254,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     <input type="hidden" name="id" value="<?php echo $id; ?>" />
         <input type="hidden" name="imagenAnterior" value="<?php echo $imagenAnterior; ?>" />
         <button type="submit" value="aceptar"> Modificar</button>
-        <a href="../../index.php"> Volver</a>
+        <a href="listado.php"> Volver</a>
 </form>
 <br><br><br>
 <!-- Pie de la página web -->

@@ -49,5 +49,5 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 <label>stockinicial</label>
 <p><?php echo $instrumento->getstockinicial(); ?></p>
 
-<p><a href="../../index.php"> Aceptar</a></p>
+<p><a href="listado.php"> Aceptar</a></p>
 <br><br><br>

@@ -85,7 +85,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         <p>¿Está seguro que desea borrar este instrumento?</p><br>
         <p>
             <button type="submit"> Borrar</button>
-            <a href="../../index.php"> Volver</a>
+            <a href="listado.php"> Volver</a>
         </p>
     </div>
 </form>

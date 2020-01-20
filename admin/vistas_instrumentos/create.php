@@ -204,6 +204,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     <!-- Botones -->
     <button type="submit" name="aceptar" value="aceptar" > Aceptar</button>
     <button type="reset" value="reset" > Limpiar</button>
-    <a href="../../index.php" > Volver</a>
+    <a href="listado.php" > Volver</a>
 </form>
 <br><br><br>

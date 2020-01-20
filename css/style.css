@@ -36,7 +36,6 @@ body {
 	height: 100%;
 	font-family: "Muli", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
 }
 
 h1,
@@ -377,7 +376,6 @@ ol {
 }
 
 .header-top .ht-right .login-panel {
-	float: right;
 	font-size: 14px;
 	color: #252525;
 	display: inline-block;
@@ -737,9 +735,6 @@ ol {
 }
 
 .nav-item .nav-menu {
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
-	display: inline-flex;
 	position: relative;
 }
 

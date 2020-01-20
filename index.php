@@ -1,18 +1,7 @@
-<?php
-require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
-require_once CONTROLLER_PATH."ControladorUsuario.php";
-require_once CONTROLLER_PATH."ControladorImagen.php";
-require_once CONTROLLER_PATH . "Paginador.php";
-?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Musihub</title>
-        <link rel="icon" type="image/png" href="logo.png">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
 	<body>
         <?php
@@ -39,14 +28,14 @@ require_once CONTROLLER_PATH . "Paginador.php";
 
             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
-            $limite = 20; // Limite
+            $limite = 12; // Limite
             $paginador  = new Paginador($consulta, $parametros, $limite);
             $resultados = $paginador->getDatos($pagina);
             foreach ($resultados->datos as $a) {
             $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
             ?>
             <div class="col-md-3">
-                <form method='post' action='index.php?action=add&id=<?php echo $instrumento->getid(); ?>'>
+                   <form method='post' action='index.php?action=add&id=<?php echo $instrumento->getid(); ?>'>
                     <div style=' border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;' align="center">
                         <img style='height:200px;' src='imagenes/fotos/<?php echo $instrumento->getimagen() ?>' class='img-responsive' /><br />
 
@@ -56,16 +45,19 @@ require_once CONTROLLER_PATH . "Paginador.php";
 
                         <br><br>
                         <?php
-                        echo "<a style='margin-right:5px;' class='btn btn-lg btn-success' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
-                        echo "<a style='margin-left:5px;' class='btn btn-lg btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
+                        echo "<a style='margin-right:5px;' class='btn btn-principal btn-success' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
+                        echo "<a style='margin-left:5px;' class='btn btn-principal btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
                         ?>
                     </div>
                 </form>
             </div>
             <?php
-            }
+                }
             ?>
         </div>
+        <?php
+            echo $paginador->crearLinks($enlaces);
+        ?>
         <br>
         <br>
         <br>

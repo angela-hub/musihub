@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+require_once CONTROLLER_PATH . "ControladorInstrumento.php";
+require_once CONTROLLER_PATH . "Paginador.php";
+require_once UTILITY_PATH . "funciones.php";
+require_once "../../cabecera.php"; 
+?>
 <h2>Ficha de Instrumentos</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="no_imprimir">
     <div>
@@ -16,11 +32,6 @@
 </form>
 </div>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
-require_once CONTROLLER_PATH . "ControladorInstrumento.php";
-require_once CONTROLLER_PATH . "Paginador.php";
-require_once UTILITY_PATH . "funciones.php";
-
 if (!isset($_POST["instrumento"])) {
     $referencia = "";
     $nombre = "";
@@ -100,3 +111,5 @@ require_once VIEW_PATH . "../footer.html";
     */?>
 </div>
 <br><br><br>
+</body>
+</html>

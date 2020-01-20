@@ -24,10 +24,10 @@
                     <button type="submit" class="btn btn-primary mb-2"> <span class="glyphicon glyphicon-search"></span>  Buscar</button>
                     <!-- Aquí va el nuevo botón para dar de alta, podría ir al final -->
                     <!--<a href="javascript:window.print()" class="btn pull-right"> <span class="glyphicon glyphicon-print"></span> IMPRIMIR</a> -->
-                    <a href="../../utilidades/descargar.php?opcion=TXTUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  TXT</a>
-                    <a href="../../utilidades/descargar.php?opcion=PDFUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  PDF</a>
-                    <a href="../../utilidades/descargar.php?opcion=XMLUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  XML</a>
-                    <a href="../../utilidades/descargar.php?opcion=JSONUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-download"></span>  JSON</a>
+                    <a href="../../utilidades/descargar.php?opcion=TXTUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-save"></span>  TXT</a>
+                    <a href="../../utilidades/descargar.php?opcion=PDFUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-save"></span>  PDF</a>
+                    <a href="../../utilidades/descargar.php?opcion=XMLUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-save"></span>  XML</a>
+                    <a href="../../utilidades/descargar.php?opcion=JSONUsu" class="btn pull-right" target="_blank"><span class="glyphicon glyphicon-save"></span>  JSON</a>
                     <a href="create_usu.php" class="btn btn-success pull-right"><span class="glyphicon glyphicon-user"></span>  Añadir Usuario</a>
                     <br><br>
 

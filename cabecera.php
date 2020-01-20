@@ -18,11 +18,11 @@ require_once CONTROLLER_PATH . "Paginador.php";
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/musihub/css/style.css" type="text/css">
-<header class="header-section"></header>
+<header class="header-section">
         <div class="header-top">
         <?php    
         $tipo=$_SERVER["REQUEST_URI"];
-            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1"){
+            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1"){
                 $tipo="";
                 $estilo="width:99.24%";
             }else{
@@ -45,7 +45,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
         </div>
         <div class="nav-item">
             <?php
-            echo "<div class='$tipo' style='$estilo'>"
+            echo "<div class='$tipo' style='$estilo'>";
             ?>
                 <nav class="nav-menu mobile-menu">
                     <ul>

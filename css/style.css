@@ -645,12 +645,8 @@ ol {
 	font-weight: 700;
 	color: #252525;
 }
-
 .nav-item {
 	background: #252525;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
 }
 
 .nav-item .nav-depart {

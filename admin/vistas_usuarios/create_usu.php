@@ -203,8 +203,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                         </div>
                         <!-- Botones --> 
                         <div class="form-group">
-                            <button type="submit" id="button1id" name="aceptar" class="btn btn-success">Aceptar</button>
-                            <button type="reset" id="button2id" class="btn btn-warning">Limpiar</button>
+                            <button type="submit" name= "aceptar" value="aceptar" class="btn btn-success">Aceptar</button>
+                            <button type="reset" class="btn btn-warning">Limpiar</button>
                             <a href="./listado_usu.php" class="btn btn-primary">Volver</a>
                         </div>
                     </form>

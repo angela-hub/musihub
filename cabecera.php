@@ -22,7 +22,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
         <div class="header-top">
         <?php    
         $tipo=$_SERVER["REQUEST_URI"];
-            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1"){
+            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php?limit=5&page=1"){
                 $tipo="";
                 $estilo="width:99.24%";
             }else{

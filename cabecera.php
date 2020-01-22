@@ -4,6 +4,31 @@ require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once CONTROLLER_PATH . "Paginador.php";
+session_start();
+  if(isset($_COOKIE['CONTADOR']))
+  { 
+    // Caduca en un día
+    setcookie('CONTADOR', $_COOKIE['CONTADOR'] + 1, time() + 24 * 60 * 60); // un día
+    $contador = 'Número de visitas hoy: ' . $_COOKIE['CONTADOR']; 
+  } 
+  else 
+  { 
+    // Caduca en un día
+    setcookie('CONTADOR', 1, time() + 24 * 60 * 60); 
+    $cotador = 'Número de visitas hoy: 1'; 
+  } 
+  if(isset($_COOKIE['ACCESO']))
+  { 
+    // Caduca en un día
+    setcookie('ACCESO', date("d/m/Y  H:i:s"), time() + 3 * 24 * 60 * 60); // 3 días
+    $acceso = '<br>Último acceso: ' . $_COOKIE['ACCESO']; 
+  } 
+  else 
+  { 
+    // Caduca en un día
+    setcookie('ACCESO', date("d/m/Y  H:i:s"), time() + 3 * 24 * 60 * 60); // 3 días
+    $acceso = '<br>Último acceso: '. date("d/m/Y  H:i:s"); 
+  } 
 ?>
 <link rel="icon" type="image/png" href="logo.png">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -85,8 +110,16 @@ require_once CONTROLLER_PATH . "Paginador.php";
                             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
                             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
                         ?>
-                        <li class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span>  Login</a></li>
                     </ul>
+                    <?php
+                                if(!isset($_SESSION['USUARIO']['email'])){
+                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
+                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
+                                }else{
+                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['USUARIO']['email'].'</a></li>';
+                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="/dragonball/accion/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
+                                }
+                                ?>
                 </nav>
                 <div id="mobile-menu-wrap"></div>
             </div>

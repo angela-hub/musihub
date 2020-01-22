@@ -22,7 +22,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
         <div class="header-top">
         <?php    
         $tipo=$_SERVER["REQUEST_URI"];
-            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1"){
+            if ($tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php?limit=5&page=1"){
                 $tipo="";
                 $estilo="width:99.24%";
             }else{
@@ -32,13 +32,13 @@ require_once CONTROLLER_PATH . "Paginador.php";
             $inicio=$_SERVER["REQUEST_URI"];
             echo "<div class='$tipo'>";
         ?>
-                <div class="ht-left">
+                <div style="margin-left:5px;" class="ht-left">
                     <div class="mail-service">
-                        <i class=" fa fa-envelope"></i>
+                    <i class="glyphicon glyphicon-envelope"></i>
                         contacto@musihub.com
                     </div>
                     <div class="phone-service">
-                        <i class=" fa fa-phone"></i>
+                        <i class="glyphicon glyphicon-earphone"></i>
                         +34 666 55 55 55
                     </div>
                 </div>
@@ -56,7 +56,7 @@ require_once CONTROLLER_PATH . "Paginador.php";
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li class='active'><a href='/musihub/contacto.php'>Contacto</a></li>";
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
-                        }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1"){
+                        }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1" || $inicio=="/musihub/"){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";

@@ -85,9 +85,9 @@ if(count($resultados->datos)>0){
                     echo "<td class='centrado'>" . $usuario->getfecha_alta() . "</td>";
                     echo "<td class='centrado'><img src='../../imagenes/fotos/".$usuario->getfoto()."' width='48px' height='48px'></td>";
                     echo "<td>";
-                    echo "<a href='leer_usu.php?id=" . encode($usuario->getid()) . "' title='Ver usuario'>Ver   <span class='glyphicon glyphicon-eye-open'></span></a>" . "<br>";
-                    echo "<a href='update_usu.php?id=" . encode($usuario->getid()) . "' title='Actualizar Usuario' >Editar   <span class='glyphicon glyphicon-edit'></span></a>" . "<br>";
-                    echo "<a href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar usuario' data-toggle='tooltip'>Borrar   <span class='glyphicon glyphicon-trash'></span></a>";
+                    echo "<a class='letra' href='leer_usu.php?id=" . encode($usuario->getid()) . "' title='Ver usuario'>Ver   <span class='glyphicon glyphicon-eye-open'></span></a>" . "<br>";
+                    echo "<a class='letra' href='update_usu.php?id=" . encode($usuario->getid()) . "' title='Actualizar Usuario' >Editar   <span class='glyphicon glyphicon-edit'></span></a>" . "<br>";
+                    echo "<a class='letra' href='borrar_usu.php?id=" . encode($usuario->getid()) . "' title='Borrar usuario' data-toggle='tooltip'>Borrar   <span class='glyphicon glyphicon-trash'></span></a>";
                     echo "</td>";
                     echo "</tr>";
     }
@@ -150,7 +150,7 @@ tr:hover td {
     background: #d0dafd; 
     color: #339; }
 
-a:hover{ 
+.letra:hover{ 
     background: #d0dafd; 
     color: black; }
 </style>

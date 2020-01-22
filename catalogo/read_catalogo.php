@@ -17,19 +17,19 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 <?php //require_once VIEW_PATH . "cabecera.php"; ?>
 
 <h1>Detalles del Instrumento</h1>
-<table>
+<table style=>
     <tr>
         <td>
             <label>Nombre</label>
             <p><?php echo $instrumento->getnombre(); ?></p>
         </td>
-        <td>
+        <td style="position:absolute; left:200px;">
             <label>Fotografía</label><br>
             <img src='<?php echo "../imagenes/fotos/" . $instrumento->getimagen() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
         </td>
     </tr>
 </table>
-
+<br>
 <label>Referencia</label>
 <p><?php echo $instrumento->getreferencia(); ?></p>
 

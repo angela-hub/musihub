@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Musihub</title>
+        <link rel="icon" type="image/png" href="logo.png">
 	</head>
 	<body>
         <?php

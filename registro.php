@@ -140,7 +140,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
             header("location: index.php");
             exit();
         }else{
-            header("location: error.php");
+            header("location: error403.php");
             exit();
         }
     }else{

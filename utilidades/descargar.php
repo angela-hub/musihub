@@ -1,6 +1,9 @@
 <?php
+session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorDescarga.php";
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 $opcion = $_GET["opcion"];
 $fichero = ControladorDescarga::getControlador();
 switch ($opcion) {
@@ -28,4 +31,10 @@ switch ($opcion) {
     case 'PDFUsu':
         $fichero->descargarPDFUsu();
         break;
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
 }

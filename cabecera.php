@@ -125,10 +125,10 @@ if(isset($_SESSION['USUARIO']['email'])){
                             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
                             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
                             if(!isset($_SESSION['USUARIO']['email'])){
-                                echo '<li style="width:13%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
+                                echo '<li style="width:13%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/registro.php"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
                             }else{
-                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
+                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href=href="/musihub/registro.php"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
                             }
                         ?>

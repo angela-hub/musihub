@@ -41,7 +41,7 @@ $controlador->salirSesion();
         </form>
         <div class="row">
             <div class="col-md-12">
-                <a href="https://1.envato.market/OJzXK">Registrarse</a>
+                <a href="registro.php">Registrarse</a>
             </div>
         </div>
 </div>

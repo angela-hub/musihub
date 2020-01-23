@@ -2,7 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once UTILITY_PATH . "funciones.php";
-
+session_start();
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $id = decode($_GET["id"]);
     $controlador = ControladorInstrumento::getControlador();
@@ -51,3 +53,11 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 
 <p><a href="listado.php"> Aceptar</a></p>
 <br><br><br>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>

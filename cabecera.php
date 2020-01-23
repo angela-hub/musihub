@@ -4,6 +4,40 @@ require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once CONTROLLER_PATH . "Paginador.php";
+session_start();
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
+        $admin="admin";
+    }else{
+        $admin="";
+    }
+}else{
+    $admin="";
+}
+  if(isset($_COOKIE['CONTADOR']))
+  { 
+    // Caduca en un día
+    setcookie('CONTADOR', $_COOKIE['CONTADOR'] + 1, time() + 24 * 60 * 60); // un día
+    $contador = 'Número de visitas hoy: ' . $_COOKIE['CONTADOR']; 
+  } 
+  else 
+  { 
+    // Caduca en un día
+    setcookie('CONTADOR', 1, time() + 24 * 60 * 60); 
+    $cotador = 'Número de visitas hoy: 1'; 
+  } 
+  if(isset($_COOKIE['ACCESO']))
+  { 
+    // Caduca en un día
+    setcookie('ACCESO', date("d/m/Y  H:i:s"), time() + 3 * 24 * 60 * 60); // 3 días
+    $acceso = '<br>Último acceso: ' . $_COOKIE['ACCESO']; 
+  } 
+  else 
+  { 
+    // Caduca en un día
+    setcookie('ACCESO', date("d/m/Y  H:i:s"), time() + 3 * 24 * 60 * 60); // 3 días
+    $acceso = '<br>Último acceso: '. date("d/m/Y  H:i:s"); 
+  } 
 ?>
 <link rel="icon" type="image/png" href="logo.png">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -55,11 +89,15 @@ require_once CONTROLLER_PATH . "Paginador.php";
                         if ($inicio=="/musihub/contacto.php"){
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li class='active'><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            if($admin=="admin"){
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            }
                         }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1" || $inicio=="/musihub/"){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            if($admin=="admin"){
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            }
                             ?>
                             <li style="margin-left:50px;">
                                 <form class="form-inline mt-2 mt-md-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -71,7 +109,9 @@ require_once CONTROLLER_PATH . "Paginador.php";
                         }else{
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            if($admin=="admin"){
                             echo "<li class='active'><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            }
                         }
                         
                         if (!isset($_POST["instrumento"])) {
@@ -84,8 +124,14 @@ require_once CONTROLLER_PATH . "Paginador.php";
                             $controlador = ControladorInstrumento::getControlador();
                             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
                             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
+                            if(!isset($_SESSION['USUARIO']['email'])){
+                                echo '<li style="width:13%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
+                                echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
+                            }else{
+                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
+                                echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
+                            }
                         ?>
-                        <li class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span>  Login</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

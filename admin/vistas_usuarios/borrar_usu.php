@@ -1,10 +1,12 @@
 <?php
+session_start();
 // Incluimos el controlador a los objetos a usar
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once UTILITY_PATH."funciones.php";
-
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 // Obtenemos los datos del coche que nos vienen de la página anterior
 if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $id = decode($_GET["id"]);
@@ -113,3 +115,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
 <!-- Pie de la página web -->
 <?php //require_once VIEW_PATH."pie.php"; ?>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>

@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,3 +18,11 @@
     <a href="/musihub/index.php">Tienda</a>
 </body>
 </html>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>

@@ -3,7 +3,9 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once UTILITY_PATH."funciones.php";
-
+session_start();
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 // Compramos la existencia del parámetro id antes de usarlo
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Cargamos el controlador de coches
@@ -82,3 +84,11 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         </div>
     </div>
 <br><br><br>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>

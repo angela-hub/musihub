@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*//error_reporting(E_ALL & ~(E_STRICT|E_NOTICE));
 session_start();
 if (!isset($_SESSION['USUARIO']['email'])) {
@@ -7,11 +8,12 @@ if (!isset($_SESSION['USUARIO']['email'])) {
     header("location: login.php");
     exit();
 }*/
-
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
+if(isset($_SESSION['USUARIO']['email'])){
+if($_SESSION['administrador'] == "si"){
 
 // Variables
 $nombre = $referencia = $distribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
@@ -207,3 +209,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     <a href="listado.php" > Volver</a>
 </form>
 <br><br><br>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>

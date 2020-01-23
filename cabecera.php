@@ -14,30 +14,6 @@ if(isset($_SESSION['USUARIO']['email'])){
 }else{
     $admin="";
 }
-  if(isset($_COOKIE['CONTADOR']))
-  { 
-    // Caduca en un día
-    setcookie('CONTADOR', $_COOKIE['CONTADOR'] + 1, time() + 24 * 60 * 60); // un día
-    $contador = 'Número de visitas hoy: ' . $_COOKIE['CONTADOR']; 
-  } 
-  else 
-  { 
-    // Caduca en un día
-    setcookie('CONTADOR', 1, time() + 24 * 60 * 60); 
-    $cotador = 'Número de visitas hoy: 1'; 
-  } 
-  if(isset($_COOKIE['ACCESO']))
-  { 
-    // Caduca en un día
-    setcookie('ACCESO', date("d/m/Y  H:i:s"), time() + 3 * 24 * 60 * 60); // 3 días
-    $acceso = '<br>Último acceso: ' . $_COOKIE['ACCESO']; 
-  } 
-  else 
-  { 
-    // Caduca en un día
-    setcookie('ACCESO', date("d/m/Y  H:i:s"), time() + 3 * 24 * 60 * 60); // 3 días
-    $acceso = '<br>Último acceso: '. date("d/m/Y  H:i:s"); 
-  } 
 ?>
 <link rel="icon" type="image/png" href="logo.png">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

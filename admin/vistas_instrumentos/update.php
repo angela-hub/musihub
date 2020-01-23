@@ -4,7 +4,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
-
+session_start();
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 // Variables temporales
 $nombre = $referencia = $distribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
 $nombreErr = $referenciaErr = $distribuidorErr = $tipoErr =  $precioErr = $descuentoErr =  $stockinicialErr =  $imagenErr = "";
@@ -258,4 +260,12 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 </form>
 <br><br><br>
 <!-- Pie de la página web -->
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>
 <?php //require_once VIEW_PATH . "pie.php"; ?>

@@ -8,7 +8,9 @@
 </head>
 <body>
 <?php
-    require_once "../../cabecera.php";
+require_once "../../cabecera.php";
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 ?>
 <div class="container-fluid">
         <div class="row">
@@ -111,7 +113,14 @@ if(count($resultados->datos)>0){
             echo "Es tu primera visita hoy";
         }
         */
+    }else{
+        header("location:/musihub/error403.php");
+    }
+    }else{
+        header("location:/musihub/error403.php");
+    }
     ?>
+    
 </body>
 </html>
 <style>

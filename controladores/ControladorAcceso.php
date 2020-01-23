@@ -7,6 +7,7 @@
  */
 
 require_once CONTROLLER_PATH."ControladorBD.php";
+require_once MODEL_PATH."usuario.php";
 
 class ControladorAcceso {
     // Variable instancia para Singleton
@@ -61,6 +62,11 @@ class ControladorAcceso {
                  // abrimos las sesiones
                  session_start();
                  // Almacenamos el usuario en la sesion.
+                 $usuario = new usuario($filas[0]->id, $filas[0]->nombre, $filas[0]->apellidos, $filas[0]->email, $filas[0]->password, $filas[0]->administrador, $filas[0]->telefono, $filas[0]->fecha_alta, $filas[0]->foto);
+                 $_SESSION['nombre'] = $usuario->getnombre();
+                $_SESSION['apellidos'] = $usuario->getapellidos();
+                $_SESSION['administrador'] = $usuario->getadministrador();
+                $_SESSION['email'] = $usuario->getemail();
                  $_SESSION['USUARIO']['email']=$email;
                  //echo $_SESSION['USUARIO']['email'];
                  header("location: index.php"); 

@@ -5,6 +5,15 @@ require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once CONTROLLER_PATH . "Paginador.php";
 session_start();
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
+        $admin="admin";
+    }else{
+        $admin="";
+    }
+}else{
+    $admin="";
+}
   if(isset($_COOKIE['CONTADOR']))
   { 
     // Caduca en un día
@@ -80,11 +89,15 @@ session_start();
                         if ($inicio=="/musihub/contacto.php"){
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li class='active'><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            if($admin=="admin"){
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            }
                         }elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1" || $inicio=="/musihub/"){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            if($admin=="admin"){
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            }
                             ?>
                             <li style="margin-left:50px;">
                                 <form class="form-inline mt-2 mt-md-0" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -96,7 +109,9 @@ session_start();
                         }else{
                             echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            if($admin=="admin"){
                             echo "<li class='active'><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            }
                         }
                         
                         if (!isset($_POST["instrumento"])) {
@@ -109,17 +124,15 @@ session_start();
                             $controlador = ControladorInstrumento::getControlador();
                             $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
                             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
+                            if(!isset($_SESSION['USUARIO']['email'])){
+                                echo '<li style="width:13%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
+                                echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
+                            }else{
+                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
+                                echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
+                            }
                         ?>
                     </ul>
-                    <?php
-                                if(!isset($_SESSION['USUARIO']['email'])){
-                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
-                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
-                                }else{
-                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="#"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['USUARIO']['email'].'</a></li>';
-                                    echo '<li style="width:20%;"class="nav navbar-nav navbar-right"><a href="/dragonball/accion/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
-                                }
-                                ?>
                 </nav>
                 <div id="mobile-menu-wrap"></div>
             </div>

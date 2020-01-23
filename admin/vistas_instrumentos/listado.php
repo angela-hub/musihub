@@ -1,3 +1,8 @@
+<?php
+require_once "../../cabecera.php";
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,7 +19,6 @@
     require_once CONTROLLER_PATH . "ControladorInstrumento.php";
     require_once CONTROLLER_PATH . "Paginador.php";
     require_once UTILITY_PATH . "funciones.php";
-    require_once "../../cabecera.php";
     ?>
     <div class="container-fluid">
         <div class="row">
@@ -119,6 +123,14 @@
 </body>
 
 </html>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;

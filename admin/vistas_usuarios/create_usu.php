@@ -1,4 +1,5 @@
 <?php
+session_start();
 //error_reporting(E_ALL & ~(E_STRICT|E_NOTICE));
 /*session_start();
 if(!isset($_SESSION['USUARIO']['email'])){
@@ -16,6 +17,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once UTILITY_PATH."funciones.php";
+if(isset($_SESSION['USUARIO']['email'])){
+    if($_SESSION['administrador'] == "si"){
 
  
 // Variables temporales
@@ -213,3 +216,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
         </div>
     </div>
 <br><br><br>
+<?php
+}else{
+    header("location:/musihub/error403.php");
+}
+}else{
+    header("location:/musihub/error403.php");
+}
+?>

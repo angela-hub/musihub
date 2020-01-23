@@ -37,7 +37,7 @@ $controlador->salirSesion();
             </div>
         </div>
         <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-log-in"></span>  Entrar</button>
-        <a href="../index.php" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+        <a href="./index.php" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
         </form>
         <div class="row">
             <div class="col-md-12">

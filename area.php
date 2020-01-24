@@ -264,7 +264,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             <div class="form-group">
                                 <div <?php echo (!empty($passwordErr)) ? 'error: ' : ''; ?>>
                                     <div class="width30 floatL"><label>Password</label></div>
-                                    <div class="width70 floatR"><input class="width100 form-control" type="password" name="password"></div>
+                                    <div class="width70 floatR"><input class="width100 form-control" placeholder="Si no la modificas se quedara la actual" type="password" name="password"></div>
                                     <?php echo $passwordErr; ?>
                                 </div>
                             </div><br><br>

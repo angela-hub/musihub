@@ -63,6 +63,7 @@ class ControladorAcceso {
                  session_start();
                  // Almacenamos el usuario en la sesion.
                  $usuario = new usuario($filas[0]->id, $filas[0]->nombre, $filas[0]->apellidos, $filas[0]->email, $filas[0]->password, $filas[0]->administrador, $filas[0]->telefono, $filas[0]->fecha_alta, $filas[0]->foto);
+                 $_SESSION['id'] = $usuario->getid();
                  $_SESSION['nombre'] = $usuario->getnombre();
                 $_SESSION['apellidos'] = $usuario->getapellidos();
                 $_SESSION['administrador'] = $usuario->getadministrador();

@@ -4,6 +4,7 @@ require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once CONTROLLER_PATH . "Paginador.php";
+require_once UTILITY_PATH. "funciones.php";
 session_start();
 if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
@@ -104,7 +105,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                                 echo '<li style="width:13%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/registro.php"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
                             }else{
-                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/area.php"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
+                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/area.php?id=' . encode($_SESSION['id']).'"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
                             }
                         ?>

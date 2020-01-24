@@ -60,8 +60,6 @@ require_once CONTROLLER_PATH . "ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
 session_start();
-//if(isset($_SESSION['USUARIO']['email'])){
-//if($_SESSION['administrador'] == "si"){
 
 $nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto = "";
 $nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr = "";
@@ -177,7 +175,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
 
         if ($estado) {
-            header("location: listado_usu.php");
+            header("location: index.php");
             exit();
         } else {
             alerta("No se a podido enviar la solicitud");
@@ -284,9 +282,9 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             </div>
                             <br>
                             <center>
-                                <div class="width50"><input class="btn btn-success" type="submit" value="Submit" style="font-weight: bold">
-                                    <input class="btn btn-danger" type="reset" style="font-weight: bold"></div>
-                                <a href="listado_usu.php"> Volver</a>
+                                <p><div class="width50"><input class="btn btn-success" type="submit" value="Cambiar" style="font-weight: bold"></div></p>
+                                <p><div class="width50"><input class="btn btn-danger" type="reset" style="font-weight: bold"></div></p>
+                                <a href="index.php"> Volver</a>
                             </center>
                     </form>
                 </div>
@@ -297,11 +295,3 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     </body>
 </form>
 <br><br><br>
-<?php
-//}else{
-//    header("location:/musihub/error403.php");
-//}
-//}else{
-//    header("location:/musihub/error403.php");
-//}
-?>

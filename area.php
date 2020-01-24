@@ -67,7 +67,7 @@ if ($test=="/musihub/area.php?id=$prueba"){
 <?php
 
 //if(isset($_SESSION['USUARIO']['email'])){
-// if($_SESSION['administrador'] == "si"){
+//if($_SESSION['administrador'] == "si"){
 
 $nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto = "";
 $nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr = "";
@@ -233,7 +233,8 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                     <form name="theform" action="" onSubmit="validate()">
                         <!-- Fotografia-->
                         <img src='<?php echo "imagenes/fotos/" . $usuario->getfoto() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
-
+                        <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                        <input type="hidden" name="fotoAnterior" value="<?php echo $fotoAnterior; ?>" />
                         <!-- Nombre-->
                         <div class="form-group">
                             <div <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?>>
@@ -288,21 +289,11 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                                 </div>
                             </div>
                             <br>
-                            <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                            <input type="hidden" name="fotoAnterior" value="<?php echo $fotoAnterior; ?>" />
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                                    <input type="hidden" name="fotoAnterior" value="<?php echo $fotoAnterior; ?>" />
-                                </div>
-
+                            <center>
                                 <div class="width50"><input class="btn btn-success" type="submit" value="Submit" style="font-weight: bold">
                                     <input class="btn btn-danger" type="reset" style="font-weight: bold"></div>
-
                                 <a href="listado_usu.php"> Volver</a>
-
-                            </div>
+                            </center>
                     </form>
                 </div>
                 <div class="col-sm-1"></div>

@@ -100,7 +100,7 @@ if(count($resultados->datos)>0){
             // Si no hay nada seleccionado
             echo "<p class='lead'><em>No se ha encontrado ningun Usuario.</em></p>";
         }
-        require_once VIEW_PATH . "../footer.html";
+        require_once VIEW_PATH . "../footer.php";
 ?>
 <?php
 /*

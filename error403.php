@@ -1411,16 +1411,16 @@
 
       </g>
     </g>
-    <text opacity="0.6" x="15" y="257" fill="#000" font-family="Viga" font-size="25">There is no way Immma
-      <tspan x="35" y="292" >let you pass through!</tspan>
+    <text opacity="0.6" x="65" y="257" fill="#000" font-family="Viga" font-size="23">Solo acceso para
+      <tspan x="62" y="292" >Gregorio y Ángela</tspan>
       <tspan x="100" y="357" fill="#000" font-size="65">403</tspan>
-      <tspan x="93" y="381.2" fill="#000" font-size="15">Access Forbidden.</tspan>
+      <tspan x="93" y="381.2" fill="#000" font-size="15">Acceso Denegado.</tspan>
     </text>
 
-    <text x="15" y="255" fill="#6BA184" font-family="Viga" font-size="25">There is no way Immma
-      <tspan x="35" y="290" >let you pass through!</tspan>
+    <text x="65" y="255" fill="#6BA184" font-family="Viga" font-size="23">Solo acceso para
+      <tspan x="62" y="290" >Gregorio y Ángela</tspan>
       <tspan x="100" y="355" fill="#BF3E73" font-size="65">403</tspan>
-      <tspan x="93" y="380" fill="#6BA184" font-size="15">Access Forbidden.</tspan>
+      <tspan x="93" y="380" fill="#6BA184" font-size="15">Acceso Denegado.</tspan>
     </text>
   </g>
   </g>

@@ -35,8 +35,8 @@
     require_once UTILITY_PATH . "funciones.php";
     
 
-    $nombre = $apellidos = $email = $password = $telefono = $foto = "";
-    $nombreErr = $apellidosErr = $emailErr = $passwordErr = $telefonoErr = $fotoErr = "";
+    $nombre = $apellidos = $email = $password = $telefono = $foto = $tipo= $fecha_alta= "";
+    $nombreErr = $apellidosErr = $emailErr = $passwordErr = $telefonoErr = $fotoErr = $tipoErr = $fecha_altaErr="";
  // Procesamos el formulario al pulsar el botón aceptar de esta ficha
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
@@ -122,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
         $mod = false;
         $fotoErr= "Formato debe ser jpg/jpeg";
     }
-
+    $tipo="no";
     if($mod){
         // salvamos la foto
         $foto = md5($_FILES['foto']['tmp_name'] . $_FILES['foto']['name'].time()) . "." . $extension;
@@ -135,7 +135,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     if(empty($nombreErr) && empty($apellidosErr) && empty($emailErr) && empty($passwordErr) && 
      empty($telefonoErr) && empty($fotoErr)){
         $controlador = ControladorUsuario::getControlador();
-        $estado = $controlador->almacenarUsuario($nombre, $apellidos, $email, $password, "" , $telefono, "" ,$foto);
+        $estado = $controlador->almacenarUsuario($nombre, $apellidos, $email, $password, $tipo , $telefono, $fecha_alta ,$foto);
         if($estado){
             header("location: index.php");
             exit();
@@ -194,7 +194,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                     </div>
                     <hr class="colorgraph">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6"><input type="submit" name="aceptar" value="aceptar" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                        <div class="col-xs-12 col-md-6"><input type="submit" name="aceptar" value="Aceptar" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
                         <div class="col-xs-12 col-md-6"><a href="login.php" class="btn btn-success btn-block btn-lg">Login</a></div>
                     </div>
                 </form>

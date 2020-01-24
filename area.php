@@ -63,8 +63,8 @@ session_start();
 //if(isset($_SESSION['USUARIO']['email'])){
 // if($_SESSION['administrador'] == "si"){
 
-$nombre = $apellidos = $email = $administrador = $telefono = $fecha_alta = $foto = "";
-$nombreErr = $apellidosErr = $emailErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr = "";
+$nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto = "";
+$nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr = "";
 $fotoanterior = "";
 
 if (isset($_POST["id"]) && !empty($_POST["id"])) {
@@ -75,7 +75,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $nombreVal = filtrado(($_POST["nombre"]));
     if (empty($nombreVal)) {
         $nombreErr = "Por favor introduzca un nombre válido con solo carávteres alfabéticos.";
-    } elseif (!preg_match("/([^\s][A-zÀ-ž\s]+$)/", $nombreVal)) { 
+    } elseif (!preg_match("/([^\s][A-zÀ-ž\s]+$)/", $nombreVal)) {
         $nombreErr = "Por favor introduzca un nombre válido con solo carávteres alfabéticos.";
     } else {
         $nombre = $nombreVal;
@@ -85,7 +85,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $apellidosVal = filtrado(($_POST["apellidos"]));
     if (empty($apellidosVal)) {
         $apellidosErr = "Por favor introduzca unos apellidos válidos.";
-    } elseif (!preg_match("/([^\s][A-zÀ-ž\s]+$)/", $nombreVal)) { 
+    } elseif (!preg_match("/([^\s][A-zÀ-ž\s]+$)/", $nombreVal)) {
         $apellidosErr = "Por favor introduzca unos apellidos válidos.";
     } else {
         $apellidos = $apellidosVal;
@@ -98,6 +98,16 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     } else {
         $email = $emailVal;
     }
+
+    //password
+    $passwordVal = filtrado($_POST["password"]);
+    if (empty($passwordVal) || strlen($passwordVal) < 5) {
+        $passwordErr = "Por favor introduzca password válido y que sea mayor que 5 caracteres.";
+        $errores[] = $passwordErr;
+    } else {
+        $password = $passwordVal;
+    }
+
 
     // Procesamos matrícula
     if (isset($_POST["matricula"])) {
@@ -163,7 +173,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         && empty($fecha_altaErr) && empty($fotoErr)
     ) {
         $controlador = ControladorUsuario::getControlador();
-        $estado = $controlador->actualizarUsuario($id, $nombre, $apellidos, $email, $administrador, $telefono, $fecha_alta, $foto);
+        $estado = $controlador->actualizarUsuario($id, $nombre, $apellidos, $email, $password, $administrador, $telefono, $fecha_alta, $foto);
 
 
         if ($estado) {
@@ -186,6 +196,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         $nombre = $usuario->getnombre();
         $apellidos = $usuario->getapellidos();
         $email = $usuario->getemail();
+        $password = $usuario->getpassword();
         $administrador = $usuario->getadministrador();
         $telefono = $usuario->gettelefono();
         $fecha_alta = $usuario->getfecha_alta();
@@ -193,7 +204,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         $fotoAnterior = $foto;
     } else {
         // hay un error
-        header("location: error.php");
+        header("location: errors.php");
         exit();
     }
 } else {
@@ -224,7 +235,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                                 <div class="width70 floatR"><input class="width100 form-control" type="text" name="nombre" size="50" value="<?php echo $nombre; ?>">
                                     <?php echo $nombreErr; ?>
                                 </div>
-                            </div><br><br>
+                            </div><br><br><br>
                             <!-- Apellidos-->
                             <div class="form-group">
                                 <div <?php echo (!empty($apellidosErr)) ? 'error: ' : ''; ?>>
@@ -233,7 +244,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                                         <?php echo $apellidosErr; ?>
                                     </div>
                                 </div>
-                            </div><br>
+                            </div><br><br>
                             <!-- Email-->
                             <div class="form-group">
                                 <div <?php echo (!empty($emailErr)) ? 'error: ' : ''; ?>>
@@ -241,18 +252,15 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                                     <div class="width70 floatR"><input class="width100 form-control" type="email" required name="email" value="<?php echo $email; ?>"></div>
                                     <?php echo $emailErr; ?>
                                 </div>
-                            </div>
-                            <!-- Administrador-->
+                            </div><br><br>
+                            <!-- Password -->
                             <div class="form-group">
-                                <div class="width30 floatL"><label>Administrador</label></div>
-                            </div>
-                            <div class="width70 floatR">
-                                <div class="form-group <?php echo (!empty($administradorErr)) ? 'error: ' : ''; ?>">
-                                    <input type="radio" name="administrador" value="si" <?php echo (strstr($administrador, 'si')) ? 'checked' : ''; ?>>Si</input>
-                                    <input type="radio" name="administrador" value="no" <?php echo (strstr($administrador, 'no')) ? 'checked' : ''; ?>>No</input><br>
-                                    <span class="help-block"><?php echo $administradorErr; ?></span>
+                                <div <?php echo (!empty($passwordErr)) ? 'error: ' : ''; ?>>
+                                    <div class="width30 floatL"><label>Password</label></div>
+                                    <div class="width70 floatR"><input class="width100 form-control" type="password" required name="password"></div>
+                                    <?php echo $passwordErr; ?>
                                 </div>
-                            </div>
+                            </div><br><br>
                             <!-- Telefono -->
                             <div class="form-group">
                                 <div <?php echo (!empty($telefonoErr)) ? 'error: ' : ''; ?>>
@@ -261,15 +269,9 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                                     <?php echo $telefonoErr; ?>
                                 </div>
                             </div>
-                            <!-- Fecha-->
-                            <div class="form-group">
-                                <div <?php echo (!empty($fecha_altaErr)) ? 'error: ' : ''; ?>>
-                                    <div class="width30 floatL"><label>Fecha de Inscripción</label></div>
-                                    <div class="width70 floatR"><input class="width100 form-control" type="date" required name="fecha_alta" value="<?php echo date('Y-m-d', strtotime($fecha_alta)) ?>">
-                                        <?php echo $fecha_altaErr; ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" name="administrador" value="si" <?php echo (strstr($administrador, 'si')) ? 'checked' : ''; ?>></input>
+                            <input type="hidden" name="administrador" value="no" <?php echo (strstr($administrador, 'no')) ? 'checked' : ''; ?>></input><br>
+                            <input type="hidden" required name="fecha_alta" value="<?php echo date('Y-m-d', strtotime($fecha_alta)) ?>">
                             <!-- Foto-->
                             <div class="form-group">
                                 <div class="form-group <?php echo (!empty($fotoErr)) ? 'error: ' : ''; ?>">
@@ -279,18 +281,21 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                                     <span class="help-block"><?php echo $fotoErr; ?></span>
                                 </div>
                             </div>
-
+                            <br>
                             <input type="hidden" name="id" value="<?php echo $id; ?>" />
                             <input type="hidden" name="fotoAnterior" value="<?php echo $fotoAnterior; ?>" />
 
                             <div class="form-group">
                                 <div class="row">
-                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                                <input type="hidden" name="fotoAnterior" value="<?php echo $fotoAnterior; ?>" />
-                                    <div class="width50"><input class="btn btn-success" type="submit" value="Submit" style="font-weight: bold">Modificar</div>
-                                    <div class="width50"><input class="btn btn-danger" type="reset" style="font-weight: bold"></div>
-                                    <a href="listado_usu.php"> Volver</a>
+                                    <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                    <input type="hidden" name="fotoAnterior" value="<?php echo $fotoAnterior; ?>" />
                                 </div>
+
+                                <div class="width50"><input class="btn btn-success" type="submit" value="Submit" style="font-weight: bold">
+                                    <input class="btn btn-danger" type="reset" style="font-weight: bold"></div>
+
+                                <a href="listado_usu.php"> Volver</a>
+
                             </div>
                     </form>
                 </div>

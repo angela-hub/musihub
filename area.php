@@ -1,6 +1,16 @@
+<?php
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
+require_once CONTROLLER_PATH . "ControladorUsuario.php";
+require_once CONTROLLER_PATH . "ControladorImagen.php";
+require_once UTILITY_PATH . "funciones.php";
+$test=$_SERVER["REQUEST_URI"];
+$prueba=encode($_SESSION['id']);
+if ($test=="/musihub/area.php?id=$prueba"){
+
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,11 +65,7 @@
     </style>
 </head>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
-require_once CONTROLLER_PATH . "ControladorUsuario.php";
-require_once CONTROLLER_PATH . "ControladorImagen.php";
-require_once UTILITY_PATH . "funciones.php";
-session_start();
+
 //if(isset($_SESSION['USUARIO']['email'])){
 // if($_SESSION['administrador'] == "si"){
 
@@ -313,4 +319,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 //}else{
 //    header("location:/musihub/error403.php");
 //}
+}else{
+    header("location:/musihub/error403.php");
+}
 ?>

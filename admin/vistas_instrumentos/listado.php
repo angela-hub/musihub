@@ -104,7 +104,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                 } else {
                     echo "<p class='lead'><em>No se ha encontrado datos de Instrumentos.</em></p>";
                 }
-                require_once VIEW_PATH . "../footer.html";
+                require_once VIEW_PATH . "../footer.php";
                 ?>
 
                 <div id="no_imprimir">

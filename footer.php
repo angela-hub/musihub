@@ -54,17 +54,25 @@
             <div class="col-md-3 footer-one">
                 <img src="http://xena.tonytemplates.com/themeforest/lawn-service/images/guarantee.png" class="img-responsive" alt="">
             </div>
+            <?php
+            if(isset($_SESSION['USUARIO']['email'])){
+                if($_SESSION['administrador'] == "si"){
+            ?>
             <div class="col-md-3 footer-two">
                 <h5>Administración</h5>
                 <ul>
                     <li><a href="/musihub/admin/vistas_usuarios/listado_usu.php">Gestión de Usuarios</a></li>
                     <li><a href="/musihub/admin/vistas_instrumentos/listado.php">Gestión de Instrumentos</a></li>
-                    <li><a href="/musihub/index.php">Tienda</a></li>
                 </ul>
             </div>
+            <?php
+            }
+        }
+            ?>
             <div class="col-md-3 footer-three">
                 <h5>Information</h5>
                 <ul>
+                    <li><a href="/musihub/index.php">Tienda</a></li>
                     <li><a href="/musihub/contacto.php">Contacto</a></li>
                     <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
                 </ul>

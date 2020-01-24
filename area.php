@@ -215,8 +215,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                 <div class="col-sm-6 bg-light boxStyle">
                     <form name="theform" action="" onSubmit="validate()">
                         <!-- Fotografia-->
-                        <div class="width30 floatL"><label>Fotografía</label></div><br>
-                        <img src='<?php echo "../../imagenes/fotos/" . $usuario->getfoto() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
+                        <img src='<?php echo "imagenes/fotos/" . $usuario->getfoto() ?>' class='rounded' class='img-thumbnail' width='48' height='auto'>
 
                         <!-- Nombre-->
                         <div class="form-group">

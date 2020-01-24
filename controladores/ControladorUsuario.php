@@ -123,6 +123,15 @@ class ControladorUsuario{
         $bd->cerrarBD();
         return $estado;
     }
+    public function actualizarUsuarioN($id, $nombre, $apellidos, $email, $password, $telefono, $foto){
+        $bd=ControladorBD::getControlador();
+        $bd->abrirBD();
+        $consulta="UPDATE usuarios SET nombre=:nombre, apellidos=:apellidos, email=:email, password=:password, telefono=:telefono, foto=:foto WHERE id=:id";
+        $parametros= array(':id' => $id, ':nombre'=>$nombre,':apellidos'=>$apellidos,':email'=>$email,':password'=>$password,':telefono'=>$telefono,':foto'=>$foto);
+        $estado= $bd-> actualizarBD($consulta,$parametros);
+        $bd->cerrarBD();
+        return $estado;
+    }
 }
 
 ?>

@@ -108,10 +108,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     //password
     $passwordVal = filtrado($_POST["password"]);
     if (empty($passwordVal) || strlen($passwordVal) < 5) {
-        $passwordErr = "Por favor introduzca password válido y que sea mayor que 5 caracteres.";
-        $errores[] = $passwordErr;
+        $controlador = ControladorUsuario::getControlador();
+        $usuario = $controlador->buscarusuario($id);
+        $password = $usuario->getpassword();
     } else {
-        $password = $passwordVal;
+        $password= hash('md5',$passwordVal);
     }
 
 
@@ -179,11 +180,10 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         && empty($fecha_altaErr) && empty($fotoErr)
     ) {
         $controlador = ControladorUsuario::getControlador();
-        $estado = $controlador->actualizarUsuario($id, $nombre, $apellidos, $email, $password, $administrador, $telefono, $fecha_alta, $foto);
-
+        $estado = $controlador->actualizarUsuarioN($id, $nombre, $apellidos, $email, $password, $telefono, $foto);
 
         if ($estado) {
-            header("location: listado_usu.php");
+            header("location: /musihub/index.php");
             exit();
         } else {
             alerta("No se a podido enviar la solicitud");
@@ -264,7 +264,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             <div class="form-group">
                                 <div <?php echo (!empty($passwordErr)) ? 'error: ' : ''; ?>>
                                     <div class="width30 floatL"><label>Password</label></div>
-                                    <div class="width70 floatR"><input class="width100 form-control" type="password" required name="password"></div>
+                                    <div class="width70 floatR"><input class="width100 form-control" type="password" name="password"></div>
                                     <?php echo $passwordErr; ?>
                                 </div>
                             </div><br><br>
@@ -292,7 +292,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             <center>
                                 <div class="width50"><input class="btn btn-success" type="submit" value="Submit" style="font-weight: bold">
                                     <input class="btn btn-danger" type="reset" style="font-weight: bold"></div>
-                                <a href="listado_usu.php"> Volver</a>
+                                <a href="/musihub/index.php"> Volver</a>
                             </center>
                     </form>
                 </div>

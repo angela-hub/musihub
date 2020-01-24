@@ -1,8 +1,3 @@
-<?php
-session_start();
-if(isset($_SESSION['USUARIO']['email'])){
-    if($_SESSION['administrador'] == "si"){
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +10,13 @@ if(isset($_SESSION['USUARIO']['email'])){
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-
 <!------ Include the above in your HEAD tag ---------->
-
+<?php
+require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+    require_once VIEW_PATH . "../cabecera.php";
+    if(isset($_SESSION['USUARIO']['email'])){
+        if($_SESSION['administrador'] == "si"){
+?>
 <div id="fullscreen_bg" class="centrar"/>
 <div class="container">
     <div class="row">

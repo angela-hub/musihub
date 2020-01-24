@@ -291,9 +291,9 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             </div>
                             <br>
                             <center>
-                                <div class="width50"><input class="btn btn-success" type="submit" value="Submit" style="font-weight: bold">
-                                    <input class="btn btn-danger" type="reset" style="font-weight: bold"></div>
-                                <a href="/musihub/index.php"> Volver</a>
+                                <p><div class="width50"><input class="btn btn-success" type="submit" value="Cambiar" style="font-weight: bold"></div></p>
+                                <p><div class="width50"><input class="btn btn-danger" type="reset" style="font-weight: bold"></div></p>
+                                <a href="index.php"> Volver</a>
                             </center>
                     </form>
                 </div>

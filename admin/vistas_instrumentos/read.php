@@ -28,63 +28,65 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once UTILITY_PATH . "funciones.php";
 session_start();
-if(isset($_SESSION['USUARIO']['email'])){
-    if($_SESSION['administrador'] == "si"){
-if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
-    $id = decode($_GET["id"]);
-    $controlador = ControladorInstrumento::getControlador();
-    $instrumento = $controlador->buscarInstrumentoid($id);
-    if (is_null($instrumento)) {
-        header("location: error.php");
-        exit();
+if (isset($_SESSION['USUARIO']['email'])) {
+    if ($_SESSION['administrador'] == "si") {
+        if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
+            $id = decode($_GET["id"]);
+            $controlador = ControladorInstrumento::getControlador();
+            $instrumento = $controlador->buscarInstrumentoid($id);
+            if (is_null($instrumento)) {
+                header("location: error.php");
+                exit();
+            }
+        }
+?>
+
+    <?php //require_once VIEW_PATH . "cabecera.php"; 
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <h1>
+                    <center>Ficha del Instrumento</center>
+                </h1>
+                <hr class="colorgraph">
+                <table>
+                    <tr>
+                        <td>
+                            <label><big>Nombre</big></label>
+                            <p><?php echo $instrumento->getnombre(); ?></p>
+                        </td>
+                        <td style="position:absolute; left:400px;">
+                            <img src='<?php echo "../../imagenes/fotos/" . $instrumento->getimagen() ?>' class='rounded' class='img-thumbnail' width='150' height='auto'>
+                        </td>
+                    </tr>
+                </table>
+<br>
+                <label>Referencia</label>
+                <p><?php echo $instrumento->getreferencia(); ?></p>
+                <br>
+                <label>Distribuidor</label>
+
+                <p><?php echo $instrumento->getdistribuidor(); ?></p>
+                <br>
+                <label>tipo</label>
+                <p><?php echo $instrumento->gettipo(); ?></p>
+                <br>
+                <label>precio</label>
+                <p><?php echo $instrumento->getprecio(); ?></p>
+                <br>
+                <label>descuento</label>
+                <p><?php echo $instrumento->getdescuento(); ?></p>
+                <br>
+                <label>stockinicial</label>
+                <p><?php echo $instrumento->getstockinicial(); ?></p>
+                <hr class="colorgraph">
+                <div class="col-xs-12 col-md-6"><a href="listado.php" class="btn btn-primary btn-block btn-lg"> Aceptar</a>
+            <?php
+        } else {
+            header("location:/musihub/error403.php");
+        }
+    } else {
+        header("location:/musihub/error403.php");
     }
-}
-?>
-
-<?php //require_once VIEW_PATH . "cabecera.php"; ?>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-<h1><center>Ficha del Instrumento</center></h1>
-<hr class="colorgraph">
-<table>
-    <tr>
-        <td>
-            <label><big>Nombre</big></label>
-            <p><?php echo $instrumento->getnombre(); ?></p>
-        </td>
-        <td style="position:absolute; left:400px;">
-            <label><big>Fotografía</big></label><br>
-            <img src='<?php echo "../../imagenes/fotos/" . $instrumento->getimagen() ?>' class='rounded' class='img-thumbnail' width='150' height='auto'>
-        </td>
-    </tr>
-</table>
-
-<label>Referencia</label>
-<p><?php echo $instrumento->getreferencia(); ?></p>
-<br>
-<label>Distribuidor</label>
-
-<p><?php echo $instrumento->getdistribuidor(); ?></p>
-<br>
-<label>tipo</label>
-<p><?php echo $instrumento->gettipo(); ?></p>
-<br>
-<label>precio</label>
-<p><?php echo $instrumento->getprecio(); ?></p>
-<br>
-<label>descuento</label>
-<p><?php echo $instrumento->getdescuento(); ?></p>
-<br>
-<label>stockinicial</label>
-<p><?php echo $instrumento->getstockinicial(); ?></p>
-<hr class="colorgraph">
-<div class="col-xs-12 col-md-6"><a href="listado.php" class="btn btn-primary btn-block btn-lg"> Aceptar</a>
-<?php
-}else{
-    header("location:/musihub/error403.php");
-}
-}else{
-    header("location:/musihub/error403.php");
-}
-?>
+            ?>

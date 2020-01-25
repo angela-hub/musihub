@@ -92,9 +92,9 @@ if(isset($_SESSION['USUARIO']['email'])){
                         echo "<td>" . $instrumento->getstockinicial() . "</td>";
                         echo "<td><img src='../../imagenes/fotos/" . $instrumento->getimagen() . "' width='48px' height='48px'></td>";
                         echo "<td>";
-                        echo "<a class='letra' href='../vistas_instrumentos/read.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Info <span class='glyphicon glyphicon-eye-open'></span></a>";
-                        echo "<a class='letra' href='../vistas_instrumentos/update.php?id=" . encode($instrumento->getid()) . "' title='Actualizar' data-toggle='tooltip'>Actualizar <span class='glyphicon glyphicon-eye-open'></span></a>";
-                        echo "<a class='letra' href='../vistas_instrumentos/delete.php?id=" . encode($instrumento->getid()) . "' title='Borrar' data-toggle='tooltip'>Borrar <span class='glyphicon glyphicon-eye-open'></span></a>";
+                        echo "<a class='letra' href='../vistas_instrumentos/read.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Info <span class='glyphicon glyphicon-eye-open'></span></a>"; 
+                        echo "<a class='letra' href='../vistas_instrumentos/update.php?id=" . encode($instrumento->getid()) . "' title='Actualizar' data-toggle='tooltip'>Actualizar <span class='glyphicon glyphicon-edit'></span></a>"; 
+                        echo "<a class='letra' href='../vistas_instrumentos/delete.php?id=" . encode($instrumento->getid()) . "' title='Borrar' data-toggle='tooltip'>Borrar <span class='glyphicon glyphicon-trash'></span></a>";
                         echo "</td>";
                         echo "</tr>";
                     }

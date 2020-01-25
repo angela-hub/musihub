@@ -47,7 +47,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <h1><center>Detalles del Instrumento</center></h1>
             <hr class="colorgraph">
-            <table style=>
+            <table>
                 <tr>
                     <td>
                         <big><label>Nombre</label></big>

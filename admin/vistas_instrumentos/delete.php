@@ -112,19 +112,12 @@ if (isset($_SESSION['USUARIO']['email'])) {
                     </div>
                     <hr class="colorgraph">
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div>
+                    <div class="alert alert-danger fade in">
                             <input type="hidden" name="id" value="<?php echo trim($id); ?>" />
                             <p>¿Está seguro que desea borrar este instrumento?</p><br>
                             <p>
-
-                                <center>
-                                    <p>
-                                        <div class="width50"><input class="btn btn-danger" type="submit" value="Borrar" style="font-weight: bold"></div>
-                                    </p>
-
-                                    <a href="listado.php"> Volver</a>
-                                </center>
-
+                                <button type="submit" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> Borrar</button>
+                                <a href="listado.php" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
                             </p>
                         </div>
                     </form>

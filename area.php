@@ -100,12 +100,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     //password
     $passwordVal = filtrado($_POST["password"]);
     if (empty($passwordVal) || strlen($passwordVal) < 5) {
-        $passwordErr = "Por favor introduzca password válido y que sea mayor que 5 caracteres.";
-        $errores[] = $passwordErr;
+        $controlador = ControladorUsuario::getControlador();
+        $usuario = $controlador->buscarusuario($id);
+        $password = $usuario->getpassword();
     } else {
-        $password = $passwordVal;
+        $password= hash('md5',$passwordVal);
     }
-
 
     // Procesamos matrícula
     if (isset($_POST["matricula"])) {
@@ -167,7 +167,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $foto = trim($_POST["fotoAnterior"]);
     }
     if (
-        empty($nombreErr) && empty($apellidosErr) && empty($emailErr) && empty($administradorErr) && empty($telefonoErr)
+        empty($nombreErr) && empty($apellidosErr) && empty($emailErr) && empty($passwordErr) && empty($administradorErr) && empty($telefonoErr)
         && empty($fecha_altaErr) && empty($fotoErr)
     ) {
         $controlador = ControladorUsuario::getControlador();

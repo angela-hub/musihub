@@ -1,16 +1,6 @@
-<?php
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
-require_once CONTROLLER_PATH . "ControladorUsuario.php";
-require_once CONTROLLER_PATH . "ControladorImagen.php";
-require_once UTILITY_PATH . "funciones.php";
-$test=$_SERVER["REQUEST_URI"];
-$prueba=encode($_SESSION['id']);
-if ($test=="/musihub/area.php?id=$prueba"){
-
-?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,9 +55,11 @@ if ($test=="/musihub/area.php?id=$prueba"){
     </style>
 </head>
 <?php
-
-//if(isset($_SESSION['USUARIO']['email'])){
-//if($_SESSION['administrador'] == "si"){
+require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
+require_once CONTROLLER_PATH . "ControladorUsuario.php";
+require_once CONTROLLER_PATH . "ControladorImagen.php";
+require_once UTILITY_PATH . "funciones.php";
+session_start();
 
 $nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto = "";
 $nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr = "";
@@ -107,13 +99,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
     //password
     $passwordVal = filtrado($_POST["password"]);
-    if (empty($passwordVal)) {
+    if (empty($passwordVal) || strlen($passwordVal) < 5) {
         $controlador = ControladorUsuario::getControlador();
         $usuario = $controlador->buscarusuario($id);
         $password = $usuario->getpassword();
-    }elseif(strlen($passwordVal) < 5){
-        $passwordErr="La contraseña debe tener mas de 4 caracteres";
-    }else {
+    } else {
         $password= hash('md5',$passwordVal);
     }
 
@@ -181,10 +171,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         && empty($fecha_altaErr) && empty($fotoErr)
     ) {
         $controlador = ControladorUsuario::getControlador();
-        $estado = $controlador->actualizarUsuarioN($id, $nombre, $apellidos, $email, $password, $telefono, $foto);
+        $estado = $controlador->actualizarUsuario($id, $nombre, $apellidos, $email, $password, $administrador, $telefono, $fecha_alta, $foto);
+
 
         if ($estado) {
-            header("location: /musihub/index.php");
+            header("location: index.php");
             exit();
         } else {
             alerta("No se a podido enviar la solicitud");
@@ -265,7 +256,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             <div class="form-group">
                                 <div <?php echo (!empty($passwordErr)) ? 'error: ' : ''; ?>>
                                     <div class="width30 floatL"><label>Password</label></div>
-                                    <div class="width70 floatR"><input class="width100 form-control" placeholder="Si no la modificas se quedara la actual" type="password" name="password"></div>
+                                    <div class="width70 floatR"><input class="width100 form-control" type="password" required name="password"></div>
                                     <?php echo $passwordErr; ?>
                                 </div>
                             </div><br><br>
@@ -304,14 +295,3 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     </body>
 </form>
 <br><br><br>
-<?php
-//}else{
-//    header("location:/musihub/error403.php");
-//}
-//}else{
-//    header("location:/musihub/error403.php");
-//}
-}else{
-    header("location:/musihub/error403.php");
-}
-?>

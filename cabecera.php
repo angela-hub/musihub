@@ -73,6 +73,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                             echo "<li class='active'><a href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
                             if($admin=="admin"){
+                            //startwidth
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
                             }
                             ?>

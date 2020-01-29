@@ -83,6 +83,26 @@ class ControladorUsuario{
             return null;
         }
     }
+
+    public function buscarUsuarioE($id){
+        $bd= ControladorBD::getControlador();
+        $bd->abrirBD();
+        $consulta="SELECT * FROM usuarios WHERE id = :id";
+        $parametros=array(':id'=>$id);
+        $filas= $bd->consultarBD($consulta,$parametros);
+        $res=$bd->consultarBD($consulta,$parametros);
+        $filas=$res->fetchAll(PDO::FETCH_OBJ);
+        if (count($filas)>0){
+            foreach($filas as $c) {
+                $usuario = new usuario($filas[0]->id, $filas[0]->nombre, $filas[0]->apellidos, $filas[0]->email, $filas[0]->password, $filas[0]->administrador, $filas[0]->telefono, $filas[0]->fecha_alta, $filas[0]->foto);
+                $email=$usuario->getemail();
+            }
+            $bd->cerrarBD();
+            return $email;
+        }else{
+            return null;
+        }
+    }
     
     public function buscarUsuarioEmail($email){
         $bd= ControladorBD::getControlador();

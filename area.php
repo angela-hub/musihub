@@ -101,7 +101,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $emailVal = filtrado($_POST["email"]);
     $controlador = ControladorUsuario::getControlador();
     $usuario = $controlador->buscarusuario($id);
-    $emailviejo =  $_SESSION['email'];
+    $emailviejo =  $controlador->buscarUsuarioE($_POST["id"]);
     if (empty($emailVal)) {
         $emailErr = "Por favor introduzca email válido.";
     } elseif($emailVal==$emailviejo) {

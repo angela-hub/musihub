@@ -78,7 +78,7 @@ class ControladorCarrito {
      * @return bool
      */
     public function actualizarLineaCarrito($id, $uds) {
-        $conexion = ControladorProducto::getControlador();
+        $conexion = ControladorInstrumento::getControlador();
         $articulo = $conexion->buscarProductoId($id);
         $udsStock = $articulo->getStock();
 

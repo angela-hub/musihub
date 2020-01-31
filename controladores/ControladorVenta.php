@@ -109,7 +109,7 @@ class ControladorVenta {
                     values (:idVenta, :idProducto, :marca, :modelo, :precio, :cantidad)";
 
                 $parametros = array(':idVenta' => $venta->getId(), ':idProducto' => $producto->getId(),
-                    ':marca' => $producto->getMarca(), ':modelo' => $producto->getModelo(), ':precio' => $producto->getPrecio(),
+                    ':distribuidor' => $producto->getdistribuidor(), ':tipo' => $producto->gettipo(), ':precio' => $producto->getPrecio(),
                     ':cantidad' => $cantidad);
 
                 $estado = $conexion->actualizarBD($consulta, $parametros);

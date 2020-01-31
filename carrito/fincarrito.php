@@ -12,10 +12,9 @@ if ((!isset($_SESSION['nombre'])) || $_SESSION['uds'] == 0) {
 $total = $_SESSION['total'];
 
 // Procesamos el usuario de la sesion
-$id = $_SESSION['id_usuario'];
+$id = $_SESSION['id'];
 $nombre = $_SESSION['nombre'];
 $email = $_SESSION['email'];
-$direccion = $_SESSION['direccion'];
 
 // Procesamos la venta
 if (isset($_POST['procesar_compra'])) {
@@ -34,7 +33,7 @@ if (isset($_POST['procesar_compra'])) {
     $cv = ControladorVenta::getControlador();
     if ($cv->insertarVenta($venta)) {
         $cs = ControladorAcceso::getControlador();
-        alerta("Venta procesada", "../vistas/carrito_factura.php?venta=" . encode($idVenta));
+        alerta("Venta procesada", "../vistas/facturacarrito.php?venta=" . encode($idVenta));
         exit();
     } else {
         alerta("Existe un error al procesar la venta");
@@ -55,7 +54,7 @@ if (isset($_POST['procesar_compra'])) {
                 <div class="panel panel-default">
                     <div class="panel-heading">Pedido
                         <div class="pull-right">
-                            <small><a href='carrito_resumen.php'>Editar</a></small>
+                            <small><a href='carrito.php'>Editar</a></small>
                         </div>
                     </div>
                     <!-- Resumen de la cesta de la compra -->
@@ -74,13 +73,13 @@ if (isset($_POST['procesar_compra'])) {
                                     <div class="col-sm-3 col-xs-3">
                                         <!-- imagen -->
                                         <img class="img-responsive"
-                                             src='../img_productos/<?php echo $producto->getImagen(); ?>'
+                                             src='../imagenes/fotos/<?php echo $producto->getImagen(); ?>'
                                              alt='imagen' width='70'>
                                     </div>
 
                                     <div class="col-sm-6 col-xs-6">
-                                        <div class="col-xs-12"><?php echo $producto->getModelo(); ?></div>
-                                        <div class="col-xs-12"><?php echo $producto->getMarca(); ?></div>
+                                        <div class="col-xs-12"><?php echo $producto->getdistribuidor(); ?></div>
+                                        <div class="col-xs-12"><?php echo $producto->gettipo(); ?></div>
                                         <div class="col-xs-12"><small>Precio:
                                                 <span><?php echo $producto->getPrecio(); ?> €</span></small></div>
                                         <div class="col-xs-12"><small>Cantidad:
@@ -169,11 +168,6 @@ if (isset($_POST['procesar_compra'])) {
                     <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Pago electrónico
                     </div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-md-12 text-center">
-                                <img src='<?php echo IMAGE_PATH . "tarjeta.png"; ?>'>
-                            </div>
-                        </div>
                         <!-- tipo de tarjeta -->
                         <div class="form-group">
                             <div class="col-md-1">
@@ -260,7 +254,7 @@ if (isset($_POST['procesar_compra'])) {
                         <div class="form-group">
                             <div class="col-md-12 text-center text-center">
                                 <!-- Seguir comprando -->
-                                <a href='catalogo.php' class='btn btn-default'><span
+                                <a href='../index.php' class='btn btn-default'><span
                                             class='glyphicon glyphicon-plus'></span> Seguir comprando </a>
                                 <!-- Pagar -->
                                 <button class="btn btn-success" type="submit" name="procesar_compra"
@@ -278,4 +272,4 @@ if (isset($_POST['procesar_compra'])) {
 
     <br>
     <!-- Pie de la página web -->
-<?php require_once VIEW_PATH . "footer.php"; ?>
+<?php require_once VIEW_PATH . "../footer.php"; ?>

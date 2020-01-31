@@ -180,7 +180,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                             <td>  </td>
                             <td>
                                 <!-- Pagar Carrito -->
-                                <a href='carrito_resumen.php' class='btn btn-success'><span
+                                <a href='fincarrito.php' class='btn btn-success'><span
                                             class='glyphicon glyphicon-credit-card'></span> Pagar compra </a>
                             </td>
                         </tr>

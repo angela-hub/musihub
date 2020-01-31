@@ -23,6 +23,7 @@ if (isset($_POST['borrar_item'])) {
     $carrito = ControladorCarrito::getControlador();
     $carrito->borrarLineaCarrito($_POST['id'], $_POST['uds']);
     $sesion = ControladorAcceso::getControlador();
+    $sesion->crearCookie();
     header("location: carrito.php");
 }
 
@@ -70,7 +71,8 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                         <?php
                         $total = 0;
                         foreach ($_SESSION['carrito'] as $key => $value) {
-
+                            print_r($_SESSION['uds']);
+                            exit();
                             $id = $key;
                             if ($value[0] != null) {
                                 $instrumento = $value[0];
@@ -86,12 +88,12 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                         <!-- Nombre -->
                                     <td class='col-sm-8 col-md-6 text-left'>
                                         <h4><?php echo $instrumento->getdistribuidor(); ?></h4>
-                                        <h5><?php echo $instrumento->gettipo(); ?></h5>
+                                        <h6><?php echo $instrumento->gettipo(); ?></h6>
                                     </td>
                                     <!-- precio -->
                                     <td class="col-sm-1 col-md-1 text-right">
-                                        <h5><?php echo $instrumento->getprecio(); ?>
-                                            €</h5></td>
+                                        <h6><?php echo $instrumento->getprecio(); ?>
+                                            €</h6></td>
                                     <!-- Cantidad -->
                                     <td class="col-sm-1 col-md-1 text-center">
                                         <!-- Para actualizar -->
@@ -105,9 +107,9 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                         </form>
                                     </td>
                                     <!-- Total -->
-                                    <td class="col-sm-1 col-md-1 text-right"><h5>
+                                    <td class="col-sm-1 col-md-1 text-right"><h6>
                                             <strong><?php echo $instrumento->getPrecio() * $cantidad; ?> €</strong>
-                                        </h5>
+                                        </h6>
                                     </td>
                                     <!-- Eliminar -->
                                     <td class="col-sm-1 col-md-1 text-right">
@@ -117,7 +119,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                             <input type="hidden" id="uds" name="uds"
                                                    value="<?php echo $cantidad; ?>">
                                             <button class="btn btn-danger" type="submit" name="borrar_item"
-                                                    title='Borar instrumento' data-toggle='tooltip'
+                                                    title='Borar Instrumento' data-toggle='tooltip'
                                                     onclick="return confirm('¿Seguro que desea borrar a este instrumento?')">
                                                 <span class='glyphicon glyphicon-trash'></span>
                                             </button>
@@ -140,15 +142,15 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                             <td>  </td>
                             <td>  </td>
                             <td class="col-sm-1 col-md-1 text-right">
-                                <h5><strong><span id='subTotal'>SubTotal: </span></strong></h5>
-                                <h5><strong><span id='iva'>I.V.A.: </span></strong></h5>
+                                <h6><strong><span id='subTotal'>SubTotal: </span></strong></h6>
+                                <h6><strong><span id='iva'>I.V.A.: </span></strong></h6>
                                 <h4><strong><span id='iva'>TOTAL: </span></strong></h4>
                             <td class="col-sm-8 col-md-6 text-right">
-                                <h5><strong><span
+                                <h6><strong><span
                                                 id='subTotal'><?php echo round(($total / 1.21), 2); ?> €</span></strong>
-                                </h5>
-                                <h5><strong><span id='iva'><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></strong>
-                                </h5>
+                                </h6>
+                                <h6><strong><span id='iva'><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></strong>
+                                </h6>
                                 <h4><strong><span id='precioTotal'><?php echo round(($total), 2); ?> €</span></strong>
                                 </h4>
                             </td>

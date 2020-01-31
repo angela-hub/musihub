@@ -23,6 +23,7 @@ if (isset($_POST['borrar_item'])) {
     $carrito = ControladorCarrito::getControlador();
     $carrito->borrarLineaCarrito($_POST['id'], $_POST['uds']);
     $sesion = ControladorAcceso::getControlador();
+    header("location: carrito.php");
     $sesion->crearCookie();
     header("location: carrito.php");
 }
@@ -71,8 +72,6 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                         <?php
                         $total = 0;
                         foreach ($_SESSION['carrito'] as $key => $value) {
-                            print_r($_SESSION['uds']);
-                            exit();
                             $id = $key;
                             if ($value[0] != null) {
                                 $instrumento = $value[0];

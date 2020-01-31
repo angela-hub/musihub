@@ -39,6 +39,13 @@ class ControladorAcceso {
         session_unset();
         session_destroy();
     }
+
+    public function reiniciarsesion()
+    {
+        $_SESSION['uds'] = 0;
+        $_SESSION['total'] = 0;
+        $_SESSION['carrito'] = array();
+    }
     
     
     public function procesarIdentificacion($email, $password){
@@ -69,6 +76,9 @@ class ControladorAcceso {
                 $_SESSION['administrador'] = $usuario->getadministrador();
                 $_SESSION['email'] = $usuario->getemail();
                  $_SESSION['USUARIO']['email']=$email;
+
+                 $_SESSION['uds'] = 0;
+                $_SESSION['carrito'] = array();
                  //echo $_SESSION['USUARIO']['email'];
                  header("location: index.php"); 
                  exit();              
@@ -91,6 +101,12 @@ class ControladorAcceso {
                 //require_once VIEW_PATH."pie.php";
                 exit();
             }
+    }
+
+    public function reiniciarCarrito(){
+        $_SESSION['uds'] = 0;
+        $_SESSION['total'] = 0;
+        $_SESSION['carrito'] = array();
     }
 
 }

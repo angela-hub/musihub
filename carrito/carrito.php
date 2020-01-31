@@ -159,7 +159,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                         <tr>
                             <td>
                                 <!-- Seguir comprando -->
-                                <a href='catalogo.php' class='btn btn-default'><span
+                                <a href='../index.php' class='btn btn-default'><span
                                             class='glyphicon glyphicon-plus'></span> Seguir comprando </a>
                             </td>
                             <td>  </td>

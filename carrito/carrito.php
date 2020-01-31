@@ -15,7 +15,6 @@ if (isset($_POST['vaciar_carrito'])) {
     $carrito = ControladorCarrito::getControlador();
     $carrito->vaciarCarrito();
     $sesion = ControladorAcceso::getControlador();
-    $sesion->crearCookie();
     header("location: carrito.php");
 }
 
@@ -24,6 +23,7 @@ if (isset($_POST['borrar_item'])) {
     $carrito = ControladorCarrito::getControlador();
     $carrito->borrarLineaCarrito($_POST['id'], $_POST['uds']);
     $sesion = ControladorAcceso::getControlador();
+    header("location: carrito.php");
     $sesion->crearCookie();
     header("location: carrito.php");
 }
@@ -36,7 +36,6 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
     if ($carrito->actualizarLineaCarrito($_POST['id'], $_POST['uds'])) {
         // Si se actuliza el carrito en sesiones lo actualizmos en cookie
         $sesion = ControladorAcceso::getControlador();
-        $sesion->crearCookie();
         header("location: carrito.php");
     }
 }
@@ -60,7 +59,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                         <thead>
                         <tr>
                             <th class="table-image"></th>
-                            <th class="text-left">Producto</th>
+                            <th class="text-left">Instrumento</th>
                             <th class="text-right">Precio</th>
                             <th>Cantidad</th>
                             <th class="text-right">Total</th>
@@ -73,28 +72,27 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                         <?php
                         $total = 0;
                         foreach ($_SESSION['carrito'] as $key => $value) {
-
                             $id = $key;
                             if ($value[0] != null) {
-                                $producto = $value[0];
+                                $instrumento = $value[0];
                                 $cantidad = $value[1];
-                                $total += $producto->getPrecio() * $cantidad;
+                                $total += $instrumento->getprecio() * $cantidad;
                                 ?>
                                 <!-- Inicio de fila -->
                                 <tr>
                                     <!-- Imagen -->
                                     <td class='col-sm-1 col-md-1'><img
-                                                src='../img_productos/<?php echo $producto->getImagen(); ?>'
+                                                src='../imagenes/fotos/<?php echo $instrumento->getImagen(); ?>'
                                                 class='avatar img-thumbnail' alt='imagen' width='60'>
                                         <!-- Nombre -->
                                     <td class='col-sm-8 col-md-6 text-left'>
-                                        <h4><?php echo $producto->getModelo(); ?></h4>
-                                        <h5><?php echo $producto->getMarca(); ?></h5>
+                                        <h4><?php echo $instrumento->getdistribuidor(); ?></h4>
+                                        <h6><?php echo $instrumento->gettipo(); ?></h6>
                                     </td>
                                     <!-- precio -->
                                     <td class="col-sm-1 col-md-1 text-right">
-                                        <h5><?php echo $producto->getPrecio(); ?>
-                                            €</h5></td>
+                                        <h6><?php echo $instrumento->getprecio(); ?>
+                                            €</h6></td>
                                     <!-- Cantidad -->
                                     <td class="col-sm-1 col-md-1 text-center">
                                         <!-- Para actualizar -->
@@ -103,14 +101,14 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                             <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
                                             <input type="number" name="uds" value="<?php echo $cantidad; ?>"
                                                    step="1" min="1"
-                                                   max="<?php echo $producto->getStock(); ?>"
+                                                   max="<?php echo $instrumento->getstockinicial(); ?>"
                                                    onchange="submit()">
                                         </form>
                                     </td>
                                     <!-- Total -->
-                                    <td class="col-sm-1 col-md-1 text-right"><h5>
-                                            <strong><?php echo $producto->getPrecio() * $cantidad; ?> €</strong>
-                                        </h5>
+                                    <td class="col-sm-1 col-md-1 text-right"><h6>
+                                            <strong><?php echo $instrumento->getPrecio() * $cantidad; ?> €</strong>
+                                        </h6>
                                     </td>
                                     <!-- Eliminar -->
                                     <td class="col-sm-1 col-md-1 text-right">
@@ -120,8 +118,8 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                             <input type="hidden" id="uds" name="uds"
                                                    value="<?php echo $cantidad; ?>">
                                             <button class="btn btn-danger" type="submit" name="borrar_item"
-                                                    title='Borar Producto' data-toggle='tooltip'
-                                                    onclick="return confirm('¿Seguro que desea borrar a este producto?')">
+                                                    title='Borar Instrumento' data-toggle='tooltip'
+                                                    onclick="return confirm('¿Seguro que desea borrar a este instrumento?')">
                                                 <span class='glyphicon glyphicon-trash'></span>
                                             </button>
                                         </form>
@@ -143,15 +141,15 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                             <td>  </td>
                             <td>  </td>
                             <td class="col-sm-1 col-md-1 text-right">
-                                <h5><strong><span id='subTotal'>SubTotal: </span></strong></h5>
-                                <h5><strong><span id='iva'>I.V.A.: </span></strong></h5>
+                                <h6><strong><span id='subTotal'>SubTotal: </span></strong></h6>
+                                <h6><strong><span id='iva'>I.V.A.: </span></strong></h6>
                                 <h4><strong><span id='iva'>TOTAL: </span></strong></h4>
                             <td class="col-sm-8 col-md-6 text-right">
-                                <h5><strong><span
+                                <h6><strong><span
                                                 id='subTotal'><?php echo round(($total / 1.21), 2); ?> €</span></strong>
-                                </h5>
-                                <h5><strong><span id='iva'><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></strong>
-                                </h5>
+                                </h6>
+                                <h6><strong><span id='iva'><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></strong>
+                                </h6>
                                 <h4><strong><span id='precioTotal'><?php echo round(($total), 2); ?> €</span></strong>
                                 </h4>
                             </td>
@@ -161,7 +159,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                         <tr>
                             <td>
                                 <!-- Seguir comprando -->
-                                <a href='catalogo.php' class='btn btn-default'><span
+                                <a href='../index.php' class='btn btn-default'><span
                                             class='glyphicon glyphicon-plus'></span> Seguir comprando </a>
                             </td>
                             <td>  </td>

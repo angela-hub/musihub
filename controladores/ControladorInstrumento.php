@@ -63,24 +63,25 @@ class ControladorInstrumento {
         return $estado;
     }
 //----------------------------------------------------------------------------------------------------
-    public function buscarInstrumentoid($id){ 
-        $bd = ControladorBD::getControlador();
-        $bd->abrirBD();
-        $consulta = "SELECT* FROM instrumentos WHERE id = :id";
-        $parametros = array(':id' => $id);
-        $filas = $bd->consultarBD($consulta, $parametros);
-        $res = $bd->consultarBD($consulta,$parametros);
-        $filas=$res->fetchAll(PDO::FETCH_OBJ);
-        if (count($filas) > 0) {
-            foreach ($filas as $a) {
-                $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
+        public function buscarInstrumentoId($id)
+        {
+            $bd = ControladorBD::getControlador();
+            $bd->abrirBD();
+            $consulta = "select * from instrumentos where id = :id";
+            $parametros = array(':id' => $id);
+
+            $res = $bd->consultarBD($consulta, $parametros);
+            $filas = $res->fetchAll(PDO::FETCH_OBJ);
+
+            if (count($filas) > 0) {
+                $instrumento = new Instrumento($filas[0]->id, $filas[0]->nombre, $filas[0]->referencia, $filas[0]->distribuidor, $filas[0]->tipo,
+                    $filas[0]->precio, $filas[0]->descuento, $filas[0]->stockinicial, $filas[0]->imagen);
+                $bd->cerrarBD();
+                return $instrumento;
+            } else {
+                return null;
             }
-            $bd->cerrarBD();
-            return $instrumento;
-        }else{
-            return null;
-        }    
-    }
+        }
 //--------------------------------------------------------------------------------------------------
     public function buscarInstrumentoNom($nombre){ 
         $bd = ControladorBD::getControlador();

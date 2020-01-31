@@ -80,7 +80,7 @@ class ControladorCarrito {
     public function actualizarLineaCarrito($id, $uds) {
         $conexion = ControladorInstrumento::getControlador();
         $articulo = $conexion->buscarinstrumentoId($id);
-        $udsStock = $articulo->getStock();
+        $udsStock = $articulo->getstockinicial();
 
         if (($udsStock - $uds) >= 0) {
             $udsAnteriores = $_SESSION['carrito'][$id][1];

@@ -1,3 +1,9 @@
+<?php
+/*session_start();
+print_r($_SESSION['carrito']);
+exit();
+*/
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +51,7 @@
 
                         <br><br>
                         <?php
-                        echo "<a style='margin-right:5px;' class='btn btn-principal btn-success' href='catalogo/carrito.php?id=" . encode($instrumento->getid()) . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
+                        echo "<a style='margin-right:5px;' class='btn btn-principal btn-success' href='/musihub/añadircarrito.php?id=" . encode($instrumento->getId()) . "&page=" . encode("index.php") . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
                         echo "<a style='margin-left:5px;' class='btn btn-principal btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
                         ?>
                         

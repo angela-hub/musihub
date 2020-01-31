@@ -27,38 +27,38 @@ class ControladorCarrito {
 
 
     /**
-     * Inserta una línea de venta, producto, y unidades
-     * @param Producto $producto
+     * Inserta una línea de venta, instrumento, y unidades
+     * @param Instrumento $instrumento
      * @param $uds
      * @return bool
      */
-    public function insertarLineaCarrito(Producto $producto, $uds) {
-        $conexion = ControladorProducto::getControlador();
-        $articulo = $conexion->buscarProductoId($producto->getId());
-        $udsStock = $articulo->getStock();
+    public function insertarLineaCarrito(Instrumento $instrumento, $uds) {
+        $conexion = ControladorInstrumento::getControlador();
+        $articulo = $conexion->buscarinstrumentoid($instrumento->getId());
+        $udsStock = $articulo->getstockinicial();
 
         $carrito = new ControladorCarrito();
-        $udsCarrito = $carrito->unidadesArticulo($producto->getId());
+        $udsCarrito = $carrito->unidadesArticulo($instrumento->getId());
 
 
         if (($udsStock - ($uds+$udsCarrito)) >= 0) {
             $_SESSION['uds'] += $uds;
 
-            if (array_key_exists($producto->getId(), $_SESSION['carrito'])&& ($_SESSION['carrito'][$producto->getId()][0]!=null)) {
+            if (array_key_exists($instrumento->getId(), $_SESSION['carrito'])&& ($_SESSION['carrito'][$instrumento->getId()][0]!=null)) {
                 echo "<br><br><br>Existe";
-                $uds = $_SESSION['carrito'][$producto->getId()][1] + $uds;
+                $uds = $_SESSION['carrito'][$instrumento->getId()][1] + $uds;
             }
-            $_SESSION['carrito'][$producto->getId()] = [$producto, $uds];
+            $_SESSION['carrito'][$instrumento->getId()] = [$instrumento, $uds];
             return true;
         } else {
-            $id = encode($producto->getId());
-            alerta("No hay en stock suficiente tras añadir este producto a tu carrito", "producto.php?id=$id"); //devolvemos el foco al mismo sitio
+            $id = encode($instrumento->getId());
+            alerta("No hay en stock suficiente tras añadir este instrumento a tu carrito", "instrumento.php?id=$id"); //devolvemos el foco al mismo sitio
             return false;
         }
     }
 
     /**
-     * Comprueba las unidades de un producto en el carrito
+     * Comprueba las unidades de un instrumento en el carrito
      * @param $id
      * @return int
      */
@@ -79,7 +79,7 @@ class ControladorCarrito {
      */
     public function actualizarLineaCarrito($id, $uds) {
         $conexion = ControladorInstrumento::getControlador();
-        $articulo = $conexion->buscarProductoId($id);
+        $articulo = $conexion->buscarinstrumentoId($id);
         $udsStock = $articulo->getStock();
 
         if (($udsStock - $uds) >= 0) {

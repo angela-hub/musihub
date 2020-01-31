@@ -31,6 +31,9 @@ switch ($opcion) {
     case 'PDFUsu':
         $fichero->descargarPDFUsu();
         break;
+    case 'FACTURA';
+        $fichero ->descargarfactura();
+        break;
 }
 }else{
     header("location:/musihub/error403.php");

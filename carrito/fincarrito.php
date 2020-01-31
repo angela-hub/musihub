@@ -32,6 +32,7 @@ if (isset($_POST['procesar_compra'])) {
 
     $cv = ControladorVenta::getControlador();
     if ($cv->insertarVenta($venta)) {
+        exit();
         $cs = ControladorAcceso::getControlador();
         alerta("Venta procesada", "../vistas/facturacarrito.php?venta=" . encode($idVenta));
         exit();
@@ -155,7 +156,7 @@ if (isset($_POST['procesar_compra'])) {
                             </div>
                             <div class="col-md-12">
                         <textarea type="text" class="form-control" name="direccion" placeholder="Direccion"
-                                  required><?php echo $direccion; ?></textarea>
+                                  required></textarea>
                             </div>
                         </div>
 

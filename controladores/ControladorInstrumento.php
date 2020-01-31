@@ -125,5 +125,20 @@ class ControladorInstrumento {
         $bd->cerrarBD();
         return $estado;
     }
+
+    public function actualizarStock($id, $stockinicial)
+    {
+        $bd = ControladorBD::getControlador();
+        $bd->abrirBD();
+
+        $consulta = "update instrumentos set stockinicial=:stockinicial where id=:id";
+        $parametros = array(':id' => $id, ':stockinicial' => $stockinicial);
+        $estado = $bd->actualizarBD($consulta, $parametros);
+        $bd->cerrarBD();
+        return $estado;
+
+        $conexion->cerrarBD();
+        return $estado;
+    }
     
 }

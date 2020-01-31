@@ -86,7 +86,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                                 class='avatar img-thumbnail' alt='imagen' width='60'>
                                         <!-- Nombre -->
                                     <td class='col-sm-8 col-md-6 text-left'>
-                                        <h4><?php echo $instrumento->getdistribuidor(); ?></h4>
+                                        <h4><?php echo $instrumento->getnombre(); ?></h4>
                                         <h6><?php echo $instrumento->gettipo(); ?></h6>
                                     </td>
                                     <!-- precio -->

@@ -16,4 +16,7 @@ function encode($str){
 function decode($str){
     return base64_decode(urldecode($str));
 }
-
+function startsWith ($string, $startString){ 
+    $len = strlen($startString); 
+    return (substr($string, 0, $len) === $startString); 
+} 

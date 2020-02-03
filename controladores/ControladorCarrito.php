@@ -51,8 +51,7 @@ class ControladorCarrito {
             $_SESSION['carrito'][$instrumento->getId()] = [$instrumento, $uds];
             return true;
         } else {
-            $id = encode($instrumento->getId());
-            alerta("No hay en stock suficiente tras añadir este instrumento a tu carrito", "instrumento.php?id=$id"); //devolvemos el foco al mismo sitio
+            header("location:/musihub/sinstock.php"); //devolvemos el foco al mismo sitio
             return false;
         }
     }
@@ -121,6 +120,25 @@ class ControladorCarrito {
         if($total==0){
             unset($_SESSION['carrito']);
             $_SESSION['uds'] = 0;
+        }
+        return $total;
+    }
+
+    public function precioencarrito(){
+        $total=0;
+        if(isset($_SESSION['carrito'])){
+            foreach ($_SESSION['carrito'] as $key => $value) {
+                $id = $key;
+                if ($value[0] != null) {
+                    $instrumento = $value[0];
+                    $cantidad = $value[1];
+                    $total += $instrumento->getprecio() * $cantidad;
+                }
+            }
+        }
+        if($total==0){
+            unset($_SESSION['carrito']);
+            $_SESSION['total'] = 0;
         }
         return $total;
     }

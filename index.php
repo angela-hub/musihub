@@ -32,7 +32,7 @@ exit();
             $pagina = (isset($_GET['page'])) ? $_GET['page'] : 1;
             $enlaces = (isset($_GET['enlaces'])) ? $_GET['enlaces'] : 10;
 
-            $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
+            $consulta = "SELECT * FROM instrumentos WHERE stockinicial > '0' and (referencia LIKE :referencia OR nombre LIKE :nombre)";
             $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
             $limite = 12; // Limite
             $paginador  = new Paginador($consulta, $parametros, $limite);
@@ -51,8 +51,8 @@ exit();
 
                         <br><br>
                         <?php
-                        echo "<a style='margin-right:5px;' class='btn btn-principal btn-success' href='/musihub/carrito/añadircarrito.php?id=" . encode($instrumento->getId()) . "&page=" . encode("/musihub/index.php") . "' title='add' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
-                        echo "<a style='margin-left:5px;' class='btn btn-principal btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='info' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
+                        echo "<a style='margin-right:5px;' class='btn btn-principal btn-success' href='/musihub/carrito/añadircarrito.php?id=" . encode($instrumento->getId()) . "&page=" . encode("/musihub/index.php") . "' title='Añadir' data-toggle='tooltip'>Añadir<span class='glyphicon glyphicon-shopping-cart'></span></a>";
+                        echo "<a style='margin-left:5px;' class='btn btn-principal btn-info' href='catalogo/read_catalogo.php?id=" . encode($instrumento->getid()) . "' title='Informacion' data-toggle='tooltip'>Detalles<span class='glyphicon glyphicon-list-alt'></span></a>";
                         ?>
                         
                     </div>

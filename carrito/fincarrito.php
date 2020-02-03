@@ -78,7 +78,7 @@ if (isset($_POST['procesar_compra'])) {
                                     </div>
 
                                     <div class="col-sm-6 col-xs-6">
-                                        <div class="col-xs-12"><?php echo $producto->getdistribuidor(); ?></div>
+                                        <div class="col-xs-12"><?php echo $producto->getnombre(); ?></div>
                                         <div class="col-xs-12"><?php echo $producto->gettipo(); ?></div>
                                         <div class="col-xs-12"><small>Precio:
                                                 <span><?php echo $producto->getPrecio(); ?> €</span></small></div>

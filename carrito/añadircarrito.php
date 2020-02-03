@@ -3,7 +3,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once VIEW_PATH . "../cabecera.php";
 require_once CONTROLLER_PATH . "ControladorCarrito.php";
 
-
 // Compramos la existencia del parámetro id antes de usarlo
 if (isset($_GET["id"]) && !empty(trim($_GET["id"])) && isset($_GET["page"]) && !empty(trim($_GET["page"]))) {
     $id = decode($_GET["id"]);

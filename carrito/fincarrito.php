@@ -26,9 +26,18 @@ if (isset($_POST['procesar_compra'])) {
     $nombreTarjeta = $_POST['tTitular'];
     $numeroTarjeta = $_POST['tNumero'];
 
-    $venta = new Venta($idVenta, "", $total, round(($total / 1.21), 2),
+    $venta = new Venta(
+        $idVenta,
+        "",
+        $total,
+        round(($total / 1.21), 2),
         round(($total - ($total / 1.21)), 2),
-        $nombre, $email, $direccion, $nombreTarjeta, $numeroTarjeta);
+        $nombre,
+        $email,
+        $direccion,
+        $nombreTarjeta,
+        $numeroTarjeta
+    );
 
     $cv = ControladorVenta::getControlador();
     if ($cv->insertarVenta($venta)) {
@@ -42,234 +51,195 @@ if (isset($_POST['procesar_compra'])) {
 
 ?>
 
-    <!-- Iniciamos la interfaz -->
-    <br><br>
-    <div class="row cart-body">
-        <!-- Formulario de salvar -->
-        <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
-              method="post"
-              class="form-horizontal">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
-                <!-- Resumen del pedido -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">Pedido
-                        <div class="pull-right">
-                            <small><a href='carrito.php'>Editar</a></small>
-                        </div>
+<!-- Iniciamos la interfaz -->
+<br><br>
+<div class="row cart-body">
+    <!-- Formulario de salvar -->
+    <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post" class="form-horizontal">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+            <!-- Resumen del pedido -->
+            <div class="panel panel-default">
+                <div class="panel-heading">Pedido
+                    <div class="pull-right">
+                        <small><a href='carrito.php'>Editar</a></small>
                     </div>
-                    <!-- Resumen de la cesta de la compra -->
-                    <div class="panel-body">
-                        <!-- Para cada producto -->
-                        <?php
+                </div>
+                <!-- Resumen de la cesta de la compra -->
+                <div class="panel-body">
+                    <!-- Para cada producto -->
+                    <?php
 
-                        foreach ($_SESSION['carrito'] as $key => $value) {
-                            // Puñetero valor nulo :)
-                            if (($value[0] != null)) {
-                                $id = $key;
-                                $producto = $value[0];
-                                $cantidad = $value[1];
-                                ?>
-                                <div class="form-group">
-                                    <div class="col-sm-3 col-xs-3">
-                                        <!-- imagen -->
-                                        <img class="img-responsive"
-                                             src='../imagenes/fotos/<?php echo $producto->getImagen(); ?>'
-                                             alt='imagen' width='70'>
-                                    </div>
+                    foreach ($_SESSION['carrito'] as $key => $value) {
+                        // Puñetero valor nulo :)
+                        if (($value[0] != null)) {
+                            $id = $key;
+                            $producto = $value[0];
+                            $cantidad = $value[1];
+                    ?>
+                            <div class="form-group">
+                                <div class="col-sm-3 col-xs-3">
+                                    <!-- imagen -->
+                                    <img class="img-responsive" src='../imagenes/fotos/<?php echo $producto->getImagen(); ?>' alt='imagen' width='70'>
+                                </div>
 
-                                    <div class="col-sm-6 col-xs-6">
-                                        <div class="col-xs-12"><?php echo $producto->getnombre(); ?></div>
-                                        <div class="col-xs-12"><?php echo $producto->gettipo(); ?></div>
-                                        <div class="col-xs-12"><small>Precio:
-                                                <span><?php echo $producto->getPrecio(); ?> €</span></small></div>
-                                        <div class="col-xs-12"><small>Cantidad:
-                                                <span><?php echo $cantidad; ?></span></small></div>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-3 text-right">
-                                        <h6><?php echo $producto->getPrecio() * $cantidad; ?> €</h6>
-                                    </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="col-xs-12"><?php echo $producto->getnombre(); ?></div>
+                                    <div class="col-xs-12"><?php echo $producto->gettipo(); ?></div>
+                                    <div class="col-xs-12"><small>Precio:
+                                            <span><?php echo $producto->getPrecio(); ?> €</span></small></div>
+                                    <div class="col-xs-12"><small>Cantidad:
+                                            <span><?php echo $cantidad; ?></span></small></div>
                                 </div>
-                                <div class="form-group">
-                                    <hr>
+                                <div class="col-sm-3 col-xs-3 text-right">
+                                    <h6><?php echo $producto->getPrecio() * $cantidad; ?> €</h6>
                                 </div>
-                                <?php
-                                // lo guardo en un valor de sesión tb
-                            }// if
-                        }// For
-                        ?>
-                        <!-- Subtotales y totales -->
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                Subtotal:
-                                <div class="pull-right"><span><?php echo round(($total / 1.21), 2); ?> €</span></div>
                             </div>
-                            <div class="col-xs-12">
-                                <small>I.V.A.: </small>
-                                <div class="pull-right">
-                                    <span><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></div>
+                            <div class="form-group">
+                                <hr>
                             </div>
-                            <div class="col-xs-12">
-                                <strong>TOTAL: </strong>
-                                <div class="pull-right">
-                                    <span><strong><?php echo round(($total), 2); ?> €</strong></span></div>
-                            </div>
+                    <?php
+                            // lo guardo en un valor de sesión tb
+                        } // if
+                    } // For
+                    ?>
+                    <!-- Subtotales y totales -->
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            Subtotal:
+                            <div class="pull-right"><span><?php echo round(($total / 1.21), 2); ?> €</span></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <small>I.V.A.: </small>
+                            <div class="pull-right">
+                                <span><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <strong>TOTAL: </strong>
+                            <div class="pull-right">
+                                <span><strong><?php echo round(($total), 2); ?> €</strong></span></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
-                <!-- Panel de envío -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">Envío</div>
-                    <div class="panel-body">
-                        <!-- Nombre-->
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="name" class="col-md-3 control-label">Nombre:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="nombre" placeholder="Nombre y apellidos"
-                                       required
-                                       value="<?php echo $nombre; ?>"
-                                       pattern="([^\s][A-zÀ-ž\s]+)"
-                                       title="El nombre no puede contener números"
-                                       minlength="3">
-                            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+            <!-- Panel de envío -->
+            <div class="panel panel-default">
+            <img class="img-responsive pull-right" height="100px" width="100px" src="https://www.sendiroo.es/design/img/envios/baratos/enviarPesados1.jpg">
+                <div class="panel-heading">Envío</div>           
+                <div class="panel-body">
+                    <!-- Nombre-->
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="name" class="col-md-3 control-label">Nombre:</label>
                         </div>
-                        <!-- Email-->
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="name" class="col-md-3 control-label">Email:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="email" class="form-control" name="email" placeholder="Email" required
-                                       value="<?php echo $email; ?>"
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Direccion -->
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="name" class="col-md-3 control-label">Dirección:</label>
-                            </div>
-                            <div class="col-md-12">
-                        <textarea type="text" class="form-control" name="direccion" placeholder="Direccion"
-                                  required></textarea>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <!-- Panel de envio -->
-                <!-- Panel de pago -->
-                <div class="panel panel-info">
-                    <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Pago electrónico
-                    </div>
-                    <div class="panel-body">
-                        <!-- tipo de tarjeta -->
-                        <div class="form-group">
-                            <div class="col-md-1">
-                                <label for="name" class="col-md-2 control-label">Tipo:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <select name="tTipo" class="form-control">
-                                    <option value="Visa" selected>Visa</option>
-                                    <option value="MasterCard">MasterCard</option>
-                                    <option value="Paypal">Paypal</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Titular -->
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="name" class="col-md-3 control-label">Titular:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="tTitular"
-                                       placeholder="Titular de la tarjeta" required
-                                       pattern="([^\s][A-zÀ-ž\s]+)"
-                                       title="El nombre no puede contener números"
-                                       minlength="3">
-                            </div>
-                        </div>
-
-                        <!-- Numero -->
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="name" class="col-md-3 control-label">Nº:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="tNumero" placeholder="Nº de la tarjeta"
-                                       required
-                                       pattern="[0-9]{13,16}"
-                                >
-                            </div>
-                        </div>
-
-                        <!-- CVV -->
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="name" class="col-md-3 control-label">CVV:</label>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="tCVV" placeholder="CVV" required>
-                            </div>
-                        </div>
-
-                        <!-- Caducidad -->
-                        <div class="form-group">
-                            <div class="col-md-8">
-                                <label for="name" class="col-md-3 control-label">Caducidad:</label>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <select name="tMes" class="form-control" required>
-                                    <option value="01">Enero</option>
-                                    <option value="02">Febrero</option>
-                                    <option value="03">Marzo</option>
-                                    <option value="04">Abril</option>
-                                    <option value="05">Mayo</option>
-                                    <option value="06">Junio</option>
-                                    <option value="07">Juilio</option>
-                                    <option value="08">Agosto</option>
-                                    <option value="09">Septiembre</option>
-                                    <option value="10">Octubre</option>
-                                    <option value="11">Noviembre</option>
-                                    <option value="12">Diciembre</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <select name="tAño" class="form-control" required>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12 text-center text-center">
-                                <!-- Seguir comprando -->
-                                <a href='../index.php' class='btn btn-default'><span
-                                            class='glyphicon glyphicon-plus'></span> Seguir comprando </a>
-                                <!-- Pagar -->
-                                <button class="btn btn-success" type="submit" name="procesar_compra"
-                                        title='Pagar compra'
-                                        onclick="return confirm('¿Seguro que desea pagar esta compra?')">
-                                    <span class='glyphicon glyphicon-credit-card'></span> Pagar</span>
-                                </button>
-                            </div>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre y apellidos" required value="<?php echo $nombre; ?>" pattern="([^\s][A-zÀ-ž\s]+)" title="El nombre no puede contener números" minlength="3">
                         </div>
                     </div>
+                    <!-- Email-->
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="name" class="col-md-3 control-label">Email:</label>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required value="<?php echo $email; ?>">
+                        </div>
+                    </div>
+
+                    <!-- Direccion -->
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="name" class="col-md-3 control-label">Dirección:</label>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea type="text" class="form-control" name="direccion" placeholder="Direccion" required></textarea>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-        </form>
-    </div>
+            <!-- Formulario de envio aceptable con todo tipo de tarjetas-->
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-    <br>
-    <!-- Pie de la página web -->
-<?php require_once VIEW_PATH . "../footer.php"; ?>
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="panel panel-default credit-card-box">
+                            <div class="panel-heading display-table">
+                                <div class="row display-tr">
+                                    <h3 class="panel-title display-td">Pago Electronico</h3>
+                                    <div class="display-td">
+                                        <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                                    <div class="form-group">
+                                        <div class="col-md-2">
+                                            <label for="name" class="col-md-3 control-label">TITULAR</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" name="tTitular" placeholder="Titular de la tarjeta" required pattern="([^\s][A-zÀ-ž\s]+)" title="El nombre no puede contener números" minlength="3">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label for="cardNumber">NUMERO TARJETA</label>
+                                                <div class="input-group">
+                                                    <input type="tel" class="form-control" name="cardNumber" placeholder="Número valido de tarjeta" autocomplete="cc-number" required autofocus />
+                                                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-7 col-md-7">
+                                            <div class="form-group">
+                                                <label for="cardExpiry"><span class="hidden-xs">FECHA EXPIRACIÓN</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                                <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5 col-md-5 pull-right">
+                                            <div class="form-group">
+                                                <label for="cardCVC">CODIGO CV</label>
+                                                <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label for="cupon">CUPON DESCUENTO</label>
+                                                <input type="text" class="form-control" name="cupon" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 text-center text-center">
+                                            <!-- Seguir comprando -->
+                                            <a href='../index.php' class='btn btn-default'><span class='glyphicon glyphicon-shopping-cart'></span> Seguir comprando </a>
+                                            <!-- Pagar -->
+                                            <button class="btn btn-success" type="submit" name="procesar_compra" title='Pagar compra' onclick="return confirm('¿Seguro que desea pagar esta compra?')">
+                                                <span class='glyphicon glyphicon-credit-card'></span> Pagar</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="display:none;">
+                                        <div class="col-xs-12">
+                                            <p class="payment-errors"></p>
+                                        </div>
+                                    </div>
+                                </form>
+
+    </form>
+</div>

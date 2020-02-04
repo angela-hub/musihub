@@ -113,13 +113,12 @@ public function descargarTXTUsu()
         return json_encode($public);
     }
 //-----------------------------------------------------------------------------------------------------------
-    public function descargarXML()
-    {
+    public function descargarXML(){
         $this->fichero = "Instrumentos.xml";
         $lista = $controlador = ControladorInstrumento::getControlador();
-        $lista = $controlador->listarInstrumento("", "");
+        $lista = $controlador->listarInstrumentos("", "");
         $doc = new DOMDocument('1.0', 'UTF-8');
-        $instrumentos = $doc->createElement('instrumento');
+        $instrumentos = $doc->createElement('usuarios');
 
         foreach ($lista as $a) {
             $instrumento = $doc->createElement('instrumento');
@@ -135,20 +134,19 @@ public function descargarTXTUsu()
             $instrumentos->appendChild($instrumento);
         }
 
-        $doc->appendChild($instrumento);
+        $doc->appendChild($instrumentos);
         header('Content-type: application/xml');
-        //header("Content-Disposition: attachment; filename=" . $nombre . ""); //archivo de salida
         echo $doc->saveXML();
 
         exit;
     }
-    public function descargarXMLUsu()
-    {
+
+    public function descargarXMLUsu(){
         $this->fichero = "Usuarios.xml";
         $lista = $controlador = ControladorUsuario::getControlador();
         $lista = $controlador->listarUsuarios("", "");
         $doc = new DOMDocument('1.0', 'UTF-8');
-        $usuarios = $doc->createElement('usuario');
+        $usuarios = $doc->createElement('usuarios');
 
         foreach ($lista as $a) {
             $usuario = $doc->createElement('usuario');
@@ -164,9 +162,8 @@ public function descargarTXTUsu()
             $usuarios->appendChild($usuario);
         }
 
-        $doc->appendChild($usuario);
+        $doc->appendChild($usuarios);
         header('Content-type: application/xml');
-        //header("Content-Disposition: attachment; filename=" . $nombre . ""); //archivo de salida
         echo $doc->saveXML();
 
         exit;

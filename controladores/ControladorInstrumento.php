@@ -27,6 +27,27 @@ class ControladorInstrumento {
      * @param type $referencia
      */
 //----------------------------------------------------------------------------------------------------
+    public function listarInstrumentos($nombre){
+        $lista=[];
+        $bd=ControladorBD::getControlador();
+        $bd->abrirBD();
+        $consulta="SELECT * FROM instrumentos WHERE nombre LIKE :nombre";
+        $parametros=array(':nombre'=>"%".$nombre."%");
+        $res=$bd->consultarBD($consulta,$parametros);
+        $filas=$res->fetchAll(PDO::FETCH_OBJ);
+
+        if(count($filas)>0){
+            foreach($filas as $c){
+                $instrumento=new instrumento($c->id,$c->nombre,$c->referencia,$c->distribuidor,$c->tipo,$c->precio,$c->descuento,$c->stockinicial,$c->imagen);
+                $lista[]=$instrumento;
+            }
+            $bd->cerrarBD();
+            return $lista;
+        }else{
+            return null;
+        }
+    }
+
     public function listarInstrumento($nombre, $referencia){
         $lista=[];
         $bd = ControladorBD::getControlador();

@@ -31,7 +31,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             // Procesamos referencia
             if (isset($_POST["referencia"])) {
                 $referencia = filtrado($_POST["referencia"]);
-            } elseif (!preg_match("/([1-9])/", $referenciaVal)) {
+            } elseif (!preg_match("/[0123456789]{1,8}/", $referenciaVal)) {
                 $referenciaErr = "Introduzca una referencia valida en numeros";
             } else {
                 $referencia = $referenciaVal;
@@ -68,7 +68,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             // Procesamos stockinicial
             if (isset($_POST["stockinicial"])) {
                 $stockinicial = filtrado($_POST["stockinicial"]);
-            } elseif (!preg_match("/([0-9])/", $stockinicialVal)) {
+            } elseif (!preg_match("/[0123456789]{1,8}/", $stockinicialVal)) {
                 $stockinicialErr = "Introduzca un stockinicial valido desde el 0";
             } else {
                 $stockinicial = $stockinicialVal;
@@ -265,7 +265,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                             <div class="form-group">
                                 <div <?php echo (!empty($referenciaErr)) ? 'error: ' : ''; ?>>
                                     <div class="width30 floatL"><label>Referencia</label></div>
-                                    <div class="width70 floatR"><input class="width100 form-control" type="text" required name="referencia" value="<?php echo $referencia; ?>" pattern="([1-9])" title="Referencia valida solo con numeros"></div>
+                                    <div class="width70 floatR"><input class="width100 form-control" type="text" required name="referencia" value="<?php echo $referencia; ?>" pattern="[0123456789]{1,8}" title="Referencia valida solo con numeros"></div>
                                     <?php echo $referenciaErr; ?>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                                 <div <?php echo (!empty($stockinicialErr)) ? 'error: ' : ''; ?>>
                                     <div class="width30 floatL"><label>Stock Inicial</label></div>
                                     <div class="width70 floatR">
-                                        <div class="width70 floatR"><input class="width100 form-control" type="text" required name="stockinicial" min="1" pattern="([1-9])" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>"></div>
+                                        <div class="width70 floatR"><input class="width100 form-control" type="text" required name="stockinicial" min="1" pattern="[0123456789]{1,8}" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>"></div>
                                         <?php echo $stockinicialErr; ?>
                                     </div>
                                 </div><br><br><br>

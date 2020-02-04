@@ -42,11 +42,11 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
 
 
 ?>
-
 <main role="main">
     <section class="page-header clearfix text-center">
-        <h2>Carrito de compra</h2>
+        <h1>Carrito de compra</h1>
     </section>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <?php
     if ($_SESSION['uds'] > 0) {
         ?>
@@ -54,9 +54,9 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
             <div class="row">
                 <div class="col-sm-12 col-md-10 col-md-offset-1">
 
-                    <table class="table table-hover">
+                    <table class="table">
 
-                        <thead>
+                        <thead class="thead-light">
                         <tr>
                             <th class="table-image"></th>
                             <th class="text-left">Instrumento</th>

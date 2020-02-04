@@ -21,3 +21,5 @@
 </body>
 
 </html>
+
+<?php require_once "valoracion.html";?>

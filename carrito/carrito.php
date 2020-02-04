@@ -146,11 +146,11 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
                                 <h4><strong><span id='iva'>TOTAL: </span></strong></h4>
                             <td class="col-sm-8 col-md-6 text-right">
                                 <h6><strong><span
-                                                id='subTotal'><?php echo round(($total / 1.21), 2); ?> €</span></strong>
+                                                id='subTotal'><?php echo round(($total / 1.21), 2); echo "€"?> </span></strong>
                                 </h6>
-                                <h6><strong><span id='iva'><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></strong>
+                                <h6><strong><span id='iva'><?php echo round(($total - ($total / 1.21)), 2); echo "€"?> </span></strong>
                                 </h6>
-                                <h4><strong><span id='precioTotal'><?php echo round(($total), 2); ?> €</span></strong>
+                                <h4><strong><span id='precioTotal'><?php echo round(($total), 2); echo "€"?></span></strong>
                                 </h4>
                             </td>
                             <td>  </td>

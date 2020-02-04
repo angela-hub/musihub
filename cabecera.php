@@ -95,10 +95,10 @@ if(isset($_SESSION['USUARIO']['email'])){
                             echo "<li class='active'><a href='/musihub/admin/inicio.php'>Administración</a></li>";
                             }
                         }else{
-                            echo "<li><a href='/musihub/index.php'>Inicio</a></li>";
-                            echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
+                            echo "<li><a style='text-decoration:none;' href='/musihub/index.php'>Inicio</a></li>";
+                            echo "<li><a style='text-decoration:none;' href='/musihub/contacto.php'>Contacto</a></li>";
                             if($admin=="admin"){
-                            echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
+                            echo "<li><a style='text-decoration:none;' href='/musihub/admin/inicio.php'>Administración</a></li>";
                             }
                         }
                         
@@ -118,12 +118,12 @@ if(isset($_SESSION['USUARIO']['email'])){
                             }else{
                                 $to=ControladorCarrito::getControlador();
                                 $_SESSION['total'] = $to -> precioencarrito();
-                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/area.php?id=' . encode($_SESSION['id']).'"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
-                                echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
+                                echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/area.php?id=' . encode($_SESSION['id']).'"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
+                                echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
                                 if($_SESSION['total']==0){
-                                    echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/carrito/carrito.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['uds'].'</a></li>';
+                                    echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/carrito/carrito.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['uds'].'</a></li>';
                                 }else{
-                                    echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/carrito/carrito.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['uds']. ' - '. $_SESSION['total']. ' €'.'</a></li>';
+                                    echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/carrito/carrito.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['uds']. ' - '. $_SESSION['total']. ' €'.'</a></li>';
                                 }
                                 //echo '<li style="width:9%; padding:15px; color:white;"class="nav navbar-nav navbar-right"><span class="glyphicon glyphicon-euro">'. " ".$_SESSION['total'] . '</span></li>';
                             }

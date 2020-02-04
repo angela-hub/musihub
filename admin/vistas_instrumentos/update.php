@@ -28,15 +28,6 @@ if (isset($_SESSION['USUARIO']['email'])) {
                 $nombre = $nombreVal;
             }
 
-            // NO repetir nombre al actualizar
-            $controlador = ControladorInstrumento::getControlador();
-            $instrumento = $controlador->buscarInstrumentoNom($nombre);
-            if (isset($instrumento)) {
-                $nombreErr = "Ya existe un instrumento con este nombre:" . $nombreVal . " en la Base de Datos";
-            } else {
-                $nombre = $nombreVal;
-            }
-
             // Procesamos referencia
             if (isset($_POST["referencia"])) {
                 $referencia = filtrado($_POST["referencia"]);

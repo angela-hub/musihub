@@ -74,7 +74,7 @@
                 <ul>
                     <li><a href="/musihub/index.php">Tienda</a></li>
                     <li><a href="/musihub/contacto.php">Contacto</a></li>
-                    <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="/musihub/sobre_nosotros.php">Sobre nosotros</a></li>
                 </ul>
             </div>
             <div class="col-md-3 footer-four">

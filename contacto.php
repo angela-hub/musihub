@@ -7,7 +7,7 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fashi | Template</title>
+    <title>Contacto</title>
 
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
@@ -24,16 +24,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i> Home</a>
+                        <a href="#"><i class="fa fa-home"></i> Inicio</a>
                         <span>Contact</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section Begin -->
 
-    <!-- Map Section Begin -->
     <div class="map spad">
         <div class="container">
             <div class="map-inner">
@@ -47,17 +45,14 @@
             </div>
         </div>
     </div>
-    <!-- Map Section Begin -->
 
-    <!-- Contact Section Begin -->
     <section class="contact-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="contact-title">
-                        <h4>Contacts Us</h4>
-                        <p>Contrary to popular belief, Lorem Ipsum is simply random text. It has roots in a piece of
-                            classical Latin literature from 45 BC, maki years old.</p>
+                        <h4>Contacta con nosotros</h4>
+                        <p>Obten Informacion sobre nosotros</p>
                     </div>
                     <div class="contact-widget">
                         <div class="cw-item">
@@ -65,8 +60,8 @@
                                 <i class="ti-location-pin"></i>
                             </div>
                             <div class="ci-text">
-                                <span>Address:</span>
-                                <p>60-49 Road 11378 New York</p>
+                                <span>Direccion:</span>
+                                <p>Calle Paloma nº85</p>
                             </div>
                         </div>
                         <div class="cw-item">
@@ -74,8 +69,8 @@
                                 <i class="ti-mobile"></i>
                             </div>
                             <div class="ci-text">
-                                <span>Phone:</span>
-                                <p>+65 11.188.888</p>
+                                <span>Telefono:</span>
+                                <p>+34 655 55 55 55</p>
                             </div>
                         </div>
                         <div class="cw-item">
@@ -84,7 +79,7 @@
                             </div>
                             <div class="ci-text">
                                 <span>Email:</span>
-                                <p>hellocolorlib@gmail.com</p>
+                                <p>musihub@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -92,8 +87,8 @@
                 <div class="col-lg-6 offset-lg-1">
                     <div class="contact-form">
                         <div class="leave-comment">
-                            <h4>Leave A Comment</h4>
-                            <p>Our staff will call back later and answer your questions.</p>
+                            <h4>Deja un comentario</h4>
+                            <p>Dejanos tu opinion sobre nosotros que nos pueda favorecer o en contra para aprender de los fallos cometidos</p>
                             <form action="#" class="comment-form">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -104,7 +99,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <textarea placeholder="Your message"></textarea>
-                                        <button type="submit" class="site-btn">Send message</button>
+                                        <button type="submit" class="site-btn">Enviar mensaje</button>
                                     </div>
                                 </div>
                             </form>
@@ -160,9 +155,9 @@
                             <a href="#"><img src="img/footer-logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello.colorlib@gmail.com</li>
+                            <li>Direccion: Calle Paloma</li>
+                            <li>Telefono: +34 655 55 55</li>
+                            <li>Email: musihub@gmail.com</li>
                         </ul>
                         <div class="footer-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -174,33 +169,33 @@
                 </div>
                 <div class="col-lg-2 offset-lg-1">
                     <div class="footer-widget">
-                        <h5>Information</h5>
+                        <h5>Informacion</h5>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Serivius</a></li>
+                            <li><a href="#">Sobre nosotros</a></li>
+                            <li><a href="#">Pago</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Servicios</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="footer-widget">
-                        <h5>My Account</h5>
+                        <h5>Mi cuenta</h5>
                         <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Shopping Cart</a></li>
-                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Carrito</a></li>
+                            <li><a href="#">Tienda</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="newslatter-item">
-                        <h5>Join Our Newsletter Now</h5>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <h5>Disfuta de nustros boletines informativos ahora</h5>
+                        <p> Mantente informado ahora con las ultimas actulizacion de nuestra tienda</p>
                         <form action="#" class="subscribe-form">
                             <input type="text" placeholder="Enter Your Mail">
-                            <button type="button">Subscribe</button>
+                            <button type="button">Subcribete</button>
                         </form>
                     </div>
                 </div>
@@ -212,7 +207,7 @@
                     <div class="col-lg-12">
                         <div class="copyright-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">la imaginacion de Ángela y Gregorio</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">

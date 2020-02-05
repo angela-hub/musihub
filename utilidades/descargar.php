@@ -7,8 +7,8 @@ require_once CONTROLLER_PATH . "ControladorDescarga.php";
 
 // si el usuario es administrador podra hacer usos de las utilidades de descarga sino no tendra acceso el usuario normal
 if(isset($_SESSION['USUARIO']['email'])){
-    if($_SESSION['administrador'] == "si"){
     $opcion = $_GET["opcion"];
+    if($_SESSION['administrador'] == "si"){
     // opciones de descarga en TXT, JSON, XML, PDF
 $fichero = ControladorDescarga::getControlador();
 switch ($opcion) {
@@ -41,10 +41,21 @@ switch ($opcion) {
         $fichero ->descargarfactura($id);
         break;
 }
-// en caso de error redirige a la pagina de error
+// En caso de que este logeado pero no sea administrador solo le dejará ver su factura.
 }else{
-    header("location:/musihub/error403.php");
+    $fichero = ControladorDescarga::getControlador();
+    switch ($opcion) {
+        case 'FACTURA';
+        $id = decode($_GET["id"]);
+        $fichero ->descargarfactura($id);
+        break;
+        //Si no es esa opcion le dara como error de permisos
+        default;
+            header("location:/musihub/error403.php");
+        break;
+        }
 }
+//Si no esta logeado tampoco le llevara a una página de error
 }else{
     header("location:/musihub/error403.php");
 }

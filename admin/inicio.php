@@ -12,8 +12,10 @@
 <body>
 <!------ Include the above in your HEAD tag ---------->
 <?php
+//directorios de trabajo
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
     require_once VIEW_PATH . "../cabecera.php";
+    //requiere que el usuario logueado sea adminstrador para acceder a la parte de admisnistracion
     if(isset($_SESSION['USUARIO']['email'])){
         if($_SESSION['administrador'] == "si"){
 ?>
@@ -23,6 +25,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
         <div class="col-lg-5 col-md-12 col-sm-8 col-xs-9 bhoechie-tab-container">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
               <ul class="list-group">
+              <!-- Secciones de Administracion -->
                 <a href="#" class="list-group-item active">
                   <br/><br/><i class="glyphicon glyphicon-home"></i> Home<br/><br/>
                   </a>
@@ -179,6 +182,8 @@ $(document).ready(function() {
 });
 </script>
 <?php
+            // si el usuario logueado no es admin no podra insertar ningun instrumento en la base de datos
+            // Este seguro obliga a ser ADMIN como usuario logueado
 }else{
     header("location:/musihub/error403.php");
 }

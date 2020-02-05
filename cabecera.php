@@ -38,7 +38,7 @@ if(isset($_SESSION['USUARIO']['email'])){
 <header class="header-section">
         <div class="header-top">
         <?php    
-        //
+        //Recoge la URL de la web
         $tipo=$_SERVER["REQUEST_URI"];
             if (startsWith($tipo,"/musihub/carrito") || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php?limit=5&page=1"){
                 $tipo="";

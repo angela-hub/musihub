@@ -30,12 +30,13 @@ class ControladorDescarga
         return self::$instancia;
     }
 //----------------------------------------------------------------------------------------------------------
+// Con esta funcion descargaremos informacion en un fichero TXT.
 public function descargarTXT()
 {
     $this->fichero = "Instrumentos.txt";
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=" . $this->fichero . "");
-
+// cogemos la funcion de listar instrumento del controlador para recorrrer los datos de cada instrumento
     $controlador = ControladorInstrumento::getControlador();
     $lista = $controlador->listarInstrumento("", "");
 
@@ -49,6 +50,8 @@ public function descargarTXT()
         echo "No se ha encontrado datos de Instrumentos";
     }
 }
+//----------------------------------------------------------------------------------------------------------
+// Con esta funcion descargaremos informacion en un fichero TXT.
 public function descargarTXTUsu()
 {
     $this->fichero = "Usuarios.txt";
@@ -69,7 +72,7 @@ public function descargarTXTUsu()
     }
 }
 //---------------------------------------------------------------------------------------------------------
-
+// Con esta funcion nos generara un fichero JSON.
     public function descargarJSON()
     {
         $this->fichero = "Instrumentos.json";
@@ -85,7 +88,8 @@ public function descargarTXTUsu()
         }
         echo json_encode($sal);
     }
-
+//----------------------------------------------------------------------------------------------------------
+// Con esta funcion nos generara un fichero JSON.
     public function descargarJSONUsu()
     {
         $this->fichero = "Usuarios.json";
@@ -101,6 +105,7 @@ public function descargarTXTUsu()
         }
         echo json_encode($sal);
     }
+//----------------------------------------------------------------------------------------------------------
 
     private function json_encode_private($object)
     {
@@ -113,6 +118,7 @@ public function descargarTXTUsu()
         return json_encode($public);
     }
 //-----------------------------------------------------------------------------------------------------------
+// Con esta funcion nos generara en un fichero XML.
     public function descargarXML(){
         $this->fichero = "Instrumentos.xml";
         $lista = $controlador = ControladorInstrumento::getControlador();
@@ -140,7 +146,8 @@ public function descargarTXTUsu()
 
         exit;
     }
-
+//----------------------------------------------------------------------------------------------------------
+// Con esta funcion nos generara en un fichero XML.
     public function descargarXMLUsu(){
         $this->fichero = "Usuarios.xml";
         $lista = $controlador = ControladorUsuario::getControlador();
@@ -169,6 +176,7 @@ public function descargarTXTUsu()
         exit;
     }
 //-------------------------------------------------------------------------------------------------------------
+// Con esta funcion descargaremos en PDF en la parte de administracion
     public function descargarPDF(){
         $sal ='<h2 class="pull-left">Fichas de Instrumentos</h2>';
         $lista = $controlador = ControladorInstrumento::getControlador();
@@ -214,7 +222,7 @@ public function descargarTXTUsu()
 
     }
 //-------------------------------------------------------------------------------------------------------------
-
+// Con esta funcion descargaremos en PDF en la parte de administracion
     public function descargarPDFUsu(){
         $sal ='<h2 class="pull-left">Fichas de Usuarios</h2>';
         
@@ -263,6 +271,7 @@ public function descargarTXTUsu()
     }
 
 //-------------------------------------------------------------------------------------------------------------
+// Con esta funcion descargaremos el PDF de la factura final del carrito de compra una vez procesado el pago
     public function descargarfactura($id)
     {
         $cv = ControladorVenta::getControlador();

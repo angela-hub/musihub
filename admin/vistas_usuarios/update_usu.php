@@ -16,8 +16,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
+//Iniciamos la sesion
 session_start();
+//Comprobamos que existe la sesion 
 if (isset($_SESSION['USUARIO']['email'])) {
+    //Comprobamos si es administrador o no y si lo es puede continuar en el caso de que no lo sea lo llevara a una página de error
     if ($_SESSION['administrador'] == "si") {
 
         // Variables temporales

@@ -24,21 +24,24 @@
     </style>
 </head>
 <?php
+// Iniciamos la sesion
 session_start();
 // Incluimos el controlador a los objetos a usar
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
+//Comprobamos que existe la sesion 
 if (isset($_SESSION['USUARIO']['email'])) {
+    //Comprobamos si es administrador o no y si lo es puede continuar en el caso de que no lo sea lo llevara a una página de error
     if ($_SESSION['administrador'] == "si") {
-        // Obtenemos los datos del coche que nos vienen de la página anterior
+        // Cogemos la ID del usuario para buscarlo en la base de datos mediante la funcion buscarUsuario
         if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             $id = decode($_GET["id"]);
             $controlador = ControladorUsuario::getControlador();
             $usuario = $controlador->buscarUsuario($id);
             if (is_null($usuario)) {
-                // hay un error
+                // Si el usuario no existe nos llevara a una página de error
                 header("location: error.php");
                 exit();
             }
@@ -121,7 +124,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                     <hr class="colorgraph">
 
 
-                    <!-- Me llamo a mi mismo pero pasando GET -->
+                    <!-- Procesamos el formulario en la misma página -->
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger fade in">
                             <input type="hidden" name="id" value="<?php echo trim($id); ?>" />
@@ -142,6 +145,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
         <?php //require_once VIEW_PATH."pie.php"; 
         ?>
 <?php
+// En caso de que no este logeado o no sea administrador les redireccionara a la pagina de error403
     } else {
         header("location:/musihub/error403.php");
     }

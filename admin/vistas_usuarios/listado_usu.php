@@ -9,7 +9,9 @@
 <body>
 <?php
 require_once "../../cabecera.php";
+//Comprobamos que existe la sesion 
 if(isset($_SESSION['USUARIO']['email'])){
+    //Comprobamos si es administrador o no y si lo es puede continuar en el caso de que no lo sea lo llevara a una página de error
     if($_SESSION['administrador'] == "si"){
 ?>
 <div class="container-fluid">
@@ -53,7 +55,7 @@ $pagina = ( isset($_GET['page']) ) ? $_GET['page'] : 1;
 $enlaces = ( isset($_GET['enlaces']) ) ? $_GET['enlaces'] : 10;
 $consulta="SELECT * FROM usuarios WHERE email LIKE :email";
 $parametros=array(':email'=>"%". $email. "%");
-
+//Ponemos el límite de usuarios por página de 5
 $limite=5;
 $paginador= new Paginador($consulta,$parametros,$limite);
 $resultados=$paginador->getDatos($pagina);
@@ -113,6 +115,7 @@ if(count($resultados->datos)>0){
             echo "Es tu primera visita hoy";
         }
         */
+        // En caso de que no este logeado o no sea administrador les redireccionara a la pagina de error403
     }else{
         header("location:/musihub/error403.php");
     }

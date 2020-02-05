@@ -28,12 +28,14 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once UTILITY_PATH."funciones.php";
+//Iniciamos la sesion
 session_start();
+//Comprobamos que existe la sesion 
 if(isset($_SESSION['USUARIO']['email'])){
+    //Comprobamos si es administrador o no y si lo es puede continuar en el caso de que no lo sea lo llevara a una página de error
     if($_SESSION['administrador'] == "si"){
 // Compramos la existencia del parámetro id antes de usarlo
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
-    // Cargamos el controlador de coches
     $id = decode($_GET["id"]);
     $controlador = ControladorUsuario::getControlador();
     $usuario= $controlador->buscarUsuario($id);
@@ -106,6 +108,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     </div>
 <br><br><br>
 <?php
+// En caso de que no este logeado o no sea administrador les redireccionara a la pagina de error403
 }else{
     header("location:/musihub/error403.php");
 }

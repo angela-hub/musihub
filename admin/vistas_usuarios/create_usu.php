@@ -24,11 +24,11 @@ if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
 
  
-// Variables temporales
+// Declaramos las variables las cuales seran temporales
 $nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto ="";
 $nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr ="";
 
-// Procesamos el formulario al pulsar el botón aceptar de esta ficha
+// Procesamos el formulario al pulsar el botón aceptar del formulario
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
     // Procesamos el nombre
@@ -220,6 +220,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     </div>
 <br><br><br>
 <?php
+// En caso de que no este logeado o no sea administrador les redireccionara a la pagina de error403
 }else{
     header("location:/musihub/error403.php");
 }

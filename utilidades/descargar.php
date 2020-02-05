@@ -9,7 +9,6 @@ require_once CONTROLLER_PATH . "ControladorDescarga.php";
 if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
     $opcion = $_GET["opcion"];
-    $id = decode($_GET["id"]);
     // opciones de descarga en TXT, JSON, XML, PDF
 $fichero = ControladorDescarga::getControlador();
 switch ($opcion) {
@@ -38,6 +37,7 @@ switch ($opcion) {
         $fichero->descargarPDFUsu();
         break;
     case 'FACTURA';
+    $id = decode($_GET["id"]);
         $fichero ->descargarfactura($id);
         break;
 }

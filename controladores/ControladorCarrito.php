@@ -33,6 +33,7 @@ class ControladorCarrito {
      * @return bool
      */
     //--------------------------------------------------------------------------------------------
+    // Creamos la funcion para insertarLineas de carrito
     public function insertarLineaCarrito(Instrumento $instrumento, $uds) {
         $conexion = ControladorInstrumento::getControlador();
         $articulo = $conexion->buscarinstrumentoid($instrumento->getId());
@@ -63,6 +64,7 @@ class ControladorCarrito {
      * @return int
      */
     //--------------------------------------------------------------------------------------------
+    // Creamos la funcion para ver las unidades que hay de un articulo
     public function unidadesArticulo($id){
 
         $uds=0;
@@ -79,6 +81,7 @@ class ControladorCarrito {
      * @return bool
      */
     //--------------------------------------------------------------------------------------------
+    // Creamos la funcion para actualizar las lineas del carrito desde los formularios creados en el carrito
     public function actualizarLineaCarrito($id, $uds) {
         $conexion = ControladorInstrumento::getControlador();
         $articulo = $conexion->buscarinstrumentoId($id);
@@ -103,6 +106,7 @@ class ControladorCarrito {
      * @param $id
      * @param $uds
      */
+    //Creamos la funcion de borrarlínea de carrito para ir borrando articulos de uno en uno del carrito
     public function borrarLineaCarrito($id, $uds) {
         unset($_SESSION['carrito'][$id]);
         $_SESSION['uds'] -= $uds;
@@ -113,6 +117,7 @@ class ControladorCarrito {
      * @return int
      */
     //--------------------------------------------------------------------------------------------
+    //Creamos la funcion para ver las unidades totales que hay en el carrito
     public function unidadesEnCarrito(){
         $total=0;
         if(isset($_SESSION['carrito'])){
@@ -129,6 +134,7 @@ class ControladorCarrito {
         return $total;
     }
 //--------------------------------------------------------------------------------------------
+    //Creamos la funcion precio en carrito para saber cuanto llevamos gastado, lo cual nos aparcera al lado de los articulos en el carrito de la cabecera
     public function precioencarrito(){
         $total=0;
         if(isset($_SESSION['carrito'])){
@@ -148,6 +154,7 @@ class ControladorCarrito {
         return $total;
     }
 //--------------------------------------------------------------------------------------------
+    //Creamos la funcion vaciar carrito con la cual vaciaremos el carrito entero
     public function vaciarCarrito() {
         unset($_SESSION['carrito']);
         $_SESSION['uds'] = 0;

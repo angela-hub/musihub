@@ -16,6 +16,7 @@ class ControladorUsuario{
         return self::$instancia;
     }
     //--------------------------------------------------------------------------------------------
+    // Creamos la funcion listarUsuarios la cual buscara en la base de datos todos los usuarios que se encuentren con el nombre que se le pase a la funcion
     public function listarUsuarios($nombre){
         $lista=[];
         $bd=ControladorBD::getControlador();
@@ -37,6 +38,7 @@ class ControladorUsuario{
         }
     }
     //-------------------------------------------------------------------------------------------- 
+    // Creamos la funcion almacenar usuario la cual insertara en la base de datos un usuario con los parámetros pasados en la funcion
     public function almacenarUsuario($nombre,$apellidos,$email,$password,$administrador,$telefono,$fecha_alta,$foto){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
@@ -67,7 +69,7 @@ class ControladorUsuario{
         */
     }
     //-------------------------------------------------------------------------------------------- 
-
+    // Creamos la funcion buscarUsuario para buscar en la base de datos un usuario con la id que se le pase a la funcion
     public function buscarUsuario($id){
         $bd= ControladorBD::getControlador();
         $bd->abrirBD();
@@ -87,7 +89,7 @@ class ControladorUsuario{
         }
     }
 //-------------------------------------------------------------------------------------------- 
-
+    //Esta funcion es igual que la anterior pero la hemos adaptado para coger el email que tiene ese usuario
     public function buscarUsuarioE($id){
         $bd= ControladorBD::getControlador();
         $bd->abrirBD();
@@ -108,7 +110,7 @@ class ControladorUsuario{
         }
     }
     //--------------------------------------------------------------------------------------------
-
+    //Creamos la funcion para buscarun usuario a traves de un email en vez del nombre pasandole el email a través de la funcion
     public function buscarUsuarioEmail($email){
         $bd= ControladorBD::getControlador();
         $bd->abrirBD();
@@ -128,7 +130,7 @@ class ControladorUsuario{
         }
     }
     //--------------------------------------------------------------------------------------------
-
+    //Creamos la funcion borrar usuario con la id pasada de la tabla usuarios
     public function borrarUsuario($id){
         $estado=false;
         $bd= ControladorBD::getControlador();
@@ -140,7 +142,7 @@ class ControladorUsuario{
         return $estado;
     }
     //-------------------------------------------------------------------------------------------- 
-
+    //Creamos la funcion actualizarUsuario la cual actualizara los datos de los parametros pasados de un usuario el cual lo cogera por la id del usuario
     public function actualizarUsuario($id,$nombre,$apellidos,$email,$administrador,$telefono,$fecha_alta,$foto){
         $bd=ControladorBD::getControlador();
         $bd->abrirBD();
@@ -151,7 +153,8 @@ class ControladorUsuario{
         return $estado;
     }
     //--------------------------------------------------------------------------------------------
-
+    //Creamos la funcion actualizarUsuarioN en la cual actualizaremos un usuario como la anterior vez pero esta vez los parámetros que se actualizaran seran distintos
+    // ya que lo utilizaremos para otro proposito diferente a la anterior
     public function actualizarUsuarioN($id, $nombre, $apellidos, $email, $password, $telefono, $foto){
         $bd=ControladorBD::getControlador();
         $bd->abrirBD();

@@ -150,5 +150,5 @@ $lineas = $cv->buscarLineasID($idVenta);
 <br><br>
 
 <?php
-require_once VIEW_PATH . "footer.php";
+require_once VIEW_PATH . "../footer.php";
 ?>

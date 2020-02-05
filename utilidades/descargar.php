@@ -4,7 +4,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorDescarga.php";
 if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
-$opcion = $_GET["opcion"];
+    $opcion = $_GET["opcion"];
+    $id = decode($_GET["id"]);
 $fichero = ControladorDescarga::getControlador();
 switch ($opcion) {
     case 'TXT':
@@ -32,7 +33,7 @@ switch ($opcion) {
         $fichero->descargarPDFUsu();
         break;
     case 'FACTURA';
-        $fichero ->descargarfactura();
+        $fichero ->descargarfactura($id);
         break;
 }
 }else{

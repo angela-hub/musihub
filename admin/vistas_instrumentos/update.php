@@ -5,7 +5,9 @@ require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
 session_start();
+//Comprobamos que existe la sesion 
 if (isset($_SESSION['USUARIO']['email'])) {
+    //Comprobamos si es administrador o no y si lo es puede continuar en el caso de que no lo sea lo llevara a una página de error
     if ($_SESSION['administrador'] == "si") {
         // Variables temporales
         $nombre = $referencia = $distribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
@@ -348,6 +350,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
                         <br><br><br>
                         <!-- Pie de la página web -->
                 <?php
+            // si el usuario logueado no es admin no podra insertar ningun instrumento en la base de datos
+            // Este seguro obliga a ser ADMIN como usuario logueado
             } else {
                 header("location:/musihub/error403.php");
             }

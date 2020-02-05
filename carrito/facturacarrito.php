@@ -31,7 +31,7 @@ $lineas = $cv->buscarLineasID($idVenta);
 
 
 ?>
-
+<!-- Distribucion de diseño y recogida de datos para la creacion de la factura al procesar el carrito -->
 
 <main role="main">
     <div class="container">

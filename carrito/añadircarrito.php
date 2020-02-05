@@ -3,14 +3,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once VIEW_PATH . "../cabecera.php";
 require_once CONTROLLER_PATH . "ControladorCarrito.php";
 
-// Compramos la existencia del parámetro id antes de usarlo
+// Compramos si existe el campo ID
 if (isset($_GET["id"]) && !empty(trim($_GET["id"])) && isset($_GET["page"]) && !empty(trim($_GET["page"]))) {
     $id = decode($_GET["id"]);
     $page = decode($_GET["page"]);
     // Cargamos el controlador
     $controlador = ControladorInstrumento::getControlador();
     $producto= $controlador->buscarinstrumentoid($id);
-    // Lo insertamos y vamos a la página antaerior
+    // Lo insertamos y vamos a la página anterior
     $carrito = ControladorCarrito::getControlador();
     if ($carrito->insertarLineaCarrito($producto,1)) {
         // si es correcto recarga la página y actualizamos la cookie

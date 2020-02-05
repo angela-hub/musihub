@@ -10,6 +10,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Estilo para la pagina de read sobre los productos en el catalogo -->
     <style type="text/css">
         .colorgraph {
             height: 5px;
@@ -25,10 +26,12 @@
 </head>
 
 <?php
+// directorios de trabajo
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once UTILITY_PATH . "funciones.php";
 
+// buscar instrumento por ID para mostrar la informacion detallada sobre dicho producto
 if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $id = decode($_GET["id"]);
     $controlador = ControladorInstrumento::getControlador();
@@ -42,11 +45,13 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 
 <?php //require_once VIEW_PATH . "cabecera.php"; 
 ?>
+<!-- Formulario de presentacion para los detalles del instrumento-->
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <h1><center>Detalles del Instrumento</center></h1>
             <hr class="colorgraph">
+          <!-- tabla con el nombre y la imagen del instrumento-->  
             <table>
                 <tr>
                     <td>

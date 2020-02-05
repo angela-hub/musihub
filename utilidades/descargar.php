@@ -1,11 +1,16 @@
 <?php
-session_start();
+session_start(); // obliga a iniciar sesion
+
+// directorios requeridos de trabajo
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorDescarga.php";
+
+// si el usuario es administrador podra hacer usos de las utilidades de descarga sino no tendra acceso el usuario normal
 if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
     $opcion = $_GET["opcion"];
     $id = decode($_GET["id"]);
+    // opciones de descarga en TXT, JSON, XML, PDF
 $fichero = ControladorDescarga::getControlador();
 switch ($opcion) {
     case 'TXT':
@@ -36,6 +41,7 @@ switch ($opcion) {
         $fichero ->descargarfactura($id);
         break;
 }
+// en caso de error redirige a la pagina de error
 }else{
     header("location:/musihub/error403.php");
 }

@@ -4,9 +4,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
-//Recoge la URL de la web 
+//Recoge la URL de la web y la almacena en la variable test
 $test=$_SERVER["REQUEST_URI"];
+//Codifica la id de la sesion y la almacena en la variable prueba
 $prueba=encode($_SESSION['id']);
+//Si la variable test declarada anteriormente lleva la url pasada a continuacion podra acceder, sino sera que es otro usuario y no le dajara acceder
 if ($test=="/musihub/area.php?id=$prueba"){
 
 ?>
@@ -225,12 +227,12 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         $fotoAnterior = $foto;
     } else {
         // hay un error
-        header("location: errors.php");
+        header("location: /musihub/error.php");
         exit();
     }
 } else {
     // hay un error
-    header("location: error.php");
+    header("location: /musihub/error.php");
     exit();
 }
 ?>

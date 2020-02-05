@@ -27,3 +27,4 @@ if (is_null($producto)) {
     alerta("Operación no permitida", "error.php");
     exit();
 }
+?>

@@ -15,6 +15,7 @@
 
 <body>
 <?php
+// directorio de trabajo con cabecera
     require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
     require_once VIEW_PATH . "../cabecera.php";
 ?>

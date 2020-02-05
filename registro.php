@@ -148,6 +148,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     }
 }
     ?>
+
+<!-----------------------------Formulario de registro de usuarios para acceder a la tienda ---------------------------------------------->
     <div class="container">
 
         <div class="row">

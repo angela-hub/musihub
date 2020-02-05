@@ -1,4 +1,4 @@
-<!------ FOOTER ---------->
+<!------ Pie de la pagina ---------->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!---------------------------------------- Estilo para el pie ------------------------------------->
+
     <style type="text/css">
         .footer {
             position: relative;
@@ -54,6 +56,9 @@
             <div class="col-md-3 footer-one">
                 <img src="http://xena.tonytemplates.com/themeforest/lawn-service/images/guarantee.png" class="img-responsive" alt="">
             </div>
+
+            <!------------------- Si no ha iniado sesion el administrador no se le mostrara la parte de administracion ---------------------->
+
             <?php
             if(isset($_SESSION['USUARIO']['email'])){
                 if($_SESSION['administrador'] == "si"){
@@ -68,6 +73,7 @@
             <?php
             }
         }
+        // parte fija que tendran los usuarios normales y tambien los administradores
             ?>
             <div class="col-md-3 footer-three">
                 <h5>Information</h5>

@@ -1,4 +1,5 @@
 <?php
+// directorios de trabajo y acceso necesario para la gestion de la cabecera  
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
@@ -8,6 +9,8 @@ require_once CONTROLLER_PATH . "ControladorAcceso.php";
 require_once CONTROLLER_PATH . "ControladorCarrito.php";
 require_once CONTROLLER_PATH . "ControladorVenta.php";
 require_once UTILITY_PATH. "funciones.php";
+
+//seguro para que obligue al administrador iniciar sesion 
 session_start();
 if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
@@ -35,6 +38,7 @@ if(isset($_SESSION['USUARIO']['email'])){
 <header class="header-section">
         <div class="header-top">
         <?php    
+        //
         $tipo=$_SERVER["REQUEST_URI"];
             if (startsWith($tipo,"/musihub/carrito") || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php" || $tipo=="/musihub/admin/vistas_usuarios/listado_usu.php?limit=5&page=1" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php" || $tipo=="/musihub/admin/vistas_instrumentos/listado.php?limit=5&page=1"){
                 $tipo="";

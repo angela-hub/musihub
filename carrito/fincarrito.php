@@ -25,7 +25,7 @@ if (isset($_POST['procesar_compra'])) {
     $direccion = $_POST['direccion'];
     $nombreTarjeta = $_POST['tTitular'];
     $numeroTarjeta = $_POST['cardNumber'];
-
+// Metemos dentro de la variable venta la nueva venta que se procesara y se insertara en la base de datos
     $venta = new Venta(
         $idVenta,
         "",
@@ -40,6 +40,7 @@ if (isset($_POST['procesar_compra'])) {
     );
 
     $cv = ControladorVenta::getControlador();
+    // Se inserta la venta creada anteriormente
     if ($cv->insertarVenta($venta)) {
         $cs = ControladorAcceso::getControlador();
         header("location:/musihub/carrito/facturacarrito.php?venta=" . encode($idVenta));
@@ -52,26 +53,20 @@ if (isset($_POST['procesar_compra'])) {
 
 ?>
 
-<!-- Iniciamos la interfaz -->
 <br><br>
 <div class="row cart-body">
-    <!-- Formulario de salvar -->
     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post" class="form-horizontal">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
-            <!-- Resumen del pedido -->
             <div class="panel panel-default">
                 <div class="panel-heading">Pedido
                     <div class="pull-right">
                         <small><a href='carrito.php'>Editar</a></small>
                     </div>
                 </div>
-                <!-- Resumen de la cesta de la compra -->
                 <div class="panel-body">
-                    <!-- Para cada producto -->
                     <?php
 
                     foreach ($_SESSION['carrito'] as $key => $value) {
-                        // Puñetero valor nulo :)
                         if (($value[0] != null)) {
                             $id = $key;
                             $producto = $value[0];
@@ -79,10 +74,10 @@ if (isset($_POST['procesar_compra'])) {
                     ?>
                             <div class="form-group">
                                 <div class="col-sm-3 col-xs-3">
-                                    <!-- imagen -->
+                                    <!-- Imagen -->
                                     <img class="img-responsive" src='../imagenes/fotos/<?php echo $producto->getImagen(); ?>' alt='imagen' width='70'>
                                 </div>
-
+                                    <!-- Nombre, tipo y Precio -->
                                 <div class="col-sm-6 col-xs-6">
                                     <div class="col-xs-12"><?php echo $producto->getnombre(); ?></div>
                                     <div class="col-xs-12"><?php echo $producto->gettipo(); ?></div>
@@ -99,9 +94,8 @@ if (isset($_POST['procesar_compra'])) {
                                 <hr>
                             </div>
                     <?php
-                            // lo guardo en un valor de sesión tb
-                        } // if
-                    } // For
+                        }
+                    }
                     ?>
                     <!-- Subtotales y totales -->
                     <div class="form-group">
@@ -185,12 +179,8 @@ if (isset($_POST['procesar_compra'])) {
                             <div class="panel-body">
                                 <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
                                     <div class="form-group">
-                                        <div class="col-md-2">
-                                            <label for="name" class="col-md-3 control-label">TITULAR</label>
-                                        </div>
-                                        <div class="col-md-12">
+                                            <label for="name">TITULAR</label>
                                             <input type="text" class="form-control" name="tTitular" placeholder="Titular de la tarjeta" required pattern="([^\s][A-zÀ-ž\s]+)" title="El nombre no puede contener números" minlength="3">
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -203,28 +193,41 @@ if (isset($_POST['procesar_compra'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xs-7 col-md-7">
-                                            <div class="form-group">
-                                                <label for="cardExpiry"><span class="hidden-xs">FECHA EXPIRACIÓN</span><span class="visible-xs-inline">EXP</span> DATE</label>
-                                                <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-5 col-md-5 pull-right">
-                                            <div class="form-group">
-                                                <label for="cardCVC">CODIGO CV</label>
-                                                <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required />
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="cardCVC">CODIGO CV</label>
+                                        <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required />
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="form-group">
-                                                <label for="cupon">CUPON DESCUENTO</label>
-                                                <input type="text" class="form-control" name="cupon" />
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                    <div>
+                                        <label for="name">Caducidad:</label>
                                     </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <select name="tMes" class="form-control" required>
+                                            <option value="01">Enero</option>
+                                            <option value="02">Febrero</option>
+                                            <option value="03">Marzo</option>
+                                            <option value="04">Abril</option>
+                                            <option value="05">Mayo</option>
+                                            <option value="06">Junio</option>
+                                            <option value="07">Juilio</option>
+                                            <option value="08">Agosto</option>
+                                            <option value="09">Septiembre</option>
+                                            <option value="10">Octubre</option>
+                                            <option value="11">Noviembre</option>
+                                            <option value="12">Diciembre</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <select name="tAño" class="form-control" required>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                        </select>
+                                    </div>
+                                </div>
                                     <div class="form-group">
                                         <div class="col-md-12 text-center text-center">
                                             <!-- Seguir comprando -->
@@ -241,6 +244,5 @@ if (isset($_POST['procesar_compra'])) {
                                         </div>
                                     </div>
                                 </form>
-
     </form>
 </div>

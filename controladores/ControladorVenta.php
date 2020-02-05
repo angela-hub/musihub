@@ -81,7 +81,7 @@ class ControladorVenta {
 
     }
 /*-------------------------------------------------------------------------------------------------------------------------*/
-    
+    // Creamos la funcion insertarventa a la cual le pasaremos la venta y la insertara en la base de datos
     public function insertarVenta($venta) {
         $conexion = ControladorBD::getControlador();
         $conexion->abrirBD();

@@ -63,7 +63,7 @@ class instrumento {
         return $this->imagen;
     }
 
-    //SETS ofrece la informacion recogida por los GETS
+    //SETS Asigna a cada caracteristica del instrumento un valor el cual se asignara llamando a la funcion y pasandole el parametro
 
     function setid($id) {
         $this->id = $id;

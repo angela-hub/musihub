@@ -70,7 +70,7 @@ class Venta {
         return $this->numTarjeta;
     }
 
-    //SETS ofrece la informacion recogida por los GETS
+    //SETS Asigna a cada caracteristica del instrumento un valor el cual se asignara llamando a la funcion y pasandole el parametro
 
     function setId($idventa) {
         $this->idventa = $idventa;

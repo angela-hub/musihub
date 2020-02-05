@@ -47,6 +47,7 @@ class ControladorInstrumento {
             return null;
         }
     }
+//--------------------------------------------------------------------------------------------
 
     public function listarInstrumento($nombre, $referencia){
         $lista=[];
@@ -146,6 +147,7 @@ class ControladorInstrumento {
         $bd->cerrarBD();
         return $estado;
     }
+//--------------------------------------------------------------------------------------------
 
     public function actualizarStock($id, $stockinicial)
     {

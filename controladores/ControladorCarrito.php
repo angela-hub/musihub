@@ -32,6 +32,7 @@ class ControladorCarrito {
      * @param $uds
      * @return bool
      */
+    //--------------------------------------------------------------------------------------------
     public function insertarLineaCarrito(Instrumento $instrumento, $uds) {
         $conexion = ControladorInstrumento::getControlador();
         $articulo = $conexion->buscarinstrumentoid($instrumento->getId());
@@ -61,6 +62,7 @@ class ControladorCarrito {
      * @param $id
      * @return int
      */
+    //--------------------------------------------------------------------------------------------
     public function unidadesArticulo($id){
 
         $uds=0;
@@ -76,6 +78,7 @@ class ControladorCarrito {
      * @param $uds
      * @return bool
      */
+    //--------------------------------------------------------------------------------------------
     public function actualizarLineaCarrito($id, $uds) {
         $conexion = ControladorInstrumento::getControlador();
         $articulo = $conexion->buscarinstrumentoId($id);
@@ -89,11 +92,12 @@ class ControladorCarrito {
             return true;
         } else {
 
-            alerta("No hay en stock", "carritoMostrar.php");
+            alerta("No hay en stock");
+            header("location:/musihub/sinstock.php"); //devolvemos el foco al mismo sitio
             return false;
         }
     }
-
+//--------------------------------------------------------------------------------------------
     /**
      * Elimina la líneas de carrito
      * @param $id
@@ -108,6 +112,7 @@ class ControladorCarrito {
      * Devuelve el número de líenas de carrito
      * @return int
      */
+    //--------------------------------------------------------------------------------------------
     public function unidadesEnCarrito(){
         $total=0;
         if(isset($_SESSION['carrito'])){
@@ -123,7 +128,7 @@ class ControladorCarrito {
         }
         return $total;
     }
-
+//--------------------------------------------------------------------------------------------
     public function precioencarrito(){
         $total=0;
         if(isset($_SESSION['carrito'])){
@@ -142,7 +147,7 @@ class ControladorCarrito {
         }
         return $total;
     }
-
+//--------------------------------------------------------------------------------------------
     public function vaciarCarrito() {
         unset($_SESSION['carrito']);
         $_SESSION['uds'] = 0;

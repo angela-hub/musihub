@@ -1,5 +1,5 @@
 <?php
-
+// Datos de logueo para la base de datos -- modificable
 class ControladorBD{
     private $servername = "localhost";
     private $username = "root";
@@ -23,7 +23,7 @@ class ControladorBD{
         }
         return self::$instancia;
     }
-
+// funcion para abrir  la base de datos -------------------------------------------------------------------------------------
     public function abrirBD(){
         try{
             $this->bd = new PDO($this->server.":host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
@@ -32,13 +32,13 @@ class ControladorBD{
             die("conexión fallida " . $e->getMessage());
         }
     }
-
+// funcion para cerrar la base da datos -------------------------------------------------------------------------------------
     public function cerrarBD() {
         $this->bd=null;
         $this->rs=null;
         $this->st=null;
     }
-
+// funciones para actualizar la base datos --------------------------------------------------------------------------------------
     public function actualizarBD($consulta, $parametros=null) {
         if($parametros!=null)
             return $this->actualizarBDParametros($consulta,$parametros);
@@ -77,7 +77,7 @@ class ControladorBD{
         $this->st->execute($parametros);
         return $this->st;
     }
-
+// funcion con los datos de conexion de la base de datos -------------------------------------------------------------
     public function datosConexion() {
         return $this->servername;
     }

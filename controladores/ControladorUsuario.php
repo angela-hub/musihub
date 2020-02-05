@@ -3,7 +3,7 @@
 require_once MODEL_PATH."usuario.php";
 require_once CONTROLLER_PATH."ControladorBD.php";
 require_once UTILITY_PATH."funciones.php";
-
+//--------------------------------------------------------------------------------------------
 class ControladorUsuario{
     static private $instancia= null;
     private function __construct(){
@@ -15,6 +15,7 @@ class ControladorUsuario{
         }
         return self::$instancia;
     }
+    //--------------------------------------------------------------------------------------------
     public function listarUsuarios($nombre){
         $lista=[];
         $bd=ControladorBD::getControlador();
@@ -35,6 +36,7 @@ class ControladorUsuario{
             return null;
         }
     }
+    //-------------------------------------------------------------------------------------------- 
     public function almacenarUsuario($nombre,$apellidos,$email,$password,$administrador,$telefono,$fecha_alta,$foto){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
@@ -64,7 +66,8 @@ class ControladorUsuario{
         }
         */
     }
-    
+    //-------------------------------------------------------------------------------------------- 
+
     public function buscarUsuario($id){
         $bd= ControladorBD::getControlador();
         $bd->abrirBD();
@@ -83,6 +86,7 @@ class ControladorUsuario{
             return null;
         }
     }
+//-------------------------------------------------------------------------------------------- 
 
     public function buscarUsuarioE($id){
         $bd= ControladorBD::getControlador();
@@ -103,7 +107,8 @@ class ControladorUsuario{
             return null;
         }
     }
-    
+    //--------------------------------------------------------------------------------------------
+
     public function buscarUsuarioEmail($email){
         $bd= ControladorBD::getControlador();
         $bd->abrirBD();
@@ -122,7 +127,8 @@ class ControladorUsuario{
             return null;
         }
     }
-    
+    //--------------------------------------------------------------------------------------------
+
     public function borrarUsuario($id){
         $estado=false;
         $bd= ControladorBD::getControlador();
@@ -133,7 +139,8 @@ class ControladorUsuario{
         $bd->cerrarBD();
         return $estado;
     }
-    
+    //-------------------------------------------------------------------------------------------- 
+
     public function actualizarUsuario($id,$nombre,$apellidos,$email,$administrador,$telefono,$fecha_alta,$foto){
         $bd=ControladorBD::getControlador();
         $bd->abrirBD();
@@ -143,6 +150,8 @@ class ControladorUsuario{
         $bd->cerrarBD();
         return $estado;
     }
+    //--------------------------------------------------------------------------------------------
+
     public function actualizarUsuarioN($id, $nombre, $apellidos, $email, $password, $telefono, $foto){
         $bd=ControladorBD::getControlador();
         $bd->abrirBD();

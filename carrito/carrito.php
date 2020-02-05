@@ -48,6 +48,7 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
     </section>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <?php
+    //Si en la sesion hay mas de 0 unidades entraría en el if para imprimir los articulos del carrito
     if ($_SESSION['uds'] > 0) {
         ?>
         <div class="container-fluid">

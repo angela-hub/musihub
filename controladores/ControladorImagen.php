@@ -20,6 +20,7 @@ class ControladorImagen {
         return self::$instancia;
     }
 //--------------------------------------------------------------------------------------------
+// Creamos las funciones para guardar la imagen, tenemos dos funciones una la utilizaremos para los usuario sy otra para los productos
     function salvarImagen($foto) {
         if (move_uploaded_file($_FILES['foto']['tmp_name'], IMAGE_PATH ."fotos/" . $foto)) {
             return true;
@@ -34,6 +35,7 @@ class ControladorImagen {
         return false;
     }
 //--------------------------------------------------------------------------------------------
+// Creamos las funciones para eliminar una imagen de igual forma para ambos modelos
     function eliminarImagen($imagen) {
         $fichero = IMAGE_PATH ."fotos/" . $imagen;
         if (file_exists($fichero)) {
@@ -51,6 +53,7 @@ class ControladorImagen {
         return false;;
     }
 //--------------------------------------------------------------------------------------------
+// Creamos la funcion para actualizar una foto de un instrumento o usuario
     function actualizarFoto(){
         $fotoAnterior = trim($_POST["fotoAnterior"]);
         $extension = explode("/", $_FILES['foto']['type']);

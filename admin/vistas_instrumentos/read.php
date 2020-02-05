@@ -10,6 +10,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- estilo para el delete del crud de la parte de administracion de instrumentos -->
     <style type="text/css">
         .colorgraph {
             height: 5px;
@@ -24,12 +25,16 @@
     </style>
 </head>
 <?php
+//directorios de trabajo
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once UTILITY_PATH . "funciones.php";
+// iniciar sesion
 session_start();
+//Seguro de inicio de sesion con el usuario admisnitrador
 if (isset($_SESSION['USUARIO']['email'])) {
     if ($_SESSION['administrador'] == "si") {
+        //buscar instrumento por id
         if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             $id = decode($_GET["id"]);
             $controlador = ControladorInstrumento::getControlador();
@@ -50,6 +55,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                     <center>Ficha del Instrumento</center>
                 </h1>
                 <hr class="colorgraph">
+                <!-- tabla con nombre y foto de los instrumentos -->
                 <table>
                     <tr>
                         <td>
@@ -83,6 +89,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
                 <hr class="colorgraph">
                 <div class="col-xs-12 col-md-6"><a href="listado.php" class="btn btn-primary btn-block btn-lg"> Aceptar</a>
             <?php
+            // si el usuario logueado no es admin no podra insertar ningun instrumento en la base de datos
+            // Este seguro obliga a ser ADMIN como usuario logueado
         } else {
             header("location:/musihub/error403.php");
         }

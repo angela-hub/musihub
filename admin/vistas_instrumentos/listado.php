@@ -1,5 +1,6 @@
 <?php
 require_once "../../cabecera.php";
+//Seguro de inicio de sesion con el usuario admisnitrador
 if(isset($_SESSION['USUARIO']['email'])){
     if($_SESSION['administrador'] == "si"){
 ?>
@@ -15,6 +16,7 @@ if(isset($_SESSION['USUARIO']['email'])){
 
 <body>
     <?php
+    // Directorios de trabajo
     require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
     require_once CONTROLLER_PATH . "ControladorInstrumento.php";
     require_once CONTROLLER_PATH . "Paginador.php";
@@ -55,7 +57,7 @@ if(isset($_SESSION['USUARIO']['email'])){
 
                 $pagina = (isset($_GET['page'])) ? $_GET['page'] : 1;
                 $enlaces = (isset($_GET['enlaces'])) ? $_GET['enlaces'] : 10;
-
+                // Consulta para el buscador con los datos de referencia y nombre que estan insertados en la base de datos
                 $consulta = "SELECT * FROM instrumentos WHERE referencia LIKE :referencia OR nombre LIKE :nombre";
                 $parametros = array(':referencia' => "%" . $referencia . "%", ':referencia' => "%" . $referencia . "%", ':nombre' => "%" . $nombre . "%");
                 $limite = 5; // Limite
@@ -78,6 +80,8 @@ if(isset($_SESSION['USUARIO']['email'])){
                     echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
+
+                    // bucle for each para recorrer los instrumentos y mostrarlos
 
                     foreach ($resultados->datos as $a) {
 
@@ -124,6 +128,8 @@ if(isset($_SESSION['USUARIO']['email'])){
 
 </html>
 <?php
+            // si el usuario logueado no es admin no podra insertar ningun instrumento en la base de datos
+            // Este seguro obliga a ser ADMIN como usuario logueado
 }else{
     header("location:/musihub/error403.php");
 }
@@ -131,6 +137,7 @@ if(isset($_SESSION['USUARIO']['email'])){
     header("location:/musihub/error403.php");
 }
 ?>
+<!-- Estilo para el listado  -->
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;

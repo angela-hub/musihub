@@ -10,6 +10,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- estilo para el delete del crud de la parte de administracion de instrumentos -->
     <style type="text/css">
         .colorgraph {
             height: 5px;
@@ -23,14 +24,19 @@
         }
     </style>
 </head>
+
 <?php
 session_start();
+//directorios de trabajo
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
+
+//Seguro de inicio de sesion con el usuario admisnitrador
 if (isset($_SESSION['USUARIO']['email'])) {
     if ($_SESSION['administrador'] == "si") {
+// buscar instrumento por ID
         if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             $id = decode($_GET["id"]);
             $controlador = ControladorInstrumento::getControlador();
@@ -41,7 +47,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             }
         }
 
-
+// Borrar instrumento por ID 
         if (isset($_POST["id"]) && !empty($_POST["id"])) {
             $controlador = ControladorInstrumento::getControlador();
             $instrumento = $controlador->buscarInstrumentoid($_POST["id"]);
@@ -72,7 +78,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                         <center>Borrar Instrumento</center>
                     </h1>
                     <hr class="colorgraph">
-
+<!-- Tabla con el nombre y la imagen de instrumento -->
                     <table>
                         <tr>
                             <td>
@@ -123,6 +129,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
                     </form>
                     <br><br><br>
             <?php
+            // si el usuario logueado no es admin no podra insertar ningun instrumento en la base de datos
+            // Este seguro obliga a ser ADMIN como usuario logueado
         } else {
             header("location:/musihub/error403.php");
         }

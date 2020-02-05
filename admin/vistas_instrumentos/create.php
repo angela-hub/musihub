@@ -8,12 +8,18 @@ if (!isset($_SESSION['USUARIO']['email'])) {
     header("location: login.php");
     exit();
 }*/
+
+//directorios de trabajo
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorImagen.php";
 require_once UTILITY_PATH . "funciones.php";
+
+//Seguro de inicio de sesion con usuario administrador
 if (isset($_SESSION['USUARIO']['email'])) {
     if ($_SESSION['administrador'] == "si") {
+
+// ------------------------------------------------------------------------------- 
 
         // Variables
         $nombre = $referencia = $distribuidor = $tipo =  $precio = $descuento =  $stockinicial =  $imagen = "";
@@ -111,19 +117,6 @@ if (isset($_SESSION['USUARIO']['email'])) {
                     $imagenErr = "Error al procesar la imagen y subirla al servidor";
                 }
             }
-            /*
-    //COMPROBAR SOLO ESTOS FILTROS PARA VER SI PASAN LOS DATOS
-
-    echo $nombreVal = filtrado(($_POST["nombre"])).  "<br>";
-    echo $raza = filtrado(implode(", ", $_POST["raza"])) .  "<br>";
-    echo $ki = filtrado($_POST["ki"]) .  "<br>";
-    echo $transformacion = filtrado($_POST["transformacion"]) .  "<br>";
-    echo $ataque = filtrado($_POST["ataque"]).  "<br>"; 
-    echo $planeta = filtrado($_POST["planeta"]) .  "<br>";
-    echo $password = filtrado($_POST["password"]) .  "<br>";
-    echo $fecha = filtrado($_POST["fecha"]) .  "<br>";
-    echo $imagen = filtrado(($_POST["imagen"]));
-*/
             if (
                 empty($nombreErr) && empty($referenciaErr) && empty($distribuidorErr) && empty($tipoErr) &&
                 empty($precioErr) && empty($descuentoErr) && empty($stockinicialErr) && empty($imagenErr)
@@ -159,7 +152,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                     <div class="col-md-12">
                         <div class="page-header">
                             <h2>Insertar Instrumento</h2>
-<br>
+                                <br>
                             <p>Por favor rellene este formulario para añadir un nuevo instrumento a la base de datos de la tienda MusiHub.</p>
                             <br>
                             <!-- Formulario-->
@@ -224,6 +217,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
                             </form>
                             <br><br><br>
                     <?php
+                    // si el usuario logueado no es admin no podra insertar ningun instrumento en la base de datos
+                    // Este seguro obliga a ser ADMIN como usuario logueado
                 } else {
                     header("location:/musihub/error403.php");
                 }

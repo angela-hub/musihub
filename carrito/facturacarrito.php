@@ -14,13 +14,13 @@ $cs->reiniciarCarrito();
 
 // Solo entramos si somos el usuario y hay items
 if ((!isset($_SESSION['nombre']))) {
-    header("location: error.php");
+    header("location: /musihub/error.php");
     exit();
 }
 
 // Recuperamos la venta
 if ((!isset($_GET['venta']))) {
-    header("location: error.php");
+    header("location: /musihub/error.php");
     exit();
 }
 

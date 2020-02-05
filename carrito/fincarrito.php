@@ -6,7 +6,7 @@ require_once VIEW_PATH . "../cabecera.php";
 
 // Solo entramos si somos el usuario y hay items
 if ((!isset($_SESSION['nombre'])) || $_SESSION['uds'] == 0) {
-    header("location: error.php");
+    header("location: /musihub/error.php");
     exit();
 }
 $total = $_SESSION['total'];

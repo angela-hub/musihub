@@ -1,4 +1,5 @@
 <?php
+//Iniciamos la sesion del usuario logeado
 session_start();
 //error_reporting(E_ALL & ~(E_STRICT|E_NOTICE));
 /*session_start();
@@ -17,7 +18,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH."ControladorUsuario.php";
 require_once CONTROLLER_PATH."ControladorImagen.php";
 require_once UTILITY_PATH."funciones.php";
+//Comprobamos que existe la sesion 
 if(isset($_SESSION['USUARIO']['email'])){
+    //Comprobamos si es administrador o no y si lo es puede continuar en el caso de que no lo sea lo llevara a una página de error
     if($_SESSION['administrador'] == "si"){
 
  

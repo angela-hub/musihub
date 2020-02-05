@@ -24,7 +24,7 @@ if (isset($_POST['procesar_compra'])) {
     $email = $_POST['email'];
     $direccion = $_POST['direccion'];
     $nombreTarjeta = $_POST['tTitular'];
-    $numeroTarjeta = $_POST['tNumero'];
+    $numeroTarjeta = $_POST['cardNumber'];
 
     $venta = new Venta(
         $idVenta,
@@ -42,7 +42,8 @@ if (isset($_POST['procesar_compra'])) {
     $cv = ControladorVenta::getControlador();
     if ($cv->insertarVenta($venta)) {
         $cs = ControladorAcceso::getControlador();
-        alerta("Venta procesada", "../vistas/facturacarrito.php?venta=" . encode($idVenta));
+        header("location:/musihub/carrito/facturacarrito.php?venta=" . encode($idVenta));
+        //alerta("Venta procesada", "../vistas/facturacarrito.php?venta=" . encode($idVenta));
         exit();
     } else {
         alerta("Existe un error al procesar la venta");

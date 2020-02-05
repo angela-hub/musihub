@@ -55,7 +55,7 @@ class lineaventa {
     }
 
 
-    //SETS ofrece la informacion recogida por los GETS
+    //SETS Asigna a cada caracteristica del instrumento un valor el cual se asignara llamando a la funcion y pasandole el parametro
 
     
     public function setidventa($idventa): void

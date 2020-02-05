@@ -6,7 +6,7 @@ require_once VIEW_PATH . "../cabecera.php";
 
 // como esta página está restringida al usuario en cuestion
 if ((!isset($_SESSION['nombre']))) {
-    header("location: error.php");
+    header("location: /musihub/error.php");
     exit();
 }
 

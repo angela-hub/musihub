@@ -27,6 +27,7 @@ class ControladorInstrumento {
      * @param type $referencia
      */
 //----------------------------------------------------------------------------------------------------
+// con la funcion listarInstrumentos buscaremos en la base de datos todos los instrumentos que se encuentren con el nombre que se le pase a la funcion
     public function listarInstrumentos($nombre){
         $lista=[];
         $bd=ControladorBD::getControlador();
@@ -48,7 +49,7 @@ class ControladorInstrumento {
         }
     }
 //--------------------------------------------------------------------------------------------
-
+// con la funcion listarInstrumento la cual buscara en la base de datos todos los instrumentos que se encuentren con el nombre que se le pase a la funcion
     public function listarInstrumento($nombre, $referencia){
         $lista=[];
         $bd = ControladorBD::getControlador();
@@ -72,6 +73,7 @@ class ControladorInstrumento {
         }    
     }
 //----------------------------------------------------------------------------------------------------
+// con la funcion almacenarInstrumento la cual insertara en la base de datos un usuario con los parámetros pasados en la funcion
     public function almacenarInstrumento($nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen){
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
@@ -85,6 +87,7 @@ class ControladorInstrumento {
         return $estado;
     }
 //----------------------------------------------------------------------------------------------------
+// Creamos la funcion buscarInstrumentoId para buscar en la base de datos un instrumento con el id que se le pase a la funcion
         public function buscarInstrumentoId($id)
         {
             $bd = ControladorBD::getControlador();
@@ -105,6 +108,8 @@ class ControladorInstrumento {
             }
         }
 //--------------------------------------------------------------------------------------------------
+// Creamos la funcion buscarInstrumentoNom para buscar en la base de datos un instrumento con el nombre que se le pase a la funcion
+
     public function buscarInstrumentoNom($nombre){ 
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
@@ -124,6 +129,7 @@ class ControladorInstrumento {
         }    
     }
 //------------------------------------------------------------------------------------------------- 
+//Creamos la funcion borrarInstrumento con el id pasado a la tabla de instrumentos para eliminarlo
     public function borrarInstrumento($id){ 
         $estado=false;
         $bd = ControladorBD::getControlador();
@@ -148,7 +154,7 @@ class ControladorInstrumento {
         return $estado;
     }
 //--------------------------------------------------------------------------------------------
-
+//Creamos la funcion actualizarStock con la que actualizaremos los datos con los parametros pasados de un usuario el cual lo cogera por la id del usuario
     public function actualizarStock($id, $stockinicial)
     {
         $bd = ControladorBD::getControlador();

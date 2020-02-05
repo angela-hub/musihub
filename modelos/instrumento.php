@@ -1,4 +1,5 @@
 <?php
+// declaramos la clase instrumento con sus caracteristicas
 class instrumento {
     private $id;
     private $nombre;
@@ -11,7 +12,7 @@ class instrumento {
     private $imagen;
 
     
-    // Constructor
+    // Constructor de caracteristicas declaradas en la clase
     public function __construct($id, $nombre, $referencia, $distribuidor, $tipo, $precio, $descuento, $stockinicial, $imagen) {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -24,7 +25,7 @@ class instrumento {
         $this->imagen = $imagen;
     }
     
-    //GETS
+    //GETS obtener la informacion de las caracteristicas
     function getid() {
         return $this->id;
     }
@@ -62,7 +63,7 @@ class instrumento {
         return $this->imagen;
     }
 
-    //SETS
+    //SETS ofrece la informacion recogida por los GETS
 
     function setid($id) {
         $this->id = $id;

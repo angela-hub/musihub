@@ -1,4 +1,6 @@
 <?php
+
+// declaramos la clase usuario con sus caracteristicas
 class usuario {
     private $id;
     private $nombre;
@@ -11,7 +13,7 @@ class usuario {
     private $foto;
 
     
-    // Constructor
+    // Constructor de caracteristicas declaradas en la clase
     public function __construct($id, $nombre, $apellidos, $email, $password, $administrador, $telefono, $fecha_alta, $foto) {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -24,7 +26,7 @@ class usuario {
         $this->foto = $foto;
     }
     
-    //GETS
+    //GETS obtener la informacion de las caracteristicas
     function getid() {
         return $this->id;
     }
@@ -62,7 +64,7 @@ class usuario {
         return $this->foto;
     }
 
-    //SETS
+    //SETS ofrece la informacion recogida por los GETS
 
     function setid($id) {
         $this->id = $id;

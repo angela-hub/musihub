@@ -1,6 +1,6 @@
 <?php
 
-
+// declaramos la clase lineaventa con sus caracteristicas
 class lineaventa {
 
     private $idventa;
@@ -10,15 +10,8 @@ class lineaventa {
     private $precio;
     private $cantidad;
 
-    /**
-     * LineaVenta constructor.
-     * @param $idventa
-     * @param $idproducto
-     * @param $distribuidor
-     * @param $tipo
-     * @param $precio
-     * @param $cantidad
-     */
+    // Constructor de caracteristicas declaradas en la clase
+    
     public function __construct($idventa, $idproducto, $distribuidor, $tipo, $precio, $cantidad)
     {
         $this->idventa = $idventa;
@@ -28,98 +21,70 @@ class lineaventa {
         $this->precio = $precio;
         $this->cantidad = $cantidad;
     }
+//GETS obtiene la informacion de las caracteristicas y SET nos la ofreve
 
-    /**
-     * @return mixed
-     */
+    
     public function getidventa()
     {
         return $this->idventa;
     }
 
-    /**
-     * @param mixed $idventa
-     */
-    public function setidventa($idventa): void
-    {
-        $this->idventa = $idventa;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getidproducto()
     {
         return $this->idproducto;
     }
-
-    /**
-     * @param mixed $idproducto
-     */
-    public function setidproducto($idproducto): void
-    {
-        $this->idproducto = $idproducto;
-    }
-
-    /**
-     * @return mixed
-     */
+ 
     public function getdistribuidor()
     {
         return $this->distribuidor;
     }
 
-    /**
-     * @param mixed $distribuidor
-     */
-    public function setdistribuidor($distribuidor): void
-    {
-        $this->distribuidor = $distribuidor;
-    }
-
-    /**
-     * @return mixed
-     */
     public function gettipo()
     {
         return $this->tipo;
     }
 
-    /**
-     * @param mixed $tipo
-     */
-    public function settipo($tipo): void
-    {
-        $this->tipo = $tipo;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getprecio()
     {
         return $this->precio;
     }
 
-    /**
-     * @param mixed $precio
-     */
-    public function setprecio($precio): void
-    {
-        $this->precio = $precio;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getcantidad()
     {
         return $this->cantidad;
     }
 
-    /**
-     * @param mixed $cantidad
-     */
+
+    //SETS ofrece la informacion recogida por los GETS
+
+    
+    public function setidventa($idventa): void
+    {
+        $this->idventa = $idventa;
+    }
+
+
+    public function setidproducto($idproducto): void
+    {
+        $this->idproducto = $idproducto;
+    }
+
+    public function setdistribuidor($distribuidor): void
+    {
+        $this->distribuidor = $distribuidor;
+    }
+
+    public function settipo($tipo): void
+    {
+        $this->tipo = $tipo;
+    }
+    
+
+    public function setprecio($precio): void
+    {
+        $this->precio = $precio;
+    }
+   
     public function setcantidad($cantidad): void
     {
         $this->cantidad = $cantidad;

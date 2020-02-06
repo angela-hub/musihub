@@ -71,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     // Procesamos el password
     $passwordVal = filtrado($_POST["password"]);
     if(empty($passwordVal) || strlen($passwordVal)<5){
-        $passwordErr = "Por favor introduzca password válido y que sea mayor que 5 caracteres.";
+        $passwordErr = "Por favor introduzca password válido y que sea mayor que 4 caracteres.";
     } else{
         $password= hash('md5',$passwordVal);
     }

@@ -210,7 +210,6 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         alerta("Hay errores al enviar la solicitud reviselos");
     }
 }
-// Chequeamos los errores antes de insertar en la base de datos
 if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $id =  decode($_GET["id"]);
     $controlador = ControladorUsuario::getControlador();

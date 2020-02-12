@@ -1,19 +1,17 @@
 <?php
-//fecha
+require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
+require_once UTILITY_PATH . "funciones.php";
+//variable declaradas
+$fechaErr="";
+//Procesamos la fecha para que cuando se procese el pago no sea una fecha inferior a la actual.
+//ya que se puede estar pagando con una tarjeta caducada
 $fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
-$hoy = date("d-m-Y", time());
-
-// Comparamos las fechas
-$fecha_pago = new DateTime($fecha);
-$fecha_hoy = new DateTime($hoy);
-$comparativa = $fecha_hoy->diff($fecha_pago);
-
-if ($comparativa->format('%R%a días') < 0) {
-    $fechaErr = "La fecha no puede ser inferior a la fecha actual";
-    $errores[] =  $fechaErr;
-} else {
-    $fecha = date("d/m/Y", strtotime($fecha));
-}
+$hoy =date("d-m-Y");
+    if(strftime($fecha)<strftime($hoy)){
+        $fechaErr = "La fecha no puede ser inferior a la fecha actual";
+    }else{
+        $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
+    }
 ?>
 
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
@@ -61,7 +59,8 @@ if ($comparativa->format('%R%a días') < 0) {
               <div class="row-fluid">
                 <div class="span12">
                 <div class="input-block-level">
-                <input type="date" required name="fecha" value="<?php echo date('Y-m-d', strtotime(str_replace('/', '-', $fecha))); ?>"></input> 
+                <input type="date" required name="fecha" value="<?php echo date('Y-m-d', strtotime(str_replace('/', '-', $fecha))); ?>"></input>
+                  <?php echo $fechaErr; ?> 
                 </div>
                 </div>
               </div>

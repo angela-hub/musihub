@@ -24,7 +24,7 @@ $hoy =date("d-m-Y");
 <div class="container">
   <div class="row">
     <div class="span15">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal span11" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <fieldset>
           <legend>Pago electronico</legend>
        
@@ -61,7 +61,7 @@ $hoy =date("d-m-Y");
               <div class="row-fluid">
                 <div class="span12">
                 <div class="input-block-level">
-                <input type="date" required name="fecha" value="<?php echo date('Y-m-d', strtotime(str_replace('/', '-', $fecha))); ?>"></input>
+                <input class="form-horizontal span2" type="date" required name="fecha" value="<?php echo date('Y-m-d', strtotime(str_replace('/', '-', $fecha))); ?>"></input>
                   <?php echo $fechaErr; ?> 
                 </div>
                 </div>

@@ -1,31 +1,85 @@
 <?php
+// Directorios a usar 
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once UTILITY_PATH . "funciones.php";
-//variable declaradas
-$fechaErr="";
-//Procesamos la fecha para que cuando se procese el pago no sea una fecha inferior a la actual.
-//ya que se puede estar pagando con una tarjeta caducada
+
+//procesamos el formulario cuando se envia al darle al boton pagar
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
-$fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
-$hoy =date("d-m-Y");
-$titular=$_POST["titular"];
-    if(strftime($fecha)<=strftime($hoy)){
-        $fechaErr = "La fecha no puede ser inferior o igual a la fecha actual";
-    }else{
-        $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
-    }
-    if(isset($_POST["titular"]) && !preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu", $titular)) { //filter_var($nombreVal, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/([^\s][A-zÀ-ž\s]+$)/")))){
-      alerta("Introduzca un nombre correcto");
-      $apellidosErr = "Por favor introduzca unos apellidos válidos.";
-  }
-  
+
+    //Procesamos la fecha para que cuando se procese el pago no sea una fecha inferior a la actual.
+    //ya que se puede estar pagando con una tarjeta caducada
+    $fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
+    $hoy =date("d-m-Y");
+        if(strftime($fecha)<=strftime($hoy)){
+            $fechaErr = "La fecha no puede ser inferior o igual a la fecha actual";
+        }else{
+            $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
+        }
+    //procesamos el titular para que inserte el nombre y los apellidos
+    $titular=$_POST["titular"];
+      if(isset($_POST["titular"]) && !preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu", $titular)) { 
+        $titularErr = "Introduzca un nombre y apellidos";
+      }
+
+    //procesamos los digitos de la tarjeta de credito
+    //procemos los 4 primeros digitos
+    $tarjeta = (($_POST["num1"]));
+        if (empty($tarjeta)) {
+          $tarjetarErr = "Introduce los cuatro primeros numeros";
+        } elseif (!preg_match("/^[0-9]{4}+$/", $tarjeta)) {
+          $tarjetarErr = "Debes introducir los 4 primeros digitos";
+        } else {
+          $num1 = $tarjeta;
+        }
+        //procemos los 4 segundos digitos
+    $tarjeta = (($_POST["num2"]));
+      if (empty($tarjeta)) {
+        $tarjetarErr = "Introduce los cuatro primeros numeros";
+      } elseif (!preg_match("/^[0-9]{4}+$/", $tarjeta)) {
+        $tarjetarErr = "Debes introducir los 4 segundos digitos";
+      } else {
+        $num2 = $tarjeta;
+      }
+    //procemos los 4 terceros digitos
+    $tarjeta = (($_POST["num3"]));
+        if (empty($tarjeta)) {
+          $tarjetarErr = "Introduce los cuatro primeros numeros";
+        } elseif (!preg_match("/^[0-9]{4}+$/", $tarjeta)) {
+          $tarjetarErr = "Debes introducir los 4 terceros digitos";
+        } else {
+          $num3 = $tarjeta;
+        }
+        //procemos los 4 cuartos digitos
+    $tarjeta = (($_POST["num4"]));
+      if (empty($tarjeta)) {
+        $tarjetarErr = "Introduce los cuatro primeros numeros";
+      } elseif (!preg_match("/^[0-9]{4}+$/", $tarjeta)) {
+        $tarjetarErr = "Debes introducir los 4 cuartos digitos";
+      } else {
+        $num4 = $tarjeta;
+      }
+
+      //procemos el codigo de seguridad de la tarjeta de credito CVV
+    $cvv = (($_POST["cv"]));
+      if (empty($cvv)) {
+        $cvvErr = "Introduce los cuatro primeros numeros";
+      } elseif (!preg_match("/^[0-9]{3}+$/", $cvv)) {
+        $tarjetarErr = "Debes introducir 3 digitos del reverso";
+      } else {
+        $cv = $cvv;
+      }
+
+    //creamos una variable para concatenar el valor de los cuatro campos de la tarjeta de credito e poder insertarla en la base de datos
+      $tarjeta_completa=$num1.$num2.$num3.$num4;
   }
 ?>
 
+<!------ -----------------------Enlaces para el estilo del formulario de pago ----------------------------------------->
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
+<!---------------------------------------------- Formulario ------------------------------------------------------------>
 <br><br><br><br><br><br>
 <div class="container">
   <div class="row">
@@ -33,34 +87,34 @@ $titular=$_POST["titular"];
     <form class="form-horizontal span11" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <fieldset>
           <legend>Pago electronico</legend>
-       
+       <!--titular de la tarjeta-->
           <div class="control-group">
             <label class="control-label">Titular Pago</label>
             <div class="controls">
               <input type="text" class="input-block-level" name="titular" pattern="([^\s][A-zÀ-ž\s]+)" title="Escribe tu nombre y primer apellido" required>
             </div>
           </div>
-       
+       <!--numero de la tarjeta-->
           <div class="control-group">
             <label class="control-label">Numero Tarjeta</label>
             <div class="controls">
               <div class="row-fluid">
                 <div class="span3">
-                  <input type="text" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 primeros digitos" required>
+                  <input type="text" name="num1" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 primeros digitos" required>
                 </div>
                 <div class="span3">
-                  <input type="text" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 segundos digitos" required>
+                  <input type="text" name="num2" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 segundos digitos" required>
                 </div>
                 <div class="span3">
-                  <input type="text" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 terceros digitos" required>
+                  <input type="text" name="num3" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 terceros digitos" required>
                 </div>
                 <div class="span3">
-                  <input type="text" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 cuartos digitos" required>
+                  <input type="text" name="num4" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 cuartos digitos" required>
                 </div>
               </div>
             </div>
           </div>
-       
+       <!--fecha de caducidad de la tarjeta-->
           <div class="control-group">
             <label class="control-label">Fecha de Expiración</label>
             <div class="controls">
@@ -74,21 +128,19 @@ $titular=$_POST["titular"];
               </div>
             </div>
           </div>
-       
+       <!--codigo de seguridad de la tarjeta-->
           <div class="control-group">
             <label class="control-label">Código CVV</label>
             <div class="controls">
               <div class="row-fluid">
                 <div class="span3">
-                  <input type="text" class="input-block-level" autocomplete="off" maxlength="3" pattern="\d{3}" title="Mirar reverso de la tarjeta los 3 digitos" required>
+                  <input type="text" name="cv" class="input-block-level" autocomplete="off" maxlength="3" pattern="\d{3}" title="Mirar reverso de la tarjeta los 3 digitos" required>
                 </div>
-                <div class="span8">
-                  <!-- screenshot may be here -->
-                </div>
+                <div class="span8"></div>
               </div>
             </div>
           </div>
-       
+       <!--Botones-->
           <div class="form-actions">
             <button type="submit" name="pagar" value="pagar" class="btn btn-primary">Pagar</button>
             <button type="button" class="btn">Cancelar</button>

@@ -8,11 +8,17 @@ $fechaErr="";
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
 $fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
 $hoy =date("d-m-Y");
+$titular=$_POST["titular"];
     if(strftime($fecha)<=strftime($hoy)){
         $fechaErr = "La fecha no puede ser inferior o igual a la fecha actual";
     }else{
         $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
     }
+    if(isset($_POST["titular"]) && !preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu", $titular)) { //filter_var($nombreVal, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/([^\s][A-zÀ-ž\s]+$)/")))){
+      alerta("Introduzca un nombre correcto");
+      $apellidosErr = "Por favor introduzca unos apellidos válidos.";
+  }
+  
   }
 ?>
 
@@ -31,7 +37,7 @@ $hoy =date("d-m-Y");
           <div class="control-group">
             <label class="control-label">Titular Pago</label>
             <div class="controls">
-              <input type="text" class="input-block-level" pattern="([^\s][A-zÀ-ž\s]+)" title="Escribe tu nombre y primer apellido" required>
+              <input type="text" class="input-block-level" name="titular" pattern="([^\s][A-zÀ-ž\s]+)" title="Escribe tu nombre y primer apellido" required>
             </div>
           </div>
        

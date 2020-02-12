@@ -29,7 +29,7 @@ $hoy =date("d-m-Y");
           <div class="control-group">
             <label class="control-label">Titular Pago</label>
             <div class="controls">
-              <input type="text" class="input-block-level" pattern="\w+ \w+.*" title="Escribe tu nombre y primer apellido" required>
+              <input type="text" class="input-block-level" pattern="([^\s][A-zÀ-ž\s]+)" title="Escribe tu nombre y primer apellido" required>
             </div>
           </div>
        

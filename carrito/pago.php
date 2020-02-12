@@ -5,13 +5,15 @@ require_once UTILITY_PATH . "funciones.php";
 $fechaErr="";
 //Procesamos la fecha para que cuando se procese el pago no sea una fecha inferior a la actual.
 //ya que se puede estar pagando con una tarjeta caducada
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
 $fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
 $hoy =date("d-m-Y");
-    if(strftime($fecha)<strftime($hoy)){
-        $fechaErr = "La fecha no puede ser inferior a la fecha actual";
+    if(strftime($fecha)<=strftime($hoy)){
+        $fechaErr = "La fecha no puede ser inferior o igual a la fecha actual";
     }else{
         $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
     }
+  }
 ?>
 
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
@@ -22,7 +24,7 @@ $hoy =date("d-m-Y");
 <div class="container">
   <div class="row">
     <div class="span15">
-      <form class="form-horizontal span11">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
         <fieldset>
           <legend>Pago electronico</legend>
        
@@ -82,7 +84,7 @@ $hoy =date("d-m-Y");
           </div>
        
           <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Pagar</button>
+            <button type="submit" name="pagar" value="pagar" class="btn btn-primary">Pagar</button>
             <button type="button" class="btn">Cancelar</button>
           </div>
         </fieldset>

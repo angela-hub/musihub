@@ -6,11 +6,10 @@ $fechaErr="";
 //Procesamos la fecha para que cuando se procese el pago no sea una fecha inferior a la actual.
 //ya que se puede estar pagando con una tarjeta caducada
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
-  alerta("A pasado");
 $fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
 $hoy =date("d-m-Y");
-    if(strftime($fecha)<strftime($hoy)){
-        $fechaErr = "La fecha no puede ser inferior a la fecha actual";
+    if(strftime($fecha)<=strftime($hoy)){
+        $fechaErr = "La fecha no puede ser inferior o igual a la fecha actual";
     }else{
         $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
     }

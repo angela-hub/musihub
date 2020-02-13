@@ -118,6 +118,7 @@ class ControladorCarrito {
      */
     //--------------------------------------------------------------------------------------------
     //Creamos la funcion para ver las unidades totales que hay en el carrito
+    /*
     public function unidadesEnCarrito(){
         $total=0;
         if(isset($_SESSION['carrito'])){
@@ -133,9 +134,10 @@ class ControladorCarrito {
         }
         return $total;
     }
+    */
 //--------------------------------------------------------------------------------------------
     //Creamos la funcion precio en carrito para saber cuanto llevamos gastado, lo cual nos aparcera al lado de los articulos en el carrito de la cabecera
-    public function precioencarrito(){
+    /*public function precioencarrito(){
         $total=0;
         if(isset($_SESSION['carrito'])){
             foreach ($_SESSION['carrito'] as $key => $value) {
@@ -153,6 +155,7 @@ class ControladorCarrito {
         }
         return $total;
     }
+    */
 //--------------------------------------------------------------------------------------------
     //Creamos la funcion vaciar carrito con la cual vaciaremos el carrito entero
     public function vaciarCarrito() {

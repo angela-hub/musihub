@@ -123,7 +123,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                             }else{
                                 $to=ControladorCarrito::getControlador();
                                 //Asignamos a la sesion total el precio total en carrito a la cual la llamaremos mas abajo
-                                $_SESSION['total'] = $to -> precioencarrito();
+                                //$_SESSION['total'] = $to -> precioencarrito();
                                 echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/area.php?id=' . encode($_SESSION['id']).'"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
                                 if($_SESSION['total']==0){

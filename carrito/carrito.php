@@ -47,6 +47,26 @@ if (isset($_POST['id']) && isset($_POST['uds'])) {
         <h1>Carrito de compra</h1>
     </section>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<?php
+if(isset($_SESSION['carrito'])){
+    $arreglo = $_SESSION['carrito'];
+    echo "<table><th></th><th>Nombre</th><th>Marca</th><th>Precio</th>
+    <th>Cantidad</th>";
+    foreach ($arreglo as $key => $fila){
+        $foto = $fila['foto'];
+        echo "<tr><td><img src='../imagenes/fotos/" . $foto . " '></td>";
+        echo "<td>" . $fila['nomProducto'] . "</td>";
+        echo "<td>" . $fila['marca'] . "</td>";
+        echo "<td>" . $fila['precio'] . "</td>";
+        echo "<td>" . $fila['cantidad'] . "</td>";
+        echo "<tr>";
+    }
+    echo "</table>";
+}
+else{
+    echo "No hay productos en el carrito";
+}
+?>
     <?php
     //Si en la sesion hay mas de 0 unidades entraría en el if para imprimir los articulos del carrito
     if ($_SESSION['uds'] > 0) {

@@ -5,6 +5,9 @@ require_once UTILITY_PATH . "funciones.php";
 require_once CONTROLLER_PATH . "ControladorBD.php";
 require_once CONTROLLER_PATH . "ControladorPago.php";
 require_once MODEL_PATH . "pago.php";
+//Declaracion de variables
+$titular = $tarjeta = $cvv = $num1 = $num2 =$num3 = $num4 = "";
+$fechaErr = $titularErr = $tarjetarErr = $cvvErr =""; 
 
 //procesamos el formulario cuando se envia al darle al boton pagar
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
@@ -77,13 +80,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
       $tarjeta_completa = hash('sha256', $tarjeta_completa);
       //echo $tarjeta_completa;
 
-    // AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
+// AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
+      if (
+        empty($fechaErr) && empty($titularErr) && empty($tarjetarErr) && empty($cvvErr)
+    ) {  
       $controlador = Controladorpago::getControlador();
       $estado = $controlador->almacenarpago($titular,$tarjeta_completa,$fecha,$cv);
-      alerta("Pago Procesado");
-      redir("../index.php");
-
-
+        if ($estado) {
+            alerta("Pago Procesado");
+            redir("../index.php");
+        } else {
+            header("location: error.php");
+            exit();
+        }
+    } else {
+        alerta("Hay errores al procesar el formulario revise los errores");
+    }
   }
 ?>
 

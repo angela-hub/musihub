@@ -2,6 +2,11 @@
 // Directorios a usar 
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once UTILITY_PATH . "funciones.php";
+require_once CONTROLLER_PATH . "ControladorBD.php";
+require_once CONTROLLER_PATH . "ControladorPago.php";
+require_once MODEL_PATH . "pago.php";
+//Declaracion de variables
+$fechaErr="";
 
 //procesamos el formulario cuando se envia al darle al boton pagar
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
@@ -71,6 +76,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
 
     //creamos una variable para concatenar el valor de los cuatro campos de la tarjeta de credito e poder insertarla en la base de datos
       $tarjeta_completa=$num1.$num2.$num3.$num4;
+      $tarjeta_completa = hash('sha256', $tarjeta_completa);
+      echo $tarjeta_completa;
+
+        // AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
+      $controlador = Controladorpago::getControlador();
+      $estado = $controlador->almacenarpago($titular,$tarjeta_completa,$fecha,$cv);
+      alerta("Pago Procesado");
+      redir("?p=pago");
+
+
   }
 ?>
 
@@ -109,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
                   <input type="text" name="num3" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 terceros digitos" required>
                 </div>
                 <div class="span3">
-                  <input type="text" name="num4" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 cuartos digitos" required>
+                  <input type="password" name="num4" class="input-block-level" autocomplete="off" maxlength="4" pattern="\d{4}" title="4 cuartos digitos" required>
                 </div>
               </div>
             </div>
@@ -134,7 +149,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
             <div class="controls">
               <div class="row-fluid">
                 <div class="span3">
-                  <input type="text" name="cv" class="input-block-level" autocomplete="off" maxlength="3" pattern="\d{3}" title="Mirar reverso de la tarjeta los 3 digitos" required>
+                  <input type="password" name="cv" class="input-block-level" autocomplete="off" maxlength="3" pattern="\d{3}" title="Mirar reverso de la tarjeta los 3 digitos" required>
                 </div>
                 <div class="span8"></div>
               </div>

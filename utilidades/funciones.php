@@ -23,3 +23,12 @@ function startsWith ($string, $startString){
     $len = strlen($startString); 
     return (substr($string, 0, $len) === $startString); 
 } 
+//Funcion para redireccionar y recargar la pagina
+function redir($var){
+	?>
+	<script>
+		window.location="<?=$var?>";
+	</script>
+	<?php
+	die();
+}

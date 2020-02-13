@@ -5,8 +5,6 @@ require_once UTILITY_PATH . "funciones.php";
 require_once CONTROLLER_PATH . "ControladorBD.php";
 require_once CONTROLLER_PATH . "ControladorPago.php";
 require_once MODEL_PATH . "pago.php";
-//Declaracion de variables
-$fechaErr="";
 
 //procesamos el formulario cuando se envia al darle al boton pagar
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
@@ -15,13 +13,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
     //ya que se puede estar pagando con una tarjeta caducada
     $fecha = date("d-m-Y", strtotime(filtrado($_POST["fecha"])));
     $hoy =date("d-m-Y");
+    $titular=$_POST["titular"];
         if(strftime($fecha)<=strftime($hoy)){
             $fechaErr = "La fecha no puede ser inferior o igual a la fecha actual";
         }else{
             $fecha = date("d/m/Y", strtotime(filtrado($_POST["fecha"])));
         }
     //procesamos el titular para que inserte el nombre y los apellidos
-    $titular=$_POST["titular"];
       if(isset($_POST["titular"]) && !preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu", $titular)) { 
         $titularErr = "Introduzca un nombre y apellidos";
       }
@@ -71,19 +69,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
       } elseif (!preg_match("/^[0-9]{3}+$/", $cvv)) {
         $tarjetarErr = "Debes introducir 3 digitos del reverso";
       } else {
-        $cv = $cvv;
+        $cv =  hash('sha256', $cvv);
       }
 
     //creamos una variable para concatenar el valor de los cuatro campos de la tarjeta de credito e poder insertarla en la base de datos
       $tarjeta_completa=$num1.$num2.$num3.$num4;
       $tarjeta_completa = hash('sha256', $tarjeta_completa);
-      echo $tarjeta_completa;
+      //echo $tarjeta_completa;
 
-        // AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
+    // AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
       $controlador = Controladorpago::getControlador();
       $estado = $controlador->almacenarpago($titular,$tarjeta_completa,$fecha,$cv);
       alerta("Pago Procesado");
-      redir("?p=pago");
+      redir("../index.php");
 
 
   }
@@ -158,11 +156,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
        <!--Botones-->
           <div class="form-actions">
             <button type="submit" name="pagar" value="pagar" class="btn btn-primary">Pagar</button>
-            <button type="button" class="btn">Cancelar</button>
+            <a href="../index.php" type="button" class="btn">Cancelar</a>
           </div>
         </fieldset>
       </form>
     </div>
   </div>
 </div>
-                                

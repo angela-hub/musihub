@@ -27,5 +27,17 @@ public function almacenarpago($titular,$tarjeta_completa,$fecha,$cv){
         return $estado;
     }
 //-----------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------Funcion para almacenar carrito-----------------------------------------------
+public function almacenarcarrrito($nombre,$distribuidor,$precio,$cantidad){
+    $bd = ControladorBD::getControlador();
+    $bd->abrirBD();
+    $consulta= "INSERT INTO carrito (nombre, distribuidor, precio, cantidad) VALUES (:nombre, :distribuidor, :precio, :cantidad)";
+    $parametros= array(':nombre'=>$nombre, ':distribuidor'=>$distribuidor, ':precio'=>$precio, ':cantidad'=>$cantidad);
+    $estado = $bd->actualizarBD($consulta,$parametros);
+    $bd->cerrarBD();
+    return $estado;
+}
+//-----------------------------------------------------------------------------------------------------------------------------
+
 }
 ?>

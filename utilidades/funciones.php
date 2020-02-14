@@ -32,3 +32,32 @@ function redir($var){
 	<?php
 	die();
 }
+function contarValoresArray($array)
+{
+	$contar=array();
+ 
+	foreach($array as $value)
+	{
+		if(isset($contar[$value]))
+		{
+			$contar[$value]+=1;
+		}else{
+			// si no existe lo añadimos al array
+			$contar[$value]=1;
+		}
+	}
+	return $contar;
+}
+function restarValoresArray($array)
+{
+	$contar=$_SESSION['carrito']['prueba'];
+ 
+	foreach($array as $value)
+	{
+		if(isset($contar[$value]))
+		{
+			$contar[$value]-=1;
+		}
+	}
+	return $contar;
+}

@@ -221,32 +221,3 @@ else{
 <br>
 <!-- Pie de la página web -->
 <?php require_once VIEW_PATH . "../footer.php"; ?>
-
-<?php
-session_start();
-if (isset($sesion['usuario'])){
-    include('funciones.php');
-    include('../login.php');
-    $conexion = conectar();
-    if(isset($sesion['carrito'])){
-        $arreglo = $sesion['carrito'];
-        echo "<table><th></th><th>Nombre</th><th>Marca</th><th>Precio</th>
-        <th>Cantidad</th>";
-        foreach ($arreglo as $key => $fila){
-            $foto = $fila['foto'];
-            echo "<tr><td><img src='../foto/" . $foto . " '></td>";
-            echo "<td>" . $fila['nombreproducto'] . "</td>";
-            echo "<td>" . $fila['marca'] . "</td>";
-            echo "<td>" . $fila['precio'] . "</td>";
-            echo "<td>" . $fila['nombreproducto'] . "</td>";
-            echo "<td>" . $fila['cantidad'] . "</td>";
-            echo "<tr>";
-        }
-        echo "</table>";
-    }
-    else{
-        echo "No hay productos en el carrito";
-    }
-}
-
-?>

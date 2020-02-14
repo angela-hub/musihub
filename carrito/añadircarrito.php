@@ -37,16 +37,15 @@ if (isset($_SESSION['USUARIO']['email'])) {
     $controlador = ControladorInstrumento::getControlador();
     $estado = $controlador->buscarinstrumentoid($id);
     if(!isset($_SESSION['carrito']['id'])){
-        $fili=[];
+        $_SESSION['carrito']['id']=[];
+        $_SESSION['carrito']['prueba']=[];
     }else{
     }
-    $prueba=array_search($estado->getid(),$_SESSION['carrito']['id']);
-    alerta($prueba);
-    var_dump($_SESSION['carrito']['id']);
-    exit();
-    //exit();
+    //array_push($_SESSION['carrito']['id'],$id);
+
     if ($estado){
-        if(!isset($_SESSION['carrito'])){
+        if(!isset($_SESSION['carrito']['final'])){
+            alerta("Primero");
             $arreglo[0]['idproducto']=$estado->getid();
             $arreglo[0]['nomProducto']=$estado->getnombre();
             $arreglo[0]['cliente']=$_SESSION['USUARIO']['email'];
@@ -55,21 +54,16 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $arreglo[0]['foto']=$estado->getimagen();
             $arreglo[0]['marca']=$estado->getdistribuidor();
             $arreglo[0]['cantidad']=1;
-            $_SESSION['carrito']=$arreglo;
-            array_push($fili,$arreglo[0]['idproducto']);
-            $_SESSION['carrito']['id']=$fili;
-            $final=array_search($estado->getid(),$fili);
-            alerta($final);
-            echo "Esto es fili";
-            var_dump($fili);
-            echo "Ya";
-            //$_SESSION['carrito']['id']=$estado->getid();
-            $fila=array_search($estado->getid(),$_SESSION['carrito']['id']);
-            alerta($fila);
-        }elseif(array_search($estado->getid(),$_SESSION['carrito']['id'])!="" || array_search($estado->getid(),$_SESSION['carrito']['id'])!=""){
+            $_SESSION['carrito']['final']=$arreglo;
+            array_push($_SESSION['carrito']['id'],$estado->getid());
+        
+            
+        }
+        elseif(array_key_exists($estado->getid(),$_SESSION['carrito']['prueba'])!="" || array_key_exists($estado->getid(),$_SESSION['carrito']['prueba'])!=0){
             //alerta("Entra aqui");
+            alerta("Segundo");
             alerta("Entra");
-            $arreglo=$_SESSION['carrito'];
+            $arreglo=$_SESSION['carrito']['final'];
             //$arreglo[0]['idproducto']=$estado->getid();
             //alerta($arreglo[0]['idproducto']);
             //alerta($estado->getid());
@@ -101,7 +95,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
             */var_dump($fili);
             
         }else{
-            $arreglo=$_SESSION['carrito'];
+            alerta("Tercero");
+            $arreglo=$_SESSION['carrito']['final'];
             $cant= count($arreglo);
             $silo=$arreglo[$cant +1]['idproducto']=$estado->getid();
             $arreglo[$cant +1]['nomProducto']=$estado->getnombre();
@@ -112,10 +107,9 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $arreglo[$cant +1]['marca']=$estado->getdistribuidor();
             $arreglo[$cant +1]['cantidad']=1;
             array_push($_SESSION['carrito']['id'],$estado->getid());
-            $_SESSION['carrito']=$arreglo;
+            $_SESSION['carrito']['final']=$arreglo;
             $fili=$_SESSION['carrito']['id'];
             var_dump($_SESSION['carrito']['id']);
-            array_push($fili,$silo);
             $_SESSION['carrito']['id']=$fili;
             $hola=array_search($estado->getid(),$_SESSION['carrito']['id']);
             alerta($hola);

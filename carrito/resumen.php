@@ -61,23 +61,23 @@ if (isset($_SESSION['USUARIO']['email'])) {
     }
 
     table {
-        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-        font-size: 12px;
+        font-family: "Comic Sans MS", "Lucida Grande", Sans-Serif;
+        font-size: 18;
         margin: 1.5%;
         width: 97%;
         border-collapse: collapse;
-        border-bottom: 4px solid #aabcfe;
+        border-bottom: 4px solid #2F4F4F;
     }
 
 
     th {
-        font-size: 13px;
+        font-size: 25px;
         font-weight: normal;
         padding: 8px;
-        background: #b9c9fe;
-        border-top: 4px solid #aabcfe;
-        border-bottom: 1px solid #fff;
-        color: #039;
+        background: #556B2F;
+        border-top: 4px solid #2F4F4F;
+        border-bottom: 4px solid #2F4F4F;
+        color: #FFFAFA;
     }
 
     .centrado {
@@ -87,19 +87,13 @@ if (isset($_SESSION['USUARIO']['email'])) {
     td {
         text-align: center;
         padding: 8px;
-        background: #e8edff;
-        border-bottom: 1px solid #d0dafd;
-        color: #669;
+        background: #F0FFF0;
+        color: #006400;
         border-top: 1px solid transparent;
     }
 
     tr:hover td {
-        background: #d0dafd;
-        color: #339;
-    }
-
-    .letra:hover {
-        background: #d0dafd;
-        color: black;
+        background: #8FBC8F;
+        color: white;
     }
 </style>

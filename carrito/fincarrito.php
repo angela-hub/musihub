@@ -3,12 +3,13 @@
 // Lo que necesitamos
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once VIEW_PATH . "../cabecera.php";
-/*
+
 // Solo entramos si somos el usuario y hay items
 if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
     header("location: /musihub/error.php");
     exit();
 }
+/*
 $total = $_SESSION['total'];
 
 // Procesamos el usuario de la sesion
@@ -52,7 +53,7 @@ if (isset($_POST['procesar_compra'])) {
 }
 */
 ?>
-
+<a href='pago.php' class='btn btn-success' style="font-weight: bold">Continuar</a>
 <br><br>
 <div class="row cart-body">
     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post" class="form-horizontal">
@@ -79,73 +80,27 @@ if (isset($_POST['procesar_compra'])) {
                             echo "<td>" . $fila['cantidad'] . "</td>";
                             }
                         }
-
                     ?>
                     <?php
                         }
+                        // Subtotales y totales
+                        $final=array_sum($_SESSION['total']);
+                        $_SESSION['precio']=$final;
+                        echo "<tr>";
+                        //Calculo del precio sin iva
+                        $sub=$final/1.21;
+                        //calculo del precio con iva
+                        $iva=$final-($final/1.21);
+
+                        //Mostramos la tabla con los precios calculados y redondeados a dos decimales
+                        echo "<td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
+                        echo "<tr>";
+                        echo "<td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
+                        echo "<tr>";
+                        echo "<td>". "Total" ."  ". $final. " ". "€". "</td>";
+                        echo "</tr>";
                     ?>
-                    <!-- Subtotales y totales -->
-
-                    
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            Subtotal:
-                            <div class="pull-right"><span><?php echo round(($total / 1.21), 2); ?> €</span></div>
-                        </div>
-                        <div class="col-xs-12">
-                            <small>I.V.A.: </small>
-                            <div class="pull-right">
-                                <span><?php echo round(($total - ($total / 1.21)), 2); ?> €</span></div>
-                        </div>
-                        <div class="col-xs-12">
-                            <strong>TOTAL: </strong>
-                            <div class="pull-right">
-                                <span><strong><?php echo round(($total), 2); ?> €</strong></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
-            <!-- Panel de envío -->
-            <div class="panel panel-default">
-            <img class="img-responsive pull-right" height="100px" width="100px" src="https://www.sendiroo.es/design/img/envios/baratos/enviarPesados1.jpg">
-                <div class="panel-heading">Envío</div>           
-                <div class="panel-body">
-                    <!-- Nombre-->
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <label for="name" class="col-md-3 control-label">Nombre:</label>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="nombre" placeholder="Nombre y apellidos" required value="<?php echo $nombre; ?>" pattern="([^\s][A-zÀ-ž\s]+)" title="El nombre no puede contener números" minlength="3">
-                        </div>
-                    </div>
-                    <!-- Email-->
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <label for="name" class="col-md-3 control-label">Email:</label>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="email" class="form-control" name="email" placeholder="Email" required value="<?php echo $email; ?>">
-                        </div>
-                    </div>
-
-                    <!-- Direccion -->
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <label for="name" class="col-md-3 control-label">Dirección:</label>
-                        </div>
-                        <div class="col-md-12">
-                            <textarea type="text" class="form-control" name="direccion" placeholder="Direccion" required></textarea>
-                        </div>
-                    </div>
+        
+            
 
 
-                </div>
-            </div>
-    </form>
-</div>
-<center>
-<a href='pago.php' class='btn btn-success' style="font-weight: bold">Continuar</a>
-</center>

@@ -11,28 +11,35 @@ if (isset($_SESSION['USUARIO']['email'])) {
     //$controlador = Controladorpago::getControlador();
     //$estado = $controlador->almacenarcarrrito($nombre,$distribuidor,$precio,$cantidad);
     if (isset($_POST['borrar'])) {
-        $numero=restarValoresArray($_SESSION['carrito']['prueba']);
-        $_SESSION['carrito']['prueba']=$numero;
+        $fin=$_SESSION['carrito']['final'][10]['cantidad']-1;
+        $_SESSION['carrito']['final'][10]['cantidad']=$fin;
+        header("location: /musihub/carrito/resumen.php");
     }
 
-
-    $numero=contarValoresArray($_SESSION['carrito']['id']);
-    $_SESSION['carrito']['prueba']=$numero;
+    print_r($_SESSION['carrito']['final']);
+    $numero=$_SESSION['carrito']['final'][10]['cantidad']+1;
+    $_SESSION['carrito']['final'][10]['cantidad']=$numero;
     if(isset($_SESSION['carrito'])){
         $arreglo=$_SESSION['carrito']['final'];
         echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th><th>Funcion</th>";
         foreach ($arreglo as $key => $fila){
+            if($fila['cantidad']>=1){
             $foto = $fila['foto'];
             echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
             echo "<td>" . $fila['nomProducto'] . "</td>";
             echo "<td>" . $fila['marca'] . "</td>";
             echo "<td>" . $fila['precio'] . "</td>";
-            foreach($numero as $k => $v){
+            
+            echo "<td>" . $fila['cantidad'] . "</td>";
+            
+            
+            /*foreach($numero as $k => $v){
                 if($k==$fila['idproducto']){
+                    alerta($v);
                     echo "<td>" . $v . "</td>";
                     //alerta($v);
                 }
-            }
+            }*/
             ?>
             <td><form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
                                       method="post">
@@ -49,6 +56,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
         echo "<tr>";
         echo "</table>";
     }
+}
     else{
         echo "No hay productos en el carrito";
     }

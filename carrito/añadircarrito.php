@@ -49,14 +49,14 @@ if (isset($_SESSION['USUARIO']['email'])) {
     if ($estado){
         if(!isset($_SESSION['carrito']['final'])){
             //alerta("Primero");
-            $arreglo[0]['idproducto']=$estado->getid();
-            $arreglo[0]['nomProducto']=$estado->getnombre();
-            $arreglo[0]['cliente']=$_SESSION['USUARIO']['email'];
-            $arreglo[0]['fecha']=date('Y-m-d h:m');
-            $arreglo[0]['precio']=$estado->getprecio();
-            $arreglo[0]['foto']=$estado->getimagen();
-            $arreglo[0]['marca']=$estado->getdistribuidor();
-            $arreglo[0]['cantidad']=1;
+            $arreglo[$id]['idproducto']=$estado->getid();
+            $arreglo[$id]['nomProducto']=$estado->getnombre();
+            $arreglo[$id]['cliente']=$_SESSION['USUARIO']['email'];
+            $arreglo[$id]['fecha']=date('Y-m-d h:m');
+            $arreglo[$id]['precio']=$estado->getprecio();
+            $arreglo[$id]['foto']=$estado->getimagen();
+            $arreglo[$id]['marca']=$estado->getdistribuidor();
+            $arreglo[$id]['cantidad']=1;
             $_SESSION['carrito']['final']=$arreglo;
             array_push($_SESSION['carrito']['id'],$estado->getid());
             

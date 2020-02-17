@@ -75,7 +75,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                                 </button>
                                 </form>
             <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-                            <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar" title='+1'>
+                            <button class="btn btn-success" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar" title='+1'>
                                 <span class='glyphicon glyphicon-trash'></span> +1</span>
                             </button>
                         </form></td>
@@ -98,19 +98,23 @@ if (isset($_SESSION['USUARIO']['email'])) {
 <br><br>
 <!--Link para el estilo de los botones-->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<table>
+<tr>
 <!--Boton para volver al catalogo-->
-<a href="/musihub/index.php" class="btn btn-warning" >Seguir comprando</a><br><br>
-<!--Boton para continuar el proceso de compra-->
-<a href="/musihub/carrito/fincarrito.php" class="btn btn-success" >Procesar compra</a><br><br>
+<td><a href="/musihub/index.php" class="btn btn-warning" >Seguir comprando</a></td>
 
 <!--Boton para vaciar carrito-->
 <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-    <button onclick="return confirm('¿Desea eliminar todos los productos del carrito?')" class="btn btn-danger" type="submit" 
+<td><button onclick="return confirm('¿Desea eliminar todos los productos del carrito?')" class="btn btn-danger" type="submit" 
             value="<?php print_r($fila['idproducto']); ?>" name="vaciar">
-        <span>Vaciar carrito</span>
+        <span>Vaciar carrito</span></td>
     </button>
 </form>
 
+<!--Boton para continuar el proceso de compra-->
+<td><a href="/musihub/carrito/fincarrito.php" class="btn btn-success" >Procesar compra</a></td>
+</tr>
+</table>
 <!-------------------------------------------------Estilo para la tabla--------------------------------------------------->
 
 <style>
@@ -153,5 +157,6 @@ if (isset($_SESSION['USUARIO']['email'])) {
     tr:hover td {
         background: #8FBC8F;
         color: white;
+    }
     
 </style>

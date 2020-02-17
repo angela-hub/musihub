@@ -24,6 +24,12 @@ if (isset($_SESSION['USUARIO']['email'])) {
         $_SESSION['cantidad']=$_SESSION['cantidad']+1;
         header("location: /musihub/carrito/resumen.php");
     }
+    //Procesamo¡iento para vaciar todos los productos del carrito
+    if (isset($_POST['vaciar'])) {
+        unset($_SESSION['carrito']['final']);
+        header("location: /musihub/carrito/resumen.php");
+    }
+
     if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
         $arreglo=$_SESSION['carrito']['final'];
         echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th><th>Funcion</th>";
@@ -43,19 +49,13 @@ if (isset($_SESSION['USUARIO']['email'])) {
                 }
             }*/
             ?>
-            <td><form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
-                                      method="post">
-                                    <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borrar"
-                                            title='-1'
-                                            >
-                                        <span class='glyphicon glyphicon-trash'></span> -1</span>
-                                    </button>
+            <td><form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                                <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borrar" title='-1'>
+                                    <span class='glyphicon glyphicon-trash'></span> -1</span>
+                                </button>
                                 </form>
-            <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
-                                method="post">
-                            <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar"
-                                    title='+1'
-                                    >
+            <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                            <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar" title='+1'>
                                 <span class='glyphicon glyphicon-trash'></span> +1</span>
                             </button>
                         </form></td>
@@ -74,7 +74,23 @@ if (isset($_SESSION['USUARIO']['email'])) {
 }
 ?>
 <br><br>
-<a href="/musihub/index.php">Carrito</a>
+<!--Link para el estilo de los botones-->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--Boton para volver al catalogo-->
+<a href="/musihub/index.php" class="btn btn-warning" >Seguir comprando</a><br><br>
+<!--Boton para continuar el proceso de compra-->
+<a href="/musihub/carrito/fincarrito.php" class="btn btn-success" >Procesar compra</a><br><br>
+
+<!--Boton para vaciar carrito-->
+<form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+    <button onclick="return confirm('¿Desea eliminar todos los productos del carrito?')" class="btn btn-danger" type="submit" 
+            value="<?php print_r($fila['idproducto']); ?>" name="vaciar">
+        <span>Vaciar carrito</span>
+    </button>
+</form>
+
+<!-------------------------------------------------Estilo para la tabla--------------------------------------------------->
+
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
@@ -115,5 +131,5 @@ if (isset($_SESSION['USUARIO']['email'])) {
     tr:hover td {
         background: #8FBC8F;
         color: white;
-    }
+    
 </style>

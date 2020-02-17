@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once UTILITY_PATH . "funciones.php";
 require_once CONTROLLER_PATH . "ControladorBD.php";
 require_once CONTROLLER_PATH . "ControladorPago.php";
+require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 
 session_start();
 if (isset($_SESSION['USUARIO']['email'])) {
@@ -15,22 +16,40 @@ if (isset($_SESSION['USUARIO']['email'])) {
         $_SESSION['cantidad']=$_SESSION['cantidad']-1;
         if($_SESSION['carrito']['final'][$id]['cantidad']<=0){
             unset($_SESSION['carrito']['final'][$id]);
+            unset($_SESSION['total'][$id]);
+        }
+        $precio=$_SESSION['carrito']['final'][$id]['precio'];
+        if(isset($_SESSION['total'][$id])){
+            $_SESSION['total'][$id]=$_SESSION['total'][$id]-$precio;
         }
         header("location: /musihub/carrito/resumen.php");
     }
     if (isset($_POST['agregar'])) {
         $id=$_POST['agregar'];
-        $_SESSION['carrito']['final'][$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']+1;
-        $_SESSION['cantidad']=$_SESSION['cantidad']+1;
-        header("location: /musihub/carrito/resumen.php");
+        $controlador = ControladorInstrumento::getControlador();
+        $instrumento = $controlador->buscarinstrumentoid($id);
+        $stock=$instrumento->getstockinicial();
+        if($stock>$_SESSION['carrito']['final'][$id]['cantidad']){
+            $_SESSION['carrito']['final'][$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']+1;
+            $_SESSION['cantidad']=$_SESSION['cantidad']+1;
+            $precio=$_SESSION['carrito']['final'][$id]['precio'];
+            if(!isset($_SESSION['total'][$id])|| empty($_SESSION['total'][$id])){
+                $_SESSION['total'][$id]=$precio;
+            }else{
+                $_SESSION['total'][$id]=$_SESSION['total'][$id]+$precio;
+            }
+        }else{
+            alerta("No hay mas stock de este articulo");
+        }
+        redir("/musihub/carrito/resumen.php");
     }
     //Procesamo¡iento para vaciar todos los productos del carrito
     if (isset($_POST['vaciar'])) {
         unset($_SESSION['carrito']['final']);
         header("location: /musihub/carrito/resumen.php");
         unset($_SESSION['cantidad']);
+        unset($_SESSION['total']);
     }
-
     if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
         $arreglo=$_SESSION['carrito']['final'];
         echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th><th>Funcion</th>";
@@ -64,9 +83,11 @@ if (isset($_SESSION['USUARIO']['email'])) {
         }
     }
         //echo "<td>" . $fila['idproducto'] . "</td>";
+        $final=array_sum($_SESSION['total']);
+        $_SESSION['precio']=$final;
         echo "<tr>";
+        echo "<td>" . $final . "</td>";
         echo "</table>";
-
     
 }
     else{

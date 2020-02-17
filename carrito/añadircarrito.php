@@ -44,8 +44,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
     //print_r($_SESSION['carrito']['prueba']);
     //exit;
     
-    //array_push($_SESSION['carrito']['id'],$id);
-
+    //array_push($_SESSION['carrito']['id'],$id); 
+    
     if ($estado){
         if(!isset($_SESSION['carrito']['final'])){
             //alerta("Primero");
@@ -60,6 +60,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $_SESSION['cantidad']=1;
             $_SESSION['carrito']['final']=$arreglo;
             array_push($_SESSION['carrito']['id'],$estado->getid());
+            $_SESSION['total'][$id]=$estado->getprecio();
             
         }
         elseif(array_key_exists($estado->getid(),$_SESSION['carrito']['prueba'])!="" || 
@@ -91,6 +92,13 @@ if (isset($_SESSION['USUARIO']['email'])) {
             //$_SESSION['carrito']['id']['cantidad']=$_SESSION['carrito']['id']['cantidad']+1;
             //$_SESSION['carrito']=$arreglo;
             array_push($_SESSION['carrito']['id'],$estado->getid());
+            array_push($_SESSION['total'][$id],$estado->getprecio());
+            $precio=$_SESSION['carrito']['final'][$id]['precio'];
+            if(!isset($_SESSION['total'][$id])|| empty($_SESSION['total'][$id])){
+                $_SESSION['total'][$id]=$precio;
+            }else{
+                $_SESSION['total'][$id]=$_SESSION['total'][$id]+$precio;
+            }
             //$fili=$_SESSION['carrito']['id'];
             //$fili[]=$_SESSION['carrito']['id'];
             //array_push($fili,$silo);
@@ -128,15 +136,14 @@ if (isset($_SESSION['USUARIO']['email'])) {
             var_dump($_SESSION['carrito']['id']);
             $_SESSION['carrito']['id']=$fili;
             $hola=array_search($estado->getid(),$_SESSION['carrito']['id']);
+            $_SESSION['total'][$id]=$estado->getprecio();
             //alerta($hola);
         }
     }
-    
 echo "Este es el print";
 $numero=contarValoresArray($_SESSION['carrito']['id']);
 $_SESSION['carrito']['prueba']=$numero;
-        header("location:/musihub/carrito/resumen.php");  
-            exit();
+        header("location:/musihub/index.php");  
     //var_dump($_SESSION['carrito']);
 }
 ?>

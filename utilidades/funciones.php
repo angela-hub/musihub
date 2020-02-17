@@ -23,6 +23,7 @@ function startsWith ($string, $startString){
     $len = strlen($startString); 
     return (substr($string, 0, $len) === $startString); 
 } 
+
 //Funcion para redireccionar y recargar la pagina
 function redir($var){
 	?>
@@ -32,6 +33,8 @@ function redir($var){
 	<?php
 	die();
 }
+
+//Funcion para contar los valores de un array
 function contarValoresArray($array)
 {
 	$contar=array();
@@ -44,19 +47,6 @@ function contarValoresArray($array)
 		}else{
 			// si no existe lo añadimos al array
 			$contar[$value]=1;
-		}
-	}
-	return $contar;
-}
-function restarValoresArray($array)
-{
-	$contar=$_SESSION['carrito']['prueba'];
- 
-	foreach($array as $value)
-	{
-		if(isset($contar[$value]))
-		{
-			$contar[$value]-=1;
 		}
 	}
 	return $contar;

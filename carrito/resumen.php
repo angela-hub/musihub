@@ -86,13 +86,17 @@ if (isset($_SESSION['USUARIO']['email'])) {
         $final=array_sum($_SESSION['total']);
         $_SESSION['precio']=$final;
         echo "<tr>";
-        $iva=$final-($final/1.21);
+        //Calculo del precio sin iva
         $sub=$final/1.21;
-        echo "<td>". "Subtotal" ."  ". round($sub,2) . "</td>";
+        //calculo del precio con iva
+        $iva=$final-($final/1.21);
+
+        //Mostramos la tabla con los precios calculados y redondeados a dos decimales
+        echo "<td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
         echo "<tr>";
-        echo "<td>". "IVA" ."  ". round($iva,2). "</td>";
+        echo "<td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
         echo "<tr>";
-        echo "<td>". "Total" ."  ". $final. "</td>";
+        echo "<td>". "Total" ."  ". $final. " ". "€". "</td>";
         echo "</tr>";
         echo "</table>";
         

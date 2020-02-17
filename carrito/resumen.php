@@ -12,6 +12,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
     if (isset($_POST['borrar'])) {
         $id=$_POST['borrar'];
         $_SESSION['carrito']['final'][$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']-1;
+        $_SESSION['cantidad']=$_SESSION['cantidad']-1;
         if($_SESSION['carrito']['final'][$id]['cantidad']<=0){
             unset($_SESSION['carrito']['final'][$id]);
         }
@@ -20,6 +21,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
     if (isset($_POST['agregar'])) {
         $id=$_POST['agregar'];
         $_SESSION['carrito']['final'][$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']+1;
+        $_SESSION['cantidad']=$_SESSION['cantidad']+1;
         header("location: /musihub/carrito/resumen.php");
     }
     if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
@@ -71,6 +73,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
     }
 }
 ?>
+<br><br>
 <a href="/musihub/index.php">Carrito</a>
 <style>
     body {

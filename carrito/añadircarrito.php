@@ -57,6 +57,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $arreglo[$id]['foto']=$estado->getimagen();
             $arreglo[$id]['marca']=$estado->getdistribuidor();
             $arreglo[$id]['cantidad']=1;
+            $_SESSION['cantidad']=1;
             $_SESSION['carrito']['final']=$arreglo;
             array_push($_SESSION['carrito']['id'],$estado->getid());
             
@@ -75,6 +76,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $arreglo[$id]['foto']=$estado->getimagen();
             $arreglo[$id]['marca']=$estado->getdistribuidor();
             $arreglo[$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']+1;
+            $_SESSION['cantidad']=$_SESSION['cantidad']+1;
             $_SESSION['carrito']['final']=$arreglo;
             array_push($_SESSION['carrito']['id'],$estado->getid());
             //$arreglo[0]['idproducto']=$estado->getid();
@@ -119,6 +121,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $arreglo[$id]['foto']=$estado->getimagen();
             $arreglo[$id]['marca']=$estado->getdistribuidor();
             $arreglo[$id]['cantidad']=1;
+            $_SESSION['cantidad']=$_SESSION['cantidad']+1;
             array_push($_SESSION['carrito']['id'],$estado->getid());
             $_SESSION['carrito']['final']=$arreglo;
             $fili=$_SESSION['carrito']['id'];

@@ -132,30 +132,6 @@ if (isset($_SESSION['USUARIO']['email'])) {
 echo "Este es el print";
 $numero=contarValoresArray($_SESSION['carrito']['id']);
 $_SESSION['carrito']['prueba']=$numero;
-print_r($numero);
-
-    $fila=array_search($estado->getid(),$_SESSION['carrito']['id']);
-    //alerta($fila);
-    echo "<table><th></th><th>Nombre</th><th>Marca</th><th>Precio</th>
-        <th>Cantidad</th>";
-        foreach ($arreglo as $key => $fila){
-            $foto = $fila['foto'];
-            echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
-            echo "<td>" . $fila['nomProducto'] . "</td>";
-            echo "<td>" . $fila['marca'] . "</td>";
-            echo "<td>" . $fila['precio'] . "</td>";
-            foreach($numero as $k => $v){
-                if($k==$fila['idproducto']){
-                    echo "<td>" . $v . "</td>";
-                    //alerta($v);
-                }
-            }
-            
-        }
-        //echo "<td>" . $fila['idproducto'] . "</td>";
-        echo "<tr>";
-        echo "</table>";
-
         header("location:/musihub/carrito/resumen.php");  
             exit();
     //var_dump($_SESSION['carrito']);

@@ -43,6 +43,12 @@ if (isset($_SESSION['USUARIO']['email'])) {
         }
         redir("/musihub/carrito/resumen.php");
     }
+    if (isset($_POST['borr_item'])) {
+        $id=$_POST['borr_item'];
+        $_SESSION['cantidad']=$_SESSION['cantidad']-$_SESSION['carrito']['final'][$id]['cantidad'];
+        unset($_SESSION['carrito']['final'][$id]);
+        unset($_SESSION['total'][$id]);
+    }
     //Procesamo¡iento para vaciar todos los productos del carrito
     if (isset($_POST['vaciar'])) {
         unset($_SESSION['carrito']['final']);
@@ -77,6 +83,11 @@ if (isset($_SESSION['USUARIO']['email'])) {
             <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                             <button class="btn btn-success" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar" title='+1'>
                                 <span class='glyphicon glyphicon-trash'></span> +1</span>
+                            </button>
+                        </form>
+            <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                            <button class="btn btn-success" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borr_item" >
+                                <span class='glyphicon glyphicon-trash'></span> Eliminar</span>
                             </button>
                         </form></td>
                         <?php                  

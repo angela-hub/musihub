@@ -28,6 +28,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
     if (isset($_POST['vaciar'])) {
         unset($_SESSION['carrito']['final']);
         header("location: /musihub/carrito/resumen.php");
+        unset($_SESSION['cantidad']);
     }
 
     if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){

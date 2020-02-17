@@ -3,9 +3,9 @@
 // Lo que necesitamos
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once VIEW_PATH . "../cabecera.php";
-
+/*
 // Solo entramos si somos el usuario y hay items
-if ((!isset($_SESSION['nombre'])) || $_SESSION['uds'] == 0) {
+if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
     header("location: /musihub/error.php");
     exit();
 }
@@ -50,7 +50,7 @@ if (isset($_POST['procesar_compra'])) {
         alerta("Existe un error al procesar la venta");
     }
 }
-
+*/
 ?>
 
 <br><br>
@@ -60,44 +60,33 @@ if (isset($_POST['procesar_compra'])) {
             <div class="panel panel-default">
                 <div class="panel-heading">Pedido
                     <div class="pull-right">
-                        <small><a href='carrito.php'>Editar</a></small>
+                        <small><a href='resumen.php'>Editar</a></small>
                     </div>
                 </div>
                 <div class="panel-body">
                     <?php
 
-                    foreach ($_SESSION['carrito'] as $key => $value) {
-                        if (($value[0] != null)) {
-                            $id = $key;
-                            $producto = $value[0];
-                            $cantidad = $value[1];
+                    if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
+                        $arreglo=$_SESSION['carrito']['final'];
+                        echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th>";
+                        foreach ($arreglo as $key => $fila){
+                            if($fila['cantidad']>=1){
+                            $foto = $fila['foto'];
+                            echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
+                            echo "<td>" . $fila['nomProducto'] . "</td>";
+                            echo "<td>" . $fila['marca'] . "</td>";
+                            echo "<td>" . $fila['precio'] . "</td>";
+                            echo "<td>" . $fila['cantidad'] . "</td>";
+                            }
+                        }
+
                     ?>
-                            <div class="form-group">
-                                <div class="col-sm-3 col-xs-3">
-                                    <!-- Imagen -->
-                                    <img class="img-responsive" src='../imagenes/fotos/<?php echo $producto->getImagen(); ?>' alt='imagen' width='70'>
-                                </div>
-                                    <!-- Nombre, tipo y Precio -->
-                                <div class="col-sm-6 col-xs-6">
-                                    <div class="col-xs-12"><?php echo $producto->getnombre(); ?></div>
-                                    <div class="col-xs-12"><?php echo $producto->gettipo(); ?></div>
-                                    <div class="col-xs-12"><small>Precio:
-                                            <span><?php echo $producto->getPrecio(); ?> €</span></small></div>
-                                    <div class="col-xs-12"><small>Cantidad:
-                                            <span><?php echo $cantidad; ?></span></small></div>
-                                </div>
-                                <div class="col-sm-3 col-xs-3 text-right">
-                                    <h6><?php echo $producto->getPrecio() * $cantidad; ?> €</h6>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <hr>
-                            </div>
                     <?php
                         }
-                    }
                     ?>
                     <!-- Subtotales y totales -->
+
+                    
                     <div class="form-group">
                         <div class="col-xs-12">
                             Subtotal:

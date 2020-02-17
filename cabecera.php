@@ -109,6 +109,9 @@ if(isset($_SESSION['USUARIO']['email'])){
                         if(!isset($_SESSION['cantidad']) || empty($_SESSION['cantidad'])){
                             $_SESSION['cantidad']=0;
                         }
+                        if(!isset($_SESSION['precio']) || empty($_SESSION['precio'])){
+                            $_SESSION['precio']=0;
+                        }
                         if (!isset($_POST["instrumento"])) {
                             $referencia = "";
                             $nombre = "";
@@ -128,7 +131,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                                 //$_SESSION['total'] = $to -> precioencarrito();
                                 echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/area.php?id=' . encode($_SESSION['id']).'"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
-                                if($_SESSION['total']==0){
+                                if($_SESSION['precio']==0){
                                     echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/carrito/resumen.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['cantidad'].'</a></li>';
                                 }else{
                                     //Aqui llamamos a la sesion total

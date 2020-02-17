@@ -45,7 +45,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
     //exit;
     
     //array_push($_SESSION['carrito']['id'],$id); 
-    
+    $stock=$estado->getstockinicial();
+    if($stock>$_SESSION['carrito']['final'][$id]['cantidad']){
     if ($estado){
         if(!isset($_SESSION['carrito']['final'])){
             //alerta("Primero");
@@ -151,6 +152,9 @@ echo "Este es el print";
 $numero=contarValoresArray($_SESSION['carrito']['id']);
 $_SESSION['carrito']['prueba']=$numero;
         header("location:/musihub/index.php");  
+}else{
+    alerta("No hay mas stock de este articulo");
+}
     //var_dump($_SESSION['carrito']);
 }
 ?>

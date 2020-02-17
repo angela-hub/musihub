@@ -153,7 +153,7 @@ $numero=contarValoresArray($_SESSION['carrito']['id']);
 $_SESSION['carrito']['prueba']=$numero;
         header("location:/musihub/index.php");  
 }else{
-    alerta("No hay mas stock de este articulo");
+    header("location:/musihub/sinstock.php");
 }
     //var_dump($_SESSION['carrito']);
 }

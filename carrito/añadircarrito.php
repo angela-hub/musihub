@@ -61,6 +61,9 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $_SESSION['carrito']['final']=$arreglo;
             array_push($_SESSION['carrito']['id'],$estado->getid());
             $_SESSION['total'][$id]=$estado->getprecio();
+            //Total
+            $final=array_sum($_SESSION['total']);
+            $_SESSION['precio']=$final;
             
         }
         elseif(array_key_exists($estado->getid(),$_SESSION['carrito']['prueba'])!="" || 
@@ -116,6 +119,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
             }
             alerta($final);
             */var_dump($fili);
+            $final=array_sum($_SESSION['total']);
+            $_SESSION['precio']=$final;
             
         }else{
             //alerta("Tercero");
@@ -137,6 +142,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
             $_SESSION['carrito']['id']=$fili;
             $hola=array_search($estado->getid(),$_SESSION['carrito']['id']);
             $_SESSION['total'][$id]=$estado->getprecio();
+            $final=array_sum($_SESSION['total']);
+            $_SESSION['precio']=$final;
             //alerta($hola);
         }
     }

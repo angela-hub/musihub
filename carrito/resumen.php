@@ -6,20 +6,23 @@ require_once CONTROLLER_PATH . "ControladorBD.php";
 require_once CONTROLLER_PATH . "ControladorPago.php";
 
 session_start();
-
 if (isset($_SESSION['USUARIO']['email'])) {
     //$controlador = Controladorpago::getControlador();
     //$estado = $controlador->almacenarcarrrito($nombre,$distribuidor,$precio,$cantidad);
     if (isset($_POST['borrar'])) {
-        $fin=$_SESSION['carrito']['final'][10]['cantidad']-1;
-        $_SESSION['carrito']['final'][10]['cantidad']=$fin;
+        $id=$_POST['borrar'];
+        $_SESSION['carrito']['final'][$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']-1;
+        if($_SESSION['carrito']['final'][$id]['cantidad']<=0){
+            unset($_SESSION['carrito']['final'][$id]);
+        }
         header("location: /musihub/carrito/resumen.php");
     }
-
-    print_r($_SESSION['carrito']['final']);
-    $numero=$_SESSION['carrito']['final'][10]['cantidad']+1;
-    $_SESSION['carrito']['final'][10]['cantidad']=$numero;
-    if(isset($_SESSION['carrito'])){
+    if (isset($_POST['agregar'])) {
+        $id=$_POST['agregar'];
+        $_SESSION['carrito']['final'][$id]['cantidad']=$_SESSION['carrito']['final'][$id]['cantidad']+1;
+        header("location: /musihub/carrito/resumen.php");
+    }
+    if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
         $arreglo=$_SESSION['carrito']['final'];
         echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th><th>Funcion</th>";
         foreach ($arreglo as $key => $fila){
@@ -29,10 +32,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
             echo "<td>" . $fila['nomProducto'] . "</td>";
             echo "<td>" . $fila['marca'] . "</td>";
             echo "<td>" . $fila['precio'] . "</td>";
-            
             echo "<td>" . $fila['cantidad'] . "</td>";
-            
-            
             /*foreach($numero as $k => $v){
                 if($k==$fila['idproducto']){
                     alerta($v);
@@ -43,26 +43,35 @@ if (isset($_SESSION['USUARIO']['email'])) {
             ?>
             <td><form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
                                       method="post">
-                                    <button class="btn btn-danger" type="submit" name="borrar"
-                                            title='Vaciar Carrito'
-                                            onclick="return confirm('¿Seguro que desea vaciar el carrito?')">
-                                        <span class='glyphicon glyphicon-trash'></span> Vaciar carrito</span>
+                                    <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borrar"
+                                            title='-1'
+                                            >
+                                        <span class='glyphicon glyphicon-trash'></span> -1</span>
                                     </button>
-                                </form></td>
-              <?php                  
-            
+                                </form>
+            <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>"
+                                method="post">
+                            <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar"
+                                    title='+1'
+                                    >
+                                <span class='glyphicon glyphicon-trash'></span> +1</span>
+                            </button>
+                        </form></td>
+                        <?php                  
         }
+    }
         //echo "<td>" . $fila['idproducto'] . "</td>";
         echo "<tr>";
         echo "</table>";
-    }
+
+    
 }
     else{
         echo "No hay productos en el carrito";
     }
 }
 ?>
-
+<a href="/musihub/index.php">Carrito</a>
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;

@@ -11,6 +11,10 @@ $titular = $tarjeta = $cvv = $num1 = $num2 =$num3 = $num4 = "";
 $fechaErr = $titularErr = $tarjetarErr = $cvvErr =""; 
 
 session_start();
+if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
+  header("location: /musihub/error.php");
+  exit();
+}
 //procesamos el formulario cuando se envia al darle al boton pagar
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
 

@@ -44,8 +44,7 @@ redir("/musihub/index.php");
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-                    <h3 class="pull-left">Factura</h3>
-                    <h3 class="pull-right">Pedido nº: <?php echo $_SESSION['venta']['idventa']; ?></h3>
+                    <h3 class="pull-right">Numero de pedido: <?php echo $_SESSION['venta']['idventa']; ?></h3>
         </div>
         <div id="invoice">
         <strong>Facturado a:</strong><br>

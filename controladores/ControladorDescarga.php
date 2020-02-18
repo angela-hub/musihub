@@ -2,7 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorUsuario.php";
-require_once CONTROLLER_PATH . "ControladorVenta.php";
 require_once MODEL_PATH . "instrumento.php";
 require_once VENDOR_PATH . "autoload.php";
 use Spipu\Html2Pdf\HTML2PDF;
@@ -274,9 +273,6 @@ public function descargarTXTUsu()
 // Con esta funcion descargaremos el PDF de la factura final del carrito de compra una vez procesado el pago
     public function descargarfactura($id)
     {
-        $cv = ControladorVenta::getControlador();
-
-
         $sal = "<h2>Factura</h2>";
         $sal .= "<h3>Pedido nº:" . $_SESSION['venta']['idventa'] . "</h3>";
         $fech = new DateTime($_SESSION['venta']['fecha']);

@@ -4,7 +4,6 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once CONTROLLER_PATH . "ControladorAcceso.php";
 require_once UTILITY_PATH . "funciones.php";
-require_once CONTROLLER_PATH . "ControladorVenta.php";
 //require_once VIEW_PATH . "../cabecera.php";
 session_start();
 // Solo entramos si somos el usuario y hay items
@@ -13,8 +12,10 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
     exit();
 }
 if (isset($_POST['finalizar'])) {
-alerta("Gracias por confiar en nosotros su sesión se cerrara automáticamente");
-session_destroy();
+alerta("Gracias por confiar y realizar su compra con nosotros");
+$_SESSION['carrito']=[];
+$_SESSION['cantidad']=[];
+$_SESSION['precio']=[];
 redir("/musihub/index.php");
 }
 ?>

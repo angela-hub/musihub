@@ -12,6 +12,11 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
     header("location: /musihub/error.php");
     exit();
 }
+if (isset($_POST['finalizar'])) {
+alerta("Gracias por confiar en nosotros su sesión se cerrara automáticamente");
+session_destroy();
+redir("/musihub/index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,9 +118,13 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
         </table>
     <div class="row no-print nover">
         <div class='text-center'>
-            <a href="../index.php" class='btn btn-success'><span class='glyphicon glyphicon-ok'></span> Finalizar </a>
+        <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+            <button class="btn btn-success" type="submit" name="finalizar" >
+                                <span class='glyphicon glyphicon-ok'></span> Finalizar</span></button>
+                                
             <?php
             echo "<a href='/musihub/utilidades/descargar.php?opcion=FACTURA&id=".encode($_SESSION['venta']['idventa']). " ' target='_blank' class='btn btn-primary'><span class='glyphicon glyphicon-download'></span>  PDF</a>";
+            echo "</form>";
             ?>
 
         </div>

@@ -94,8 +94,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     $direccion = filtrado(($_POST["direccion"]));
     if(empty($direccion)){
         $direccionErr = "Por favor introduzca una direccion";
-    } elseif(!preg_match("/[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?)* (((#|[nN][oO]\.?) ?)?\d{1,4}(( ?[a-zA-Z0-9\-]+)+)?)/", $direccion)) {
-        $direccionErr = "Por favor introduzca una direccion válida";
     }
 
     
@@ -136,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($direccionErr)) ? 'error: ' : ''; ?>>
                     <div class="form-group">
-                        <input type="text-area" required name="direccion" pattern="[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?)* (((#|[nN][oO]\.?) ?)?\d{1,4}(( ?[a-zA-Z0-9\-]+)+)?)" 
+                        <input type="text-area" required name="direccion"  
                         class="form-control input-lg" placeholder="calle ejemplo nº12" tabindex="1">
                         <span class="help-block"><?php echo $direccionErr; ?></span>
                     </div>

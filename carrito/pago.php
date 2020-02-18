@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
       $estado = $controlador->almacenarpago($titular,$tarjeta_completa,$fecha,$cv);
         if ($estado) {
             alerta("Pago Procesado");
-            redir("../index.php");
+            redir("factura.php");
         } else {
             header("location: error.php");
             exit();

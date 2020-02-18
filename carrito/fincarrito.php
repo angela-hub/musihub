@@ -10,22 +10,6 @@ if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
     exit();
 }
 /*
-$total = $_SESSION['total'];
-
-// Procesamos el usuario de la sesion
-$id = $_SESSION['id'];
-$nombre = $_SESSION['nombre'];
-$email = $_SESSION['email'];
-
-// Procesamos la venta
-if (isset($_POST['procesar_compra'])) {
-    // Generamos el id de la compra
-    $idVenta = date('ymd-his');
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
-    $direccion = $_POST['direccion'];
-    $nombreTarjeta = $_POST['tTitular'];
-    $numeroTarjeta = $_POST['cardNumber'];
 // Metemos dentro de la variable venta la nueva venta que se procesara y se insertara en la base de datos
     $venta = new Venta(
         $idVenta,
@@ -70,7 +54,7 @@ if (isset($_POST['procesar_compra'])) {
 $nombre = $email = $telefono = $direccion = "";
 $nombreErr = $emailErr = $telefonoErr = $direccionErr ="";
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pago"]){
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
     // Procesamos el nombre
     $nombre=$_POST["nombre"];
@@ -99,6 +83,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pago"]){
     } elseif(!preg_match("/[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?)* (((#|[nN][oO]\.?) ?)?\d{1,4}(( ?[a-zA-Z0-9\-]+)+)?)/", $direccion)) {
         $direccionErr = "Por favor introduzca una direccion válida";
     }
+
+    
+    if (
+        empty($nombreErr) && empty($emailErr) && empty($telefonoErr) && empty($direccionErr)
+    ) {
+        redir("pago.php");
+    }
 }
 ?>
 
@@ -111,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pago"]){
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?>>
                     <div class="form-group">
-                        <input type="text" required name="nombre" pattern="([^\s][A-zÀ-ž\s]+)" class="form-control input-lg" placeholder="Nombre" tabindex="1">
+                        <input type="text" required name="nombre" pattern="/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu" class="form-control input-lg" placeholder="Nombre" tabindex="1">
                         <span class="help-block"><?php echo $nombreErr; ?></span>
                     </div>
                 </div>
@@ -140,7 +131,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pago"]){
             <hr class="colorgraph">
             <div class="row">
                 <div class="col-xs-12 col-md-6"><a href="resumen.php" class="btn btn-warning btn-block btn-lg">Atrás</a></div>
-                <div class="col-xs-12 col-md-6"><a href="pago.php" type="submit" name="pago" class="btn btn-success btn-block btn-lg">Pago</a></div>
+                <div class="col-xs-12 col-md-6"><button type="submit" name="aceptar" class="btn btn-success btn-block btn-lg" value="aceptar" class="btn btn-success">Aceptar</button></div>
             </div>
         </form>
     </div>

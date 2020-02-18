@@ -100,6 +100,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     if (
         empty($nombreErr) && empty($emailErr) && empty($telefonoErr) && empty($direccionErr)
     ) {
+        $_SESSION['venta']=[];
+        $_SESSION['venta']['nombre']=$nombre;
+        $_SESSION['venta']['email']=$email;
+        $_SESSION['venta']['telefono']=$telefono;
+        $_SESSION['venta']['direccion']=$direccion;
         redir("pago.php");
     }
 }

@@ -182,11 +182,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
             $iva=$final-($final/1.21);
 
             //Mostramos la tabla con los precios calculados y redondeados a dos decimales
-            echo "<td></td><td></td><td></td><td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
+            echo "<td></td><td></td><td></td><td>". "<strong>"."Subtotal". "</strong>"."  ". round($sub,2) . " ". "€". "</td>";
             echo "<tr>";
-            echo "<td></td><td></td><td></td><td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
+            echo "<td></td><td></td><td></td><td>". "<strong>". "IVA" . "</strong>"."  ". round($iva,2). " ". "€". "</td>";
             echo "<tr>";
-            echo "<td></td><td></td><td></td><td>". "Total" ."  ". $final. " ". "€". "</td>";
+            echo "<td></td><td></td><td></td><td>". "<strong>"."Total" . "</strong>"."  ". $final. " ". "€". "</td>";
             echo "</tr>";
             echo "</table>";
         ?>

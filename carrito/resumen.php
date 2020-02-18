@@ -7,23 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Carrito</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-        table {
+    table {
+        font-size: 150%;
             width: 95%;
-            font-size: 150%;
-            text-align: left;
         }
-        th, td {
-            width: 20%;
-            text-align: left;
-            vertical-align: top;
-        }
+    h1 {
+        font-size: 300px;
+        text-align: center;
+    }
+
     </style>
 </head>
 
@@ -85,22 +81,34 @@ if (isset($_SESSION['USUARIO']['email'])) {
         unset($_SESSION['cantidad']);
         unset($_SESSION['total']);
     }
-?>
-<div class="panel panel-success">
-    <div class="panel-heading">Resumen de su pedido</div>
-      <div class="panel-body">
-<?php
-    
+    ?>
+    <h1>Mi Carrito</h1>
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+
+    <?php
     if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
         $arreglo=$_SESSION['carrito']['final'];
-        echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th><th>Funcion</th>";
+        echo "<thead>";
+            echo"<tr>";
+            echo "<th></th>";
+            echo"<th>Instrumento</th>";
+            echo"<th>Distribuidor</th>";
+            echo"<th>Precio</th>";
+            echo"<th >Cantidad</th>";
+            echo"<th>Funcion </th>";
+            echo"</tr>";
+        echo" </thead>";
+        echo "<tbody>";
         foreach ($arreglo as $key => $fila){
             if($fila['cantidad']>=1){
             $foto = $fila['foto'];
             echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
             echo "<td>" . $fila['nomProducto'] . "</td>";
             echo "<td>" . $fila['marca'] . "</td>";
-            echo "<td>" . $fila['precio'] . "</td>";
+            echo "<td>" . $fila['precio'] . " ". "€" ."</td>";
             echo "<td>" . $fila['cantidad'] . "</td>";
             /*foreach($numero as $k => $v){
                 if($k==$fila['idproducto']){
@@ -111,18 +119,18 @@ if (isset($_SESSION['USUARIO']['email'])) {
             }*/
             ?>
             <td><form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-                                <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borrar" title='-1'>
-                                    <span class='glyphicon glyphicon-trash'></span> -1</span>
+                                <button class="btn btn-warning" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borrar" title='-1'>
+                                    <span class='glyphicon glyphicon-arrow-down'></span></span>
                                 </button>
                                 </form>
             <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                             <button class="btn btn-success" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="agregar" title='+1'>
-                                <span class='glyphicon glyphicon-trash'></span> +1</span>
+                                <span class='glyphicon glyphicon-arrow-up'></span></span>
                             </button>
                         </form>
             <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
-                            <button class="btn btn-success" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borr_item" >
-                                <span class='glyphicon glyphicon-trash'></span> Eliminar</span>
+                            <button class="btn btn-danger" type="submit" value="<?php print_r($fila['idproducto']); ?>" name="borr_item" >
+                                <span class='glyphicon glyphicon-trash'></span></span>
                             </button>
                         </form></td>
                         <?php                  
@@ -138,18 +146,18 @@ if (isset($_SESSION['USUARIO']['email'])) {
         $iva=$final-($final/1.21);
 
         //Mostramos la tabla con los precios calculados y redondeados a dos decimales
-        echo "<td></td><td></td><td></td><td></td><td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
+        echo "<td></td><td></td><td></td><td></td><td>". "<strong>" . "Subtotal" . "</strong>" ."  ". round($sub,2) . " ". "€". "</td>";
         echo "<tr>";
-        echo "<td></td><td></td><td></td><td></td><td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
+        echo "<td></td><td></td><td></td><td></td><td>". "<strong>". "IVA". "</strong>" . "  ". round($iva,2). " ". "€". "</td>";
         echo "<tr>";
-        echo "<td></td><td></td><td></td><td></td><td>". "Total" ."  ". $final. " ". "€". "</td>";
+        echo "<td></td><td></td><td></td><td></td><td><h2>". "<strong>". "Total". "</strong>" ."  ". $final. " ". "€". "</h2></td>";
         echo "</tr>";
         echo "</table>";
         
     
 }
     else{
-        echo "No hay productos en el carrito";
+        echo "<h3>"."No hay productos en el carrito"."</h3>";
     }
 }
 ?>
@@ -173,3 +181,4 @@ if (isset($_SESSION['USUARIO']['email'])) {
 <td><a href="/musihub/carrito/fincarrito.php" class="btn btn-success" >Procesar compra</a></td>
 </tr>
 </table>
+<br><br><br><br>

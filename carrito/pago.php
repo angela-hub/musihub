@@ -11,7 +11,7 @@ $titular = $tarjeta = $cvv = $num1 = $num2 =$num3 = $num4 = "";
 $fechaErr = $titularErr = $tarjetarErr = $cvvErr =""; 
 
 session_start();
-if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
+if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0 || $_SESSION["pago"] <> "si") {
   header("location: /musihub/error.php");
   exit();
 }
@@ -108,6 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
         $fechacompra=date('Y-m-d h:m');
         $_SESSION['venta']['fecha']=$fechacompra;
         $_SESSION['venta']['tarjetapago']=$_POST["num4"];
+        $_SESSION['pago']=[];
         if ($estado) {
             alerta("Pago Procesado");
             redir("factura.php");

@@ -108,6 +108,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                         }
                         if(!isset($_SESSION['cantidad']) || empty($_SESSION['cantidad'])){
                             $_SESSION['cantidad']=0;
+                            $_SESSION['precio']=0;
                         }
                         if(!isset($_SESSION['precio']) || empty($_SESSION['precio'])){
                             $_SESSION['precio']=0;

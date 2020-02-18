@@ -94,8 +94,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     $direccion = filtrado(($_POST["direccion"]));
     if(empty($direccion)){
         $direccionErr = "Por favor introduzca una direccion";
+    }elseif(!preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){1,18}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){0,10}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){2,10}\s+[1-9]{0,3}$/iu", $Valdireccion)){
+    $Errdireccion= "Introduce una direccion valida , valores validos : Pio 3 , Falsa 4 , Principe pio 9 , Téresa De Calcula 192 ";
+    }else{
+    $direccion = $Valdireccion;
     }
-
+    
     
     if (
         empty($nombreErr) && empty($emailErr) && empty($telefonoErr) && empty($direccionErr)
@@ -141,7 +145,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($direccionErr)) ? 'error: ' : ''; ?>>
                     <div class="form-group">
                         <input type="text-area" required name="direccion"  
-                        class="form-control input-lg" placeholder="calle ejemplo nº12" tabindex="1">
+                        class="form-control input-lg" placeholder="Ejemplo 15" 
+                        pattern='^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){1,18}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){0,10}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){2,10}\s+[1-9]{0,3}$' tabindex="1">
                         <span class="help-block"><?php echo $direccionErr; ?></span>
                     </div>
                 </div>

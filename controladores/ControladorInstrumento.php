@@ -155,13 +155,13 @@ class ControladorInstrumento {
     }
 //--------------------------------------------------------------------------------------------
 //Creamos la funcion actualizarStock con la que actualizaremos los datos con los parametros pasados de un usuario el cual lo cogera por la id del usuario
-    public function actualizarStock($id, $stockinicial)
+    public function actualizarStock($id, $stock)
     {
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
 
-        $consulta = "update instrumentos set stockinicial=:stockinicial where id=:id";
-        $parametros = array(':id' => $id, ':stockinicial' => $stockinicial);
+        $consulta = "update instrumentos set stockinicial=stockinicial-:stock where id=:id";
+        $parametros = array(':id' => $id, ':stock' => $stock);
         $estado = $bd->actualizarBD($consulta, $parametros);
         $bd->cerrarBD();
         return $estado;

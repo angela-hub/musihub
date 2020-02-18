@@ -38,6 +38,14 @@ public function almacenarcarrrito($nombre,$distribuidor,$precio,$cantidad){
     return $estado;
 }
 //-----------------------------------------------------------------------------------------------------------------------------
-
+public function almacenarventa($nombre,$email,$telefono,$domicilio,$total,$fecha){
+    $bd = ControladorBD::getControlador();
+    $bd->abrirBD();
+    $consulta= "INSERT INTO ventas (nombre, distribuidor, precio, cantidad) VALUES (:nombre, :distribuidor, :precio, :cantidad)";
+    $parametros= array(':nombre'=>$nombre, ':distribuidor'=>$distribuidor, ':precio'=>$precio, ':cantidad'=>$cantidad);
+    $estado = $bd->actualizarBD($consulta,$parametros);
+    $bd->cerrarBD();
+    return $estado;
+}
 }
 ?>

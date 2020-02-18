@@ -3,6 +3,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/musihub/dirs.php";
 require_once UTILITY_PATH . "funciones.php";
 require_once CONTROLLER_PATH . "ControladorBD.php";
+require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 require_once CONTROLLER_PATH . "ControladorPago.php";
 require_once MODEL_PATH . "pago.php";
 //Declaracion de variables
@@ -85,6 +86,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
       if (
         empty($fechaErr) && empty($titularErr) && empty($tarjetarErr) && empty($cvvErr)
     ) {  
+      $arreglo=$_SESSION['carrito']['final'];
+      foreach ($arreglo as $key => $fila){
+        if($fila['cantidad']>=1){
+        $id=$fila['idproducto'];
+        $stock=$fila['cantidad'];
+      $actualiza = ControladorInstrumento::getControlador();
+      $actualizar = $actualiza->actualizarstock($id,$stock);
+        }
+        }
       $controlador = Controladorpago::getControlador();
       $estado = $controlador->almacenarpago($titular,$tarjeta_completa,$fecha,$cv);
       $idventafe = getdate();

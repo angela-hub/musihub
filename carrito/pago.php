@@ -9,6 +9,7 @@ require_once MODEL_PATH . "pago.php";
 $titular = $tarjeta = $cvv = $num1 = $num2 =$num3 = $num4 = "";
 $fechaErr = $titularErr = $tarjetarErr = $cvvErr =""; 
 
+session_start();
 //procesamos el formulario cuando se envia al darle al boton pagar
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
 
@@ -86,6 +87,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
     ) {  
       $controlador = Controladorpago::getControlador();
       $estado = $controlador->almacenarpago($titular,$tarjeta_completa,$fecha,$cv);
+      $idventafe = getdate();
+      $idventa=$idventafe[0];
+        array_push($_SESSION['venta'],$_SESSION['carrito']['final']);
+        $_SESSION['venta']['idventa']=$idventa;
+        $fechacompra=date('Y-m-d h:m');
+        $_SESSION['venta']['fecha']=$fechacompra;
+        $_SESSION['venta']['tarjetapago']=$_POST["num4"];
         if ($estado) {
             alerta("Pago Procesado");
             redir("factura.php");

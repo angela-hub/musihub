@@ -49,7 +49,21 @@ if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        table {
+            width: 95%;
+        }
+        th, td {
+            width: 25%;
+            text-align: left;
+            vertical-align: top;
+        }
+    </style>
 </head>
+
 <?php
 $nombre = $email = $telefono = $direccion = "";
 $nombreErr = $emailErr = $telefonoErr = $direccionErr ="";
@@ -139,27 +153,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
 <br><br>
 
-<div class="panel panel-default">
+<div class="panel panel-success">
     <div class="panel-heading">Resumen de su pedido</div>
-    <div class="panel-body">
-        <?php
-
-        if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
-            $arreglo=$_SESSION['carrito']['final'];
-            echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th>";
-            foreach ($arreglo as $key => $fila){
-                if($fila['cantidad']>=1){
-                $foto = $fila['foto'];
-                echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
-                echo "<td>" . $fila['nomProducto'] . "</td>";
-                echo "<td>" . $fila['marca'] . "</td>";
-                echo "<td>" . $fila['precio'] . "</td>";
-                echo "<td>" . $fila['cantidad'] . "</td>";
+      <div class="panel-body">
+            <?php
+            if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
+                $arreglo=$_SESSION['carrito']['final'];
+                echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th>";
+                foreach ($arreglo as $key => $fila){
+                    if($fila['cantidad']>=1){
+                    $foto = $fila['foto'];
+                    echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
+                    echo "<td>" . $fila['nomProducto'] . "</td>";
+                    echo "<td>" . $fila['marca'] . "</td>";
+                    echo "<td>" . $fila['precio'] . "</td>";
+                    echo "<td>" . $fila['cantidad'] . "</td>";
+                    }
                 }
             }
-        ?>
-        <?php
-            }
+            ?>
+
+            <?php
             // Subtotales y totales
             $final=array_sum($_SESSION['total']);
             $_SESSION['precio']=$final;
@@ -176,9 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
             echo "<tr>";
             echo "<td>". "Total" ."  ". $final. " ". "€". "</td>";
             echo "</tr>";
+            echo "</table>";
         ?>
-
-    </div>
+      </div>
 </div>
-
-

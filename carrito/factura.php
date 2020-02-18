@@ -19,8 +19,9 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
     <meta charset="utf-8">
     <title>Factura</title>
     <link rel="stylesheet" href="../css/estilo.css" media="all" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   </head>
-  <body>
+  <body class="centro">
     <header class="clearfix">
       <div id="logo">
         <img src="../logo.png">
@@ -112,7 +113,6 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
         </table>
     <div class="row no-print nover">
         <div class='text-center'>
-            <a href="javascript:window.print()" class='btn btn-info'><span class='glyphicon glyphicon-print'></span> Imprimir </a>
             <a href="../index.php" class='btn btn-success'><span class='glyphicon glyphicon-ok'></span> Finalizar </a>
             <?php
             echo "<a href='/musihub/utilidades/descargar.php?opcion=FACTURA&id=".encode($_SESSION['venta']['idventa']). " ' target='_blank' class='btn btn-primary'><span class='glyphicon glyphicon-download'></span>  PDF</a>";

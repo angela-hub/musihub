@@ -1,3 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carrito</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        table {
+            width: 95%;
+            font-size: 150%;
+            text-align: left;
+        }
+        th, td {
+            width: 20%;
+            text-align: left;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
 <?php
 //Directorios para trabajar
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
@@ -56,6 +85,12 @@ if (isset($_SESSION['USUARIO']['email'])) {
         unset($_SESSION['cantidad']);
         unset($_SESSION['total']);
     }
+?>
+<div class="panel panel-success">
+    <div class="panel-heading">Resumen de su pedido</div>
+      <div class="panel-body">
+<?php
+    
     if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
         $arreglo=$_SESSION['carrito']['final'];
         echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th><th>Funcion</th>";
@@ -103,11 +138,11 @@ if (isset($_SESSION['USUARIO']['email'])) {
         $iva=$final-($final/1.21);
 
         //Mostramos la tabla con los precios calculados y redondeados a dos decimales
-        echo "<td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
+        echo "<td></td><td></td><td></td><td></td><td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
         echo "<tr>";
-        echo "<td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
+        echo "<td></td><td></td><td></td><td></td><td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
         echo "<tr>";
-        echo "<td>". "Total" ."  ". $final. " ". "€". "</td>";
+        echo "<td></td><td></td><td></td><td></td><td>". "Total" ."  ". $final. " ". "€". "</td>";
         echo "</tr>";
         echo "</table>";
         
@@ -138,48 +173,3 @@ if (isset($_SESSION['USUARIO']['email'])) {
 <td><a href="/musihub/carrito/fincarrito.php" class="btn btn-success" >Procesar compra</a></td>
 </tr>
 </table>
-<!-------------------------------------------------Estilo para la tabla--------------------------------------------------->
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    table {
-        font-family: "Comic Sans MS", "Lucida Grande", Sans-Serif;
-        font-size: 18;
-        margin: 1.5%;
-        width: 97%;
-        border-collapse: collapse;
-        border-bottom: 4px solid #2F4F4F;
-    }
-
-
-    th {
-        font-size: 25px;
-        font-weight: normal;
-        padding: 8px;
-        background: #556B2F;
-        border-top: 4px solid #2F4F4F;
-        border-bottom: 4px solid #2F4F4F;
-        color: #FFFAFA;
-    }
-
-    .centrado {
-        text-align: center;
-    }
-
-    td {
-        text-align: center;
-        padding: 8px;
-        background: #F0FFF0;
-        color: #006400;
-        border-top: 1px solid transparent;
-    }
-
-    tr:hover td {
-        background: #8FBC8F;
-        color: white;
-    }
-    
-</style>

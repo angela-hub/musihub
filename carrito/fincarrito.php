@@ -52,7 +52,7 @@ if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style type="text/css">
+    <style>
         table {
             width: 95%;
         }
@@ -182,11 +182,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
             $iva=$final-($final/1.21);
 
             //Mostramos la tabla con los precios calculados y redondeados a dos decimales
-            echo "<td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
+            echo "<td></td><td></td><td></td><td>". "Subtotal" ."  ". round($sub,2) . " ". "€". "</td>";
             echo "<tr>";
-            echo "<td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
+            echo "<td></td><td></td><td></td><td>". "IVA" ."  ". round($iva,2). " ". "€". "</td>";
             echo "<tr>";
-            echo "<td>". "Total" ."  ". $final. " ". "€". "</td>";
+            echo "<td></td><td></td><td></td><td>". "Total" ."  ". $final. " ". "€". "</td>";
             echo "</tr>";
             echo "</table>";
         ?>

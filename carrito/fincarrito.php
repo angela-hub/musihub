@@ -116,14 +116,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?>>
                     <div class="form-group">
-                        <input type="text" required name="nombre" pattern="/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu" class="form-control input-lg" placeholder="Nombre" tabindex="1">
+                        <input type="text" required name="nombre" pattern="([^\s][A-zÀ-ž\s]+$)" class="form-control input-lg" placeholder="Nombre y primer apellido" tabindex="1">
                         <span class="help-block"><?php echo $nombreErr; ?></span>
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($emailErr)) ? 'error: ' : ''; ?>>
                 <input type="email" required name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control input-lg" 
-                placeholder="E-mail" tabindex="3">
+                placeholder="E-mail" tabindex="3" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $emailErr; ?></span>
             </div>
             </div>
@@ -137,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($direccionErr)) ? 'error: ' : ''; ?>>
                     <div class="form-group">
                         <input type="text-area" required name="direccion" pattern="[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?)* (((#|[nN][oO]\.?) ?)?\d{1,4}(( ?[a-zA-Z0-9\-]+)+)?)" 
-                        class="form-control input-lg" placeholder="Direccion" tabindex="1">
+                        class="form-control input-lg" placeholder="calle ejemplo nº12" tabindex="1">
                         <span class="help-block"><?php echo $direccionErr; ?></span>
                     </div>
                 </div>

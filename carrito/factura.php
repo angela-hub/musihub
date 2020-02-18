@@ -11,6 +11,7 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
     header("location: /musihub/error.php");
     exit();
 }
+//Vaciamos las sesiones que utilizamos en la compra
 if (isset($_POST['finalizar'])) {
 alerta("Gracias por confiar y realizar su compra con nosotros");
 $_SESSION['carrito']=[];
@@ -43,8 +44,7 @@ redir("/musihub/index.php");
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-                    <h3 class="pull-left">Factura</h3>
-                    <h3 class="pull-right">Pedido nº: <?php echo $_SESSION['venta']['idventa']; ?></h3>
+                    <h3 class="pull-right">Numero de pedido: <?php echo $_SESSION['venta']['idventa']; ?></h3>
         </div>
         <div id="invoice">
         <strong>Facturado a:</strong><br>

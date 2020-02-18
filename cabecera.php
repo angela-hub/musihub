@@ -135,7 +135,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                                     echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/carrito/resumen.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['cantidad'].'</a></li>';
                                 }else{
                                     //Aqui llamamos a la sesion total
-                                    echo '<li style="width:11.3%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;"href="/musihub/carrito/resumen.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['cantidad']. ' - '. $_SESSION['precio']. ' €'.'</a></li>';
+                                    echo '<li style="width:11.3%; margin-right:3px;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;"href="/musihub/carrito/resumen.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['cantidad']. ' - '. $_SESSION['precio']. ' €'.'</a></li>';
                                 }
                                 //echo '<li style="width:9%; padding:15px; color:white;"class="nav navbar-nav navbar-right"><span class="glyphicon glyphicon-euro">'. " ".$_SESSION['total'] . '</span></li>';
                             }

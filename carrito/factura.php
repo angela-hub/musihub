@@ -11,6 +11,7 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
     header("location: /musihub/error.php");
     exit();
 }
+//Vaciamos las sesiones que utilizamos en la compra
 if (isset($_POST['finalizar'])) {
 alerta("Gracias por confiar y realizar su compra con nosotros");
 $_SESSION['carrito']=[];

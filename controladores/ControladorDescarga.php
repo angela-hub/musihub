@@ -276,20 +276,18 @@ public function descargarTXTUsu()
     {
         $cv = ControladorVenta::getControlador();
 
-        $venta = $cv->buscarVentaID($id);
-        $lineas = $cv->buscarLineasID($id);
 
         $sal = "<h2>Factura</h2>";
-        $sal .= "<h3>Pedido nº:" . $id . "</h3>";
-        $date = new DateTime($venta->getFecha());
-        $sal .= "<h4>Fecha de compra:" . $date->format('d/m/Y') . "</h4>";
+        $sal .= "<h3>Pedido nº:" . $_SESSION['venta']['idventa'] . "</h3>";
+        $fech = new DateTime($_SESSION['venta']['fecha']);
+        $sal .= "<h4>Fecha de compra:" . $fech->format('d/m/Y') . "</h4>";
         $sal .= "<h4>Datos de pago:</h4>";
-        $sal .= "<h5>Facturado a: " . $venta->getNombreTarjeta() . "</h5>";
-        $sal .= "<h5>Metodo de pago: Tarjeta de crédito/debito: **** " . substr($venta->getNumTarjeta(), -4) . "</h5>";
+        $sal .= "<h5>Facturado a: " . $_SESSION['nombre'] . "</h5>";
+        $sal .= "<h5>Metodo de pago: Tarjeta de crédito/debito: **** " . $_SESSION['venta']['tarjetapago'] . "</h5>";
         $sal .= "<h4>Datos de Envío:</h4>";
-        $sal .= "<h5>Nombre: " . $venta->getNombre() . "</h5>";
-        $sal .= "<h5>Email " . $venta->getEmail() . "</h5>";
-        $sal .= "<h5>Dirección " . $venta->getDireccion() . "</h5>";
+        $sal .= "<h5>Nombre: " . $_SESSION['venta']['nombre'] . "</h5>";
+        $sal .= "<h5>Email " . $_SESSION['venta']['email'] . "</h5>";
+        $sal .= "<h5>Dirección " . $_SESSION['venta']['direccion'] . "</h5>";
         $sal .= "<h4>Productos</h4>";
         $sal .= "<table>
                 <thead>
@@ -297,33 +295,36 @@ public function descargarTXTUsu()
                         </tr>
                         </thead>
                         <tbody>";
-
-        foreach ($lineas as $linea) {
+        $arreglo=$_SESSION['carrito']['final'];
+        foreach ($arreglo as $key => $fila) {
             $sal .= "<tr>";
-            $sal .= "<td>" . $linea->getdistribuidor() . " " . $linea->gettipo() . "</td>";
-            $sal .= "<td>" . $linea->getprecio() . " €</td>";
-            $sal .= "<td>" . $linea->getcantidad() . "</td>";
-            $sal .= "<td>" . ($linea->getprecio() * $linea->getcantidad()) . " €</td>";
+            $sal .= "<td>" . $fila['nomProducto'] . " " . $fila['marca'] . "</td>";
+            $sal .= "<td>" . $fila['precio'] . " €</td>";
+            $sal .= "<td>" . $fila['cantidad'] . "</td>";
+            $sal .= "<td>" . ($fila['precio']*$fila['cantidad']) . " €</td>";
             $sal .= "</tr>";
         }
-
+        $final=$_SESSION['precio'];
+        $sub=$final/1.21;
+        //calculo del precio con iva
+        $iva=$final-($final/1.21);
         $sal .= "<tr>
                             <td></td>
                             <td></td>
                             <td><strong>Total sin IVA</strong></td>
-                            <td>" . $venta->getSubtotal() . "€</td>
+                            <td>" . round($sub,2) . "€</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td><strong>I.V.A</strong></td>
-                            <td>" . $venta->getIva() . " €</td>
+                            <td>" . round($iva,2) . " €</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td><strong>TOTAL</strong></td>
-                            <td><strong>" . $venta->getTotal() . " €</strong></td>
+                            <td><strong>" . $final . " €</strong></td>
                         </tr>";
 
 

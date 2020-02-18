@@ -14,7 +14,6 @@ if ((!isset($_SESSION['USUARIO']['email']))) {
     header("location: /musihub/error.php");
     exit();
 }
-print_r($_SESSION['venta']);
 
 /*$idVenta = decode($_GET['venta']);
 $cv = ControladorVenta::getControlador();

@@ -32,6 +32,7 @@ require_once CONTROLLER_PATH . "ControladorPago.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 
 session_start();
+$_SESSION['pago']=[];
 if (isset($_SESSION['USUARIO']['email'])) {
     //$controlador = Controladorpago::getControlador();
     //$estado = $controlador->almacenarcarrrito($nombre,$distribuidor,$precio,$cantidad);

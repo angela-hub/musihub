@@ -79,7 +79,7 @@ if ($test=="/musihub/area.php?id=$prueba"){
 $nombre = $apellidos = $email = $password = $administrador = $telefono = $fecha_alta = $foto = "";
 $nombreErr = $apellidosErr = $emailErr = $passwordErr = $administradorErr = $telefonoErr = $fecha_altaErr = $fotoErr = "";
 $fotoanterior = "";
-
+$_SESSION['pago']=[];
 if (isset($_POST["id"]) && !empty($_POST["id"])) {
     //ID del usuario logueado
     $id = $_POST["id"];

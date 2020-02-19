@@ -76,7 +76,6 @@ if(isset($_SESSION['USUARIO']['email'])){
                             echo "<li><a href='/musihub/admin/inicio.php'>Administración</a></li>";
                             }
                         }elseif(startsWith($inicio,"/musihub/index.php")){
-                        //}elseif($inicio=="/musihub/index.php" || $inicio=="/musihub/index.php?limit=12&page=1" || $inicio=="/musihub/"){
                             echo "<li style='width:11%;' class='active'><a 'href='/musihub/index.php'>Inicio</a></li>";
                             echo "<li><a href='/musihub/contacto.php'>Contacto</a></li>";
                             if($admin=="admin"){
@@ -127,18 +126,13 @@ if(isset($_SESSION['USUARIO']['email'])){
                                 echo '<li style="width:13%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/registro.php"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px;" href="/musihub/login.php"><span class="glyphicon glyphicon-user"></span>  Login</a></li>';
                             }else{
-                                //$to=ControladorCarrito::getControlador();
-                                //Asignamos a la sesion total el precio total en carrito a la cual la llamaremos mas abajo
-                                //$_SESSION['total'] = $to -> precioencarrito();
                                 echo '<li style="width:15%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/area.php?id=' . encode($_SESSION['id']).'"><span class="glyphicon glyphicon-user"></span> '.$_SESSION['nombre'].'</a></li>';
                                 echo '<li style="width:10%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/login.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>';
                                 if($_SESSION['precio']==0){
                                     echo '<li style="width:11%;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;" href="/musihub/carrito/resumen.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['cantidad'].'</a></li>';
                                 }else{
-                                    //Aqui llamamos a la sesion total
                                     echo '<li style="width:11.3%; margin-right:3px;"class="nav navbar-nav navbar-right"><a style="padding:15px; text-decoration:none;"href="/musihub/carrito/resumen.php"><span class="glyphicon glyphicon-shopping-cart"></span> '.$_SESSION['cantidad']. ' - '. $_SESSION['precio']. ' €'.'</a></li>';
                                 }
-                                //echo '<li style="width:9%; padding:15px; color:white;"class="nav navbar-nav navbar-right"><span class="glyphicon glyphicon-euro">'. " ".$_SESSION['total'] . '</span></li>';
                             }
                         ?>
                     </ul>

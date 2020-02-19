@@ -273,20 +273,22 @@ public function descargarTXTUsu()
 // Con esta funcion descargaremos el PDF de la factura final del carrito de compra una vez procesado el pago
     public function descargarfactura($id)
     {
-        $sal = "<h2>Factura</h2>";
-        $sal .= "<h3>Pedido nº:" . $_SESSION['venta']['idventa'] . "</h3>";
+        ob_end_clean();
+        $sal = "<h1 align='center';>Factura</h1>";
+        $sal .= "<img src='../logo.png'>";
+        $sal .= "<h3 align='right';>Pedido nº:" . $_SESSION['venta']['idventa'] . "</h3>";
         $fech = new DateTime($_SESSION['venta']['fecha']);
-        $sal .= "<h4>Fecha de compra:" . $fech->format('d/m/Y') . "</h4>";
-        $sal .= "<h4>Datos de pago:</h4>";
-        $sal .= "<h5>Facturado a: " . $_SESSION['nombre'] . "</h5>";
-        $sal .= "<h5>Metodo de pago: Tarjeta de crédito/debito: **** " . $_SESSION['venta']['tarjetapago'] . "</h5>";
-        $sal .= "<h4>Datos de Envío:</h4>";
-        $sal .= "<h5>Nombre: " . $_SESSION['venta']['nombre'] . "</h5>";
-        $sal .= "<h5>Email " . $_SESSION['venta']['email'] . "</h5>";
-        $sal .= "<h5>Dirección " . $_SESSION['venta']['direccion'] . "</h5>";
-        $sal .= "<h4>Productos</h4>";
-        $sal .= "<table>
-                <thead>
+        $sal .= "<h4 align='right';>Fecha de compra:" . $fech->format('d/m/Y') . "</h4>";
+        $sal .= "<h4 align='center';>Datos de pago:</h4>";
+        $sal .= "<h5 align='center';>Facturado a: " . $_SESSION['nombre'] . "</h5>";
+        $sal .= "<h5 align='center';>Metodo de pago: Tarjeta de crédito/debito: **** " . $_SESSION['venta']['tarjetapago'] . "</h5>";
+        $sal .= "<h4 align='center';>Datos de Envío:</h4>";
+        $sal .= "<h5 align='center';>Nombre: " . $_SESSION['venta']['nombre'] . "</h5>";
+        $sal .= "<h5 align='center';>Email " . $_SESSION['venta']['email'] . "</h5>";
+        $sal .= "<h5 align='center';>Dirección " . $_SESSION['venta']['direccion'] . "</h5>";
+        $sal .= "<h4 align='center';>Productos</h4>";
+        $sal .= "<table align='center'; border='1';>
+                <thead color='#F0F8FF';>
                        <tr><td><b>Item</b></td><td><b>Precio (PVP)</b></td><td><b>Cantidad</b></td><td><b>Total</b></td>
                         </tr>
                         </thead>

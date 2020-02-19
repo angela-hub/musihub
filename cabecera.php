@@ -109,6 +109,7 @@ if(isset($_SESSION['USUARIO']['email'])){
                             $_SESSION['precio']=0;
                         }
                         $_SESSION['pago']=[];
+                        $_SESSION['factura']=[];
                         if(!isset($_SESSION['precio']) || empty($_SESSION['precio'])){
                             $_SESSION['precio']=0;
                         }

@@ -109,6 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
         $_SESSION['venta']['fecha']=$fechacompra;
         $_SESSION['venta']['tarjetapago']=$_POST["num4"];
         $_SESSION['pago']=[];
+        $_SESSION['factura']="si";
         if ($estado) {
             alerta("Pago Procesado");
             redir("factura.php");

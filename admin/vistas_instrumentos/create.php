@@ -48,8 +48,17 @@ if (isset($_SESSION['USUARIO']['email'])) {
             // Procesamos referencia
             if (isset($_POST["referencia"])) {
                 $referencia = filtrado($_POST["referencia"]);
-            } elseif (!preg_match("/([1-9])/", $referenciaVal)) {
+            } elseif (!preg_match("/([0-9]{1,4})/", $referenciaVal)) {
                 $referenciaErr = "Introduzca una referencia valida en numeros";
+            } else {
+                $referencia = $referenciaVal;
+            }
+
+            // NO SE REPITA la referencia
+            $controlador = ControladorInstrumento::getControlador();
+            $instrumento = $controlador->buscarRef($referencia);
+            if (isset($instrumento)) {
+                $referenciaErr = "Ya existe un instrumento con esta refe:" . $referencia . " en la Base de Datos";
             } else {
                 $referencia = $referenciaVal;
             }
@@ -71,8 +80,10 @@ if (isset($_SESSION['USUARIO']['email'])) {
             // Procesamos precio
             if (isset($_POST["precio"])) {
                 $precio = filtrado($_POST["precio"]);
+            } elseif (!preg_match("/([0-9,]{1,6})/", $precioVal)) {
+                $precioErr = "Introduzca un precio valido";
             } else {
-                $precioErr = "Precio incorrecto";
+                $precio = $precioVal;
             }
 
             // Procesamos descuento
@@ -81,11 +92,11 @@ if (isset($_SESSION['USUARIO']['email'])) {
             } else {
                 $descuentoErr = "descuento incorrecto";
             }
-
+            
             // Procesamos stockinicial
             if (isset($_POST["stockinicial"])) {
                 $stockinicial = filtrado($_POST["stockinicial"]);
-            } elseif (!preg_match("/([0-9])/", $stockinicialVal)) {
+            } elseif (!preg_match("/([0-9]{1,4})/", $stockinicialVal)) {
                 $stockinicialErr = "Introduzca un stockinicial valido desde el 0";
             } else {
                 $stockinicial = $stockinicialVal;
@@ -166,7 +177,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                                 <!-- referencia -->
                                 <div class="form-group <?php echo (!empty($referenciaErr)) ? 'error: ' : ''; ?>">
                                     <label>Referencia</label>
-                                    <input class="form-control" type="text" required name="referencia" pattern="([1-9])" min="0" title="Referencia valida solo con numeros" value="<?php echo $referencia; ?>">
+                                    <input class="form-control" type="text" required name="referencia" pattern="([0-9]{1,4})" min="1" max="4" title="Referencia valida solo con numeros" value="<?php echo $referencia; ?>">
                                     <?php echo $referenciaErr; ?>
                                 </div>
                                 <!-- distribuidor -->
@@ -187,7 +198,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                                 <!-- Precio -->
                                 <div class="form-group <?php echo (!empty($precioErr)) ? 'error: ' : ''; ?>">
                                     <label>Precio</label>
-                                    <input class="form-control" type="text" required name="precio" value="<?php echo $precio; ?>">
+                                    <input class="form-control" type="text" required name="precio" pattern="([0-9,]{1,6})" value="<?php echo $precio; ?>">
                                     <?php echo $precioErr; ?>
                                 </div>
                                 <!-- descuento-->
@@ -199,7 +210,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                                 <!-- stockinicial -->
                                 <div class="form-group <?php echo (!empty($stockinicialErr)) ? 'error: ' : ''; ?>">
                                     <label>Stock Inicial</label>
-                                    <input class="form-control" type="text" required name="stockinicial" min="1" pattern="([1-9])" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>">
+                                    <input class="form-control" type="text" required name="stockinicial" min="1" max="4" pattern="[0-9]{1,4}" title="Stock valido solo con numeros" value="<?php echo $stockinicial; ?>">
                                     <?php echo $stockinicialErr; ?>
                                 </div>
                                 <!-- Foto-->

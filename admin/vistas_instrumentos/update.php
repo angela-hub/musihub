@@ -38,8 +38,8 @@ if (isset($_SESSION['USUARIO']['email'])) {
             } elseif($nombre==$nombreviejo) {
                 $nombre = $nombre;
             } else{
-                $usuario = $controlador->buscarInstrumentoNom($nombre);
-                if(isset($usuario)){
+                $instrumento = $controlador->buscarInstrumentoNom($nombre);
+                if(isset($instrumento)){
                     $nombreErr = "Ya existe un instrumento con este nombre: " .$nombre. " en la Base de Datos";
                 }else{
                     $nombre= $nombre;
@@ -267,7 +267,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                                         <div class="form-group">
                                             <div <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?>>
                                                 <div class="width30 floatL"><label>Nombre</label></div>
-                                                <div class="width70 floatR"><input class="width100 form-control" type="text" name="nombre" value="<?php echo $nombre; ?>"></div>
+                                                <div class="width70 floatR"><input class="width100 form-control" type="text" pattern="([^\s][A-zÀ-ž\s]+$)" name="nombre" value="<?php echo $nombre; ?>"></div>
                                                 <?php echo $nombreErr; ?>
                                             </div>
                                         </div>
@@ -283,7 +283,7 @@ if (isset($_SESSION['USUARIO']['email'])) {
                             <div class="form-group">
                                 <div <?php echo (!empty($referenciaErr)) ? 'error: ' : ''; ?>>
                                     <div class="width30 floatL"><label>Referencia</label></div>
-                                    <div class="width70 floatR"><input class="width100 form-control" type="text" required name="referencia" value="<?php echo $referencia; ?>" pattern="[0123456789]{1,8}" title="Referencia valida solo con numeros"></div>
+                                    <div class="width70 floatR"><input class="width100 form-control" type="text" required name="referencia" pattern="[0123456789]{1,8}" readonly value="<?php echo $referencia; ?>" pattern="[0123456789]{1,8}" title="Referencia valida solo con numeros"></div>
                                     <?php echo $referenciaErr; ?>
                                 </div>
                             </div>

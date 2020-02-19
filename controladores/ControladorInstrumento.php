@@ -150,6 +150,27 @@ public function buscarNombre($id){
             return null;
         }    
     }
+    //--------------------------------------------------------------------------------------------------
+// Creamos la funcion buscarRef para buscar en la base de datos si hay referencias iguales ya almacenadas
+
+public function buscarRef($referencia){ 
+    $bd = ControladorBD::getControlador();
+    $bd->abrirBD();
+    $consulta = "SELECT * FROM instrumentos  WHERE referencia = :referencia";
+    $parametros = array(':referencia' => $referencia);
+    $filas = $bd->consultarBD($consulta, $parametros);
+    $res = $bd->consultarBD($consulta,$parametros);
+    $filas=$res->fetchAll(PDO::FETCH_OBJ);
+    if (count($filas) > 0) {
+        foreach ($filas as $a) {
+            $instrumento = new instrumento($a->id, $a->nombre, $a->referencia, $a->distribuidor, $a->tipo, $a->precio, $a->descuento, $a->stockinicial, $a->imagen);
+        }
+        $bd->cerrarBD();
+        return $instrumento;
+    }else{
+        return null;
+    }    
+}
 //------------------------------------------------------------------------------------------------- 
 //Creamos la funcion borrarInstrumento con el id pasado a la tabla de instrumentos para eliminarlo
     public function borrarInstrumento($id){ 

@@ -7,7 +7,7 @@ require_once UTILITY_PATH . "funciones.php";
 //require_once VIEW_PATH . "../cabecera.php";
 session_start();
 // Solo entramos si somos el usuario y hay items
-if ((!isset($_SESSION['USUARIO']['email']))) {
+if ((!isset($_SESSION['USUARIO']['email']) || $_SESSION['factura'] <> "si")) {
     header("location: /musihub/error.php");
     exit();
 }
@@ -17,6 +17,7 @@ alerta("Gracias por confiar y realizar su compra con nosotros");
 $_SESSION['carrito']=[];
 $_SESSION['cantidad']=[];
 $_SESSION['precio']=[];
+$_SESSION['factura']=[];
 redir("/musihub/index.php");
 }
 ?>

@@ -1,42 +1,16 @@
 <?php
 
-// Lo que necesitamos
+// Directorio de trabajo 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/musihub/dirs.php";
 require_once VIEW_PATH . "../cabecera.php";
 
-// Solo entramos si somos el usuario y hay items
+// Solo entramos si somos el usuario y hay productos añadidos
 if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
     header("location: /musihub/error.php");
     exit();
 }
-/*
-// Metemos dentro de la variable venta la nueva venta que se procesara y se insertara en la base de datos
-    $venta = new Venta(
-        $idVenta,
-        "",
-        $total,
-        round(($total / 1.21), 2),
-        round(($total - ($total / 1.21)), 2),
-        $nombre,
-        $email,
-        $direccion,
-        $nombreTarjeta,
-        $numeroTarjeta
-    );
-
-    $cv = ControladorVenta::getControlador();
-    // Se inserta la venta creada anteriormente
-    if ($cv->insertarVenta($venta)) {
-        $cs = ControladorAcceso::getControlador();
-        header("location:/musihub/carrito/facturacarrito.php?venta=" . encode($idVenta));
-        //alerta("Venta procesada", "../vistas/facturacarrito.php?venta=" . encode($idVenta));
-        exit();
-    } else {
-        alerta("Existe un error al procesar la venta");
-    }
-}
-*/
 ?>
+<!---------------------- Estilo para la pagina de datos direccion y resumen del pedido ------------------------------>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -56,7 +30,9 @@ if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
         table {
             width: 95%;
         }
-        th, td {
+
+        th,
+        td {
             width: 25%;
             text-align: left;
             vertical-align: top;
@@ -65,16 +41,18 @@ if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0) {
 </head>
 
 <?php
+//Variables de los datos de direccion
 $nombre = $email = $telefono = $direccion = "";
-$nombreErr = $emailErr = $telefonoErr = $direccionErr ="";
+$nombreErr = $emailErr = $telefonoErr = $direccionErr = "";
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
+//Se procesa el formulario cuando le damos al boton aceptar
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
 
     // Procesamos el nombre
-    $nombre=$_POST["nombre"];
-    if(isset($_POST["nombre"]) && !preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu", $nombre)) { 
+    $nombre = $_POST["nombre"];
+    if (isset($_POST["nombre"]) && !preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,18}\s+([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){3,36}$/iu", $nombre)) {
         $nombreErr = "Introduzca un nombre y apellidos";
-      }
+    }
 
     // Procesamos el email
     $email = filtrado($_POST["email"]);
@@ -83,43 +61,47 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
     }
 
     // Procesamos el teléfono
-    $telefono= filtrado($_POST["telefono"]);
-    if(empty($telefono)){
-        $telefonoErr="Por favor Introduzca un numero de telefono";
-    }elseif(!filter_var($telefono, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/[0-9]{9}/")))){
-        $telefonoErr="Por favor intruduzca un teléfono válido";
+    $telefono = filtrado($_POST["telefono"]);
+    if (empty($telefono)) {
+        $telefonoErr = "Por favor Introduzca un numero de telefono";
+    } elseif (!filter_var($telefono, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/[0-9]{9}/")))) {
+        $telefonoErr = "Por favor intruduzca un teléfono válido";
     }
 
     // Procesamos la direccion
     $direccion = filtrado(($_POST["direccion"]));
-    if(empty($direccion)){
+    if (empty($direccion)) {
         $direccionErr = "Por favor introduzca una direccion";
-    }elseif(!preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){1,18}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){0,10}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){2,10}\s+[1-9]{0,3}$/iu", $direccion)){
-    $Errdireccion= "Introduce una direccion valida , valores validos : calle numero";
-    }else{
-    $direccion = $direccion;
+    } elseif (!preg_match("/^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){1,18}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){0,10}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){2,10}\s+[1-9]{0,3}$/iu", $direccion)) {
+        $Errdireccion = "Introduce una direccion valida , valores validos : calle numero";
+    } else {
+        $direccion = $direccion;
     }
-    
-    
+
+    //si no hay errores lo almacenamos en la sesion venta la informacion proporcionada
     if (
         empty($nombreErr) && empty($emailErr) && empty($telefonoErr) && empty($direccionErr)
     ) {
-        $_SESSION['venta']=[];
-        $_SESSION['venta']['nombre']=$nombre;
-        $_SESSION['venta']['email']=$email;
-        $_SESSION['venta']['telefono']=$telefono;
-        $_SESSION['venta']['direccion']=$direccion;
-        $_SESSION['pago']="si";
+        $_SESSION['venta'] = [];
+        $_SESSION['venta']['nombre'] = $nombre;
+        $_SESSION['venta']['email'] = $email;
+        $_SESSION['venta']['telefono'] = $telefono;
+        $_SESSION['venta']['direccion'] = $direccion;
+        $_SESSION['pago'] = "si";
         header('location: pago.php');
     }
 }
 ?>
-
+<!------------------------------------- Fomulario para  insertar los datos del domicilio del cliente ---------------------------------->
 <div class="container">
     <div class="row">
         <form role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-            <center><h2>Datos <small>Rellenalos para el envío</small></h2></center>
+            <center>
+                <h2>Datos <small>Rellenalos para el envío</small></h2>
+            </center>
             <hr class="colorgraph">
+
+            <!--Nombre-->
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?>>
@@ -129,30 +111,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
                     </div>
                 </div>
 
+            <!--email-->
+
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($emailErr)) ? 'error: ' : ''; ?>>
-                <input type="email" required name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control input-lg" 
-                placeholder="E-mail" tabindex="3" value="<?php echo $email; ?>">
-                <span class="help-block"><?php echo $emailErr; ?></span>
+                    <input type="email" required name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control input-lg" placeholder="E-mail" tabindex="3" value="<?php echo $email; ?>">
+                    <span class="help-block"><?php echo $emailErr; ?></span>
+                </div>
             </div>
-            </div>
+
+            <!--telefono-->
+
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($telefonoErr)) ? 'error: ' : ''; ?>>
-                    <input type="tel" required name="telefono" class="form-control input-lg" placeholder="Telefono" tabindex="5" pattern="[0-9]{9}" 
-                    title="Debes poner 9 números">
+                    <input type="tel" required name="telefono" class="form-control input-lg" placeholder="Telefono" tabindex="5" pattern="[0-9]{9}" title="Debes poner 9 números">
                     <span class="help-block"><?php echo $telefonoErr; ?></span>
                 </div>
 
+            <!--direccion-->
+
                 <div class="col-xs-12 col-sm-6 col-md-6" <?php echo (!empty($direccionErr)) ? 'error: ' : ''; ?>>
                     <div class="form-group">
-                        <input type="text-area" required name="direccion"  
-                        class="form-control input-lg" placeholder="calle numero" 
-                        pattern='^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){1,18}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){0,10}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){2,10}\s+[1-9]{0,3}$' tabindex="1">
+                        <input type="text-area" required name="direccion" class="form-control input-lg" placeholder="calle numero" pattern='^([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){1,18}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]){0,10}\s?([A-Za-zÑñ]+[áéíóú]?[A-Za-z]*){2,10}\s+[1-9]{0,3}$' tabindex="1">
                         <span class="help-block"><?php echo $direccionErr; ?></span>
                     </div>
                 </div>
             </div>
             <hr class="colorgraph">
             <div class="row">
+
+            <!--Botones de redireccionamiento-->
                 <div class="col-xs-12 col-md-6"><a href="resumen.php" class="btn btn-warning btn-block btn-lg">Atrás</a></div>
                 <div class="col-xs-12 col-md-6"><button type="submit" name="aceptar" class="btn btn-success btn-block btn-lg" value="aceptar" class="btn btn-success">Aceptar</button></div>
             </div>
@@ -162,44 +149,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]){
 
 <br><br>
 
+<!------------------------------------- Tabla con el resumen de la compra ---------------------------------->
+
 <div class="panel panel-success">
     <div class="panel-heading">Resumen de su pedido</div>
-      <div class="panel-body">
-            <?php
-            if(isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])){
-                $arreglo=$_SESSION['carrito']['final'];
-                echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th>";
-                foreach ($arreglo as $key => $fila){
-                    if($fila['cantidad']>=1){
+    <div class="panel-body">
+
+        <?php
+        //con la sesion final que almacena todos los datos, obtenemos los valores que nos interesan sobre los instrumentos
+        //recorriendo el bucle foreach para cada instrumento
+        if (isset($_SESSION['carrito']['final']) && !empty($_SESSION['carrito']['final'])) {
+            $arreglo = $_SESSION['carrito']['final'];
+            echo "<table><th></th><th>Instrumento</th><th>Distribuidor</th><th>Precio</th><th>Cantidad</th>";
+            foreach ($arreglo as $key => $fila) {
+                if ($fila['cantidad'] >= 1) {
                     $foto = $fila['foto'];
                     echo "<tr><td><img src='../imagenes/fotos/" . $foto . "' width='70px' height='70'></td>";
                     echo "<td>" . $fila['nomProducto'] . "</td>";
                     echo "<td>" . $fila['marca'] . "</td>";
                     echo "<td>" . $fila['precio'] . "</td>";
                     echo "<td>" . $fila['cantidad'] . "</td>";
-                    }
                 }
             }
-            ?>
-
-            <?php
-            // Subtotales y totales
-            $final=array_sum($_SESSION['total']);
-            $_SESSION['precio']=$final;
-            echo "<tr>";
-            //Calculo del precio sin iva
-            $sub=$final/1.21;
-            //calculo del precio con iva
-            $iva=$final-($final/1.21);
-
-            //Mostramos la tabla con los precios calculados y redondeados a dos decimales
-            echo "<td></td><td></td><td></td><td>". "<strong>"."Subtotal". "</strong>"."  ". round($sub,2) . " ". "€". "</td>";
-            echo "<tr>";
-            echo "<td></td><td></td><td></td><td>". "<strong>". "IVA" . "</strong>"."  ". round($iva,2). " ". "€". "</td>";
-            echo "<tr>";
-            echo "<td></td><td></td><td></td><td>". "<strong>"."Total" . "</strong>"."  ". $final. " ". "€". "</td>";
-            echo "</tr>";
-            echo "</table>";
+        }
         ?>
-      </div>
+
+        <?php
+        // Subtotales y totales
+        $final = array_sum($_SESSION['total']);
+        $_SESSION['precio'] = $final;
+        echo "<tr>";
+        //Calculo del precio sin iva
+        $sub = $final / 1.21;
+        //calculo del precio con iva
+        $iva = $final - ($final / 1.21);
+
+        //Mostramos la tabla con los precios calculados y redondeados a dos decimales
+        echo "<td></td><td></td><td></td><td>" . "<strong>" . "Subtotal" . "</strong>" . "  " . round($sub, 2) . " " . "€" . "</td>";
+        echo "<tr>";
+        echo "<td></td><td></td><td></td><td>" . "<strong>" . "IVA" . "</strong>" . "  " . round($iva, 2) . " " . "€" . "</td>";
+        echo "<tr>";
+        echo "<td></td><td></td><td></td><td>" . "<strong>" . "Total" . "</strong>" . "  " . $final . " " . "€" . "</td>";
+        echo "</tr>";
+        echo "</table>";
+        ?>
+    </div>
 </div>

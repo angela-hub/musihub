@@ -54,10 +54,20 @@ if (isset($_SESSION['USUARIO']['email'])) {
 
             // Procesamos el email
             $emailVal = filtrado($_POST["email"]);
+            $controlador = ControladorUsuario::getControlador();
+            $usuario = $controlador->buscarusuario($id);
+            $emailviejo =  $controlador->buscarUsuarioE($_POST["id"]);
             if (empty($emailVal)) {
                 $emailErr = "Por favor introduzca email válido.";
-            } else {
+            } elseif($emailVal==$emailviejo) {
                 $email = $emailVal;
+            } else{
+                $usuario = $controlador->buscarUsuarioEmail($emailVal);
+                if(isset($usuario)){
+                    $emailErr = "Ya existe un usuario diferente a ti con email: " .$emailVal. " en la Base de Datos";
+                }else{
+                    $email= $emailVal;
+                }
             }
 
             // Procesamos matrícula

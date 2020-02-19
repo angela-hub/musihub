@@ -108,6 +108,28 @@ class ControladorInstrumento {
             }
         }
 //--------------------------------------------------------------------------------------------------
+// Creamos la funcion buscarnombre para buscar en la base de datos si existe el nombre de un instrumento y ya este insertado
+public function buscarNombre($id){
+    $bd= ControladorBD::getControlador();
+    $bd->abrirBD();
+    $consulta="SELECT * FROM instrumentos WHERE id = :id";
+    $parametros=array(':id'=>$id);
+    $filas= $bd->consultarBD($consulta,$parametros);
+    $res=$bd->consultarBD($consulta,$parametros);
+    $filas=$res->fetchAll(PDO::FETCH_OBJ);
+    if (count($filas)>0){
+        foreach($filas as $c) {
+            $instrumento = new Instrumento($filas[0]->id, $filas[0]->nombre, $filas[0]->referencia, $filas[0]->distribuidor, $filas[0]->tipo,
+            $filas[0]->precio, $filas[0]->descuento, $filas[0]->stockinicial, $filas[0]->imagen);
+            $nombre=$instrumento->getnombre();
+        }
+        $bd->cerrarBD();
+        return $nombre;
+    }else{
+        return null;
+    }
+}
+//--------------------------------------------------------------------------------------------------
 // Creamos la funcion buscarInstrumentoNom para buscar en la base de datos un instrumento con el nombre que se le pase a la funcion
 
     public function buscarInstrumentoNom($nombre){ 

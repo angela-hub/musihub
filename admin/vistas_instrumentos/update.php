@@ -29,6 +29,22 @@ if (isset($_SESSION['USUARIO']['email'])) {
             } else {
                 $nombre = $nombreVal;
             }
+            // NO SE REPITA el nombre (si se quiere otro campo modificar el ControladorInstrumento en la funcion buscarInstrumento)
+            $controlador = ControladorInstrumento::getControlador();
+            $instrumento = $controlador->buscarInstrumentoNom($nombre);
+            $nombreviejo =  $controlador->buscarNombre($_POST["id"]);
+            if (empty($nombre)) {
+                $nombreErr = "Por favor introduzca nombre válido.";
+            } elseif($nombre==$nombreviejo) {
+                $nombre = $nombre;
+            } else{
+                $usuario = $controlador->buscarInstrumentoNom($nombre);
+                if(isset($usuario)){
+                    $nombreErr = "Ya existe un instrumento con este nombre: " .$nombre. " en la Base de Datos";
+                }else{
+                    $nombre= $nombre;
+                }
+            }
 
             // Procesamos referencia
             if (isset($_POST["referencia"])) {

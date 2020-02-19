@@ -11,7 +11,7 @@ if ((!isset($_SESSION['USUARIO']['email']) || $_SESSION['factura'] <> "si")) {
     header("location: /musihub/error.php");
     exit();
 }
-//Vaciamos las sesiones que utilizamos en la compra
+//Vaciamos las sesiones que utilizamos en la compra una vez que se ha terminado todo el tramite del carrito
 if (isset($_POST['finalizar'])) {
 alerta("Gracias por confiar y realizar su compra con nosotros");
 $_SESSION['carrito']=[];
@@ -21,6 +21,7 @@ $_SESSION['factura']=[];
 redir("/musihub/index.php");
 }
 ?>
+<!------------------------------- Pagina de la factura final -------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -89,9 +90,11 @@ redir("/musihub/index.php");
             echo "<td class='qty'>".($fila['precio']*$fila['cantidad'])." €</td>";
             echo "</tr>";
         }
+        //PRECIOS obtenidos de la sesion de precio
         $final=$_SESSION['precio'];
+        //el Subtotal lo obtenemos dividiendo el precio entre 1.21
         $sub=$final/1.21;
-        //calculo del precio con iva
+        //el calculo del iva es restando al precio final entre 1.21
         $iva=$final-($final/1.21);
         ?>
 

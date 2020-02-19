@@ -10,7 +10,10 @@ require_once MODEL_PATH . "pago.php";
 $titular = $tarjeta = $cvv = $num1 = $num2 =$num3 = $num4 = "";
 $fechaErr = $titularErr = $tarjetarErr = $cvvErr =""; 
 
+//Para poder hacer el pago tiene que estar la session iniciada
 session_start();
+
+//seguro para que la sesion este iniciada, tenga una cantidad de productos añadidos al carro 
 if ((!isset($_SESSION['nombre'])) || $_SESSION['cantidad'] == 0 || $_SESSION["pago"] <> "si") {
   header("location: /musihub/error.php");
   exit();
@@ -86,10 +89,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["pagar"]){
       $tarjeta_completa = hash('sha256', $tarjeta_completa);
       //echo $tarjeta_completa;
 
-// AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
+    // AÑADIMOS LOS DATOS DEL PAGO A LA TABLA DE PAGO EN LA BASE DE DATOS
       if (
         empty($fechaErr) && empty($titularErr) && empty($tarjetarErr) && empty($cvvErr)
     ) {  
+      //Actualizamos el stock de la base de datos 
       $arreglo=$_SESSION['carrito']['final'];
       foreach ($arreglo as $key => $fila){
         if($fila['cantidad']>=1){

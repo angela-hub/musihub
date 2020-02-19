@@ -32,6 +32,9 @@ require_once CONTROLLER_PATH . "ControladorPago.php";
 require_once CONTROLLER_PATH . "ControladorInstrumento.php";
 
 session_start();
+if (!isset($_SESSION['USUARIO']['email'])){
+    header("location:/musihub/login.php");
+}
 $_SESSION['pago']=[];
 if (isset($_SESSION['USUARIO']['email'])) {
     //$controlador = Controladorpago::getControlador();

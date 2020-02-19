@@ -46,8 +46,14 @@ switch ($opcion) {
     $fichero = ControladorDescarga::getControlador();
     switch ($opcion) {
         case 'FACTURA';
+        $test=$_SERVER["REQUEST_URI"];
+        $prueba=encode($_SESSION['id']);
+        if ($test=="/musihub/area.php?id=$prueba"){
         $id = decode($_GET["id"]);
         $fichero ->descargarfactura($id);
+        }else{
+            header("location:/musihub/error403.php");
+        }
         break;
         //Si no es esa opcion le dara como error de permisos
         default;
